@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Automobile.Proprietarios.API.Configuration;
-
+using MediatR;
 
 namespace Automobile.Proprietarios.API
 {
@@ -33,6 +33,8 @@ namespace Automobile.Proprietarios.API
             services.AddApiConfiguration(Configuration);
 
             services.AddSwaggerConfiguration();
+
+            services.AddMediatR(typeof(Startup));
 
             services.RegisterServices();
         }

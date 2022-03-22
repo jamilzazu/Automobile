@@ -14,13 +14,14 @@ namespace Automobile.Proprietarios.API.Models
         // EF Relation
         protected Proprietario() { }
 
-        public Proprietario(Guid id, string nome, string email, string cpf)
+        public Proprietario(Guid id, string nome, string email, string cpf, Endereco endereco)
         {
             Id = id;
             Nome = nome;
             Email = new Email(email);
             Cpf = new Cpf(cpf);
             Cancelado = false;
+            Endereco = endereco;
         }
 
         public void TrocarEmail(string email)
