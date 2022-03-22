@@ -14,7 +14,7 @@ namespace Automobile.Proprietarios.API.Configuration
                 c.SwaggerDoc("v1", new OpenApiInfo()
                 {
                     Title = "Automobile Catálogo API",
-                    Description = "Esta API administra os registros de Proprietarios ",
+                    Description = "Esta API administra os registros de Proprietário ",
                     Contact = new OpenApiContact() { Name = "Jamil Zazu", Email = "jamillzazu@hotmail.com" },
                     License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
                 });
