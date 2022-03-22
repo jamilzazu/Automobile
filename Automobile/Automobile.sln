@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31911.196
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6EA112D6-68A3-4B46-A428-F283977A27E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Building Blocks", "Building Blocks", "{10E3B62F-950A-437C-9628-E6FA74C9B47F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{1A904D26-3AD1-4A56-8496-052C81DC77CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{D839B5CE-B98A-4927-A5E9-E5A30CED7AD7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Proprietario", "Proprietario", "{4E595F3F-6885-4289-9445-8A4F3DE1D034}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automobile.Proprietarios.API", "src\services\Automobile.Proprietarios.API\Automobile.Proprietarios.API.csproj", "{277AE486-B94C-4526-A199-561D847BD7F6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{277AE486-B94C-4526-A199-561D847BD7F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{277AE486-B94C-4526-A199-561D847BD7F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{277AE486-B94C-4526-A199-561D847BD7F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{277AE486-B94C-4526-A199-561D847BD7F6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{10E3B62F-950A-437C-9628-E6FA74C9B47F} = {6EA112D6-68A3-4B46-A428-F283977A27E0}
+		{1A904D26-3AD1-4A56-8496-052C81DC77CE} = {6EA112D6-68A3-4B46-A428-F283977A27E0}
+		{D839B5CE-B98A-4927-A5E9-E5A30CED7AD7} = {6EA112D6-68A3-4B46-A428-F283977A27E0}
+		{4E595F3F-6885-4289-9445-8A4F3DE1D034} = {1A904D26-3AD1-4A56-8496-052C81DC77CE}
+		{277AE486-B94C-4526-A199-561D847BD7F6} = {4E595F3F-6885-4289-9445-8A4F3DE1D034}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {07A51463-0D91-43FD-9C8D-7B39DE253B73}
+	EndGlobalSection
+EndGlobal
