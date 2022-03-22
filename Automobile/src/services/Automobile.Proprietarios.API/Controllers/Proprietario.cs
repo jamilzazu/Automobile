@@ -27,9 +27,9 @@ namespace Automobile.Proprietarios.API.Controllers
 
         [AllowAnonymous]
         [HttpGet("proprietario/{id}")]
-        public async Task<Proprietario> ProprietarioPorId(string cpf)
+        public async Task<Proprietario> ProprietarioPorId(Guid id)
         {
-            return await _proprietarioRepository.ObterPorCpf(cpf);
+            return await _proprietarioRepository.ObterPorId(id);
         }
         [AllowAnonymous]
         [HttpGet("proprietario/{cpf}")]
