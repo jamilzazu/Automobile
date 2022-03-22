@@ -1,4 +1,5 @@
 ﻿using Automobile.Core.Messages;
+using Automobile.Proprietarios.API.Application.Events;
 using Automobile.Proprietarios.API.Models;
 using FluentValidation.Results;
 using MediatR;
@@ -32,6 +33,8 @@ namespace Automobile.Proprietarios.API.Application.Commands
             }
 
             _proprietarioRepository.Adicionar(proprietario);
+
+            proprietario.AdicionarEvento(new ProprietarioRegistradoEvent(message.Id, message.Nome, message.Email, message.Cpf, message.Endereco));
 
             return await PersistirDados(_proprietarioRepository.UnitOfWork);
         }

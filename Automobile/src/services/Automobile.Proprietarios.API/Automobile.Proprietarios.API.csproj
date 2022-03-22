@@ -24,7 +24,6 @@
     <ProjectReference Include="..\..\building blocks\Automobile.Core\Automobile.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Application\Events\" />
     <Folder Include="Application\Queries\" />
   </ItemGroup>
 
