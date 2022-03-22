@@ -14,14 +14,13 @@ namespace Automobile.Proprietarios.API.Application.Commands
         public Endereco Endereco { get; private set; }
 
 
-        public RegistrarProprietarioCommand(Guid id, string nome, string cpf, string email, Endereco endereco)
+        public RegistrarProprietarioCommand(Guid id, string nome, string cpf, string email)
         {
             AggregateId = id;
             Id = id;
             Nome = nome;
             Cpf = cpf;
             Email = email;
-            Endereco = endereco;
         }
 
         public override bool EhValido()
