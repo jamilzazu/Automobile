@@ -18,9 +18,22 @@ namespace Automobile.Proprietarios.API.Configuration
 
             services.AddScoped<IRequestHandler<RegistrarProprietarioCommand, ValidationResult>, ProprietarioCommandHandler>();
 
+            services.AddScoped<IRequestHandler<AlterarProprietarioCommand, ValidationResult>, ProprietarioCommandHandler>();
+
             services.AddScoped<INotificationHandler<ProprietarioRegistradoEvent>, ProprietarioEventHandler>();
 
+            services.AddScoped<INotificationHandler<ProprietarioAlteradoEvent>,
+                ProprietarioEventHandler>();
+
+            services.AddScoped<INotificationHandler<ProprietarioCanceladoEvent>,
+              ProprietarioEventHandler>();
+
+            services.AddScoped<INotificationHandler<ProprietarioAtivadoEvent>,
+              ProprietarioEventHandler>();
+
             services.AddScoped<IProprietarioRepository, ProprietarioRepository>();
+            
+            services.AddScoped<ProprietarioModelBuilder>();
 
             services.AddScoped<ProprietariosContext>();
         }

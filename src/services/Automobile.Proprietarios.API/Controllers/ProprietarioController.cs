@@ -15,44 +15,78 @@ namespace Automobile.Proprietarios.API.Controllers
     {
         private readonly IProprietarioRepository _proprietarioRepository;
         private readonly IMediatorHandler _mediator;
+        private readonly ProprietarioModelBuilder _proprietarioModelBuilder;
 
-        public ProprietarioController(IProprietarioRepository proprietarioRepository, IMediatorHandler mediator)
+        public ProprietarioController(IMediatorHandler mediator
+            , IProprietarioRepository proprietarioRepository
+            , ProprietarioModelBuilder proprietarioModelBuilder)
         {
-            _proprietarioRepository = proprietarioRepository;
             _mediator = mediator;
+            _proprietarioRepository = proprietarioRepository;
+            _proprietarioModelBuilder = proprietarioModelBuilder;
         }
 
         [HttpGet("lista")]
-        public async Task<IEnumerable<Proprietario>> Index()
+        public async Task<IEnumerable<ProprietarioViewModel>> Index()
         {
-            return await _proprietarioRepository.ObterTodos();
+            var proprietarios = _proprietarioModelBuilder.ListaProprietarioViewModel(await _proprietarioRepository.ObterTodos());
+
+            return proprietarios;
         }
+
 
         [HttpGet("{id}")]
-        public async Task<Proprietario> ProprietarioPorId(Guid id)
+        public async Task<ActionResult<ProprietarioViewModel>> ProprietarioPorId(Guid id)
         {
-            return await _proprietarioRepository.ObterPorId(id);
-        }
+            var proprietarios = _proprietarioModelBuilder.CarregaInformacaoProprietario(await _proprietarioRepository.ObterPorId(id));
 
-        [HttpGet("cpf/{cpf}")]
-        public async Task<Proprietario> ProprietarioPorCpf(string cpf)
-        {
-            return await _proprietarioRepository.ObterPorCpf(cpf);
+            return proprietarios;
         }
 
         [HttpPost("cadastro")]
-        public async Task<IActionResult> RegistrarProprietario(ProprietarioViewModel
-            view)
+        public async Task<ActionResult<ProprietarioViewModel>> RegistrarProprietario(ProprietarioViewModel
+            viewModel)
         {
-
             var resultado = await _mediator.EnviarComando(
-                 new RegistrarProprietarioCommand(view.Id,
-                 view.Nome,
-                 view.Cpf,
-                 view.Email)
-                 );
+                  new RegistrarProprietarioCommand(Guid.NewGuid(),
+                  viewModel.Nome,
+                  viewModel.Cpf,
+                  viewModel.Email)
+                  );
 
             return CustomResponse(resultado);
+        }
+
+        [HttpPut("alterar")]
+        public async Task<IActionResult> AlterarProprietario(ProprietarioViewModel
+            view)
+        {
+            var resultado = await _mediator.EnviarComando(
+                  new AlterarProprietarioCommand(view.Id,
+                  view.Nome,
+                  view.Cpf,
+                  view.Email)
+                  );
+
+            return CustomResponse(resultado);
+        }
+
+
+        [HttpPatch("ativar")]
+        public async Task<IActionResult> Ativar(Guid id)
+        {
+            var resultado = await _mediator.EnviarComando(new AtivarProprietarioCommand(id, false));
+
+            return CustomResponse(resultado);
+        }
+
+        [HttpPatch("cancelar")]
+        public async Task<IActionResult> Cancelar(Guid id)
+        {
+            var resultado = await _mediator.EnviarComando(new CancelarProprietarioCommand(id, true));
+
+            return CustomResponse(resultado);
+
         }
     }
 }
