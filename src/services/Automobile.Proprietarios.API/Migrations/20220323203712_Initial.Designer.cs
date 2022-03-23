@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Automobile.Proprietarios.API.Migrations
 {
     [DbContext(typeof(ProprietariosContext))]
-    [Migration("20220323121702_Proprietarios4")]
-    partial class Proprietarios4
+    [Migration("20220323203712_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -71,8 +71,8 @@ namespace Automobile.Proprietarios.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Cancelado")
-                        .HasColumnType("bit");
+                    b.Property<int>("Cancelado")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("DataAlteracao")
                         .HasColumnType("datetime2");
@@ -83,6 +83,9 @@ namespace Automobile.Proprietarios.API.Migrations
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("varchar(200)");
+
+                    b.Property<int>("TipoDocumento")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -99,16 +102,16 @@ namespace Automobile.Proprietarios.API.Migrations
 
             modelBuilder.Entity("Automobile.Proprietarios.API.Models.Proprietario", b =>
                 {
-                    b.OwnsOne("Automobile.Core.DomainObjects.Cpf", "Cpf", b1 =>
+                    b.OwnsOne("Automobile.Core.DomainObjects.Documento", "Documento", b1 =>
                         {
                             b1.Property<Guid>("ProprietarioId")
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<string>("Numero")
                                 .IsRequired()
-                                .HasColumnName("Cpf")
-                                .HasColumnType("varchar(11)")
-                                .HasMaxLength(11);
+                                .HasColumnName("Documento")
+                                .HasColumnType("varchar(14)")
+                                .HasMaxLength(14);
 
                             b1.HasKey("ProprietarioId");
 

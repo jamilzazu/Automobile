@@ -1,4 +1,5 @@
 ﻿using Automobile.Core.Messages;
+using Automobile.Proprietarios.API.Models.Enums;
 using FluentValidation;
 using System;
 
@@ -7,10 +8,10 @@ namespace Automobile.Proprietarios.API.Application.Commands
     public class AtivarProprietarioCommand : Command
     {
         public Guid Id { get; private set; }
-        public bool Status { get; private set; }
+        public Cancelado Status { get; private set; }
 
 
-        public AtivarProprietarioCommand(Guid id, bool status)
+        public AtivarProprietarioCommand(Guid id, Cancelado status)
         {
             AggregateId = id;
             Id = id;
@@ -28,7 +29,7 @@ namespace Automobile.Proprietarios.API.Application.Commands
     {
         public AtivarProprietarioValidation()
         {
-            //RuleFor(c => c.Status)
+            //RuleFor(c => c.Cancelado)
             //    .Equals(true)
             //    .WithMessage("Id do proprietário inválido");
         }

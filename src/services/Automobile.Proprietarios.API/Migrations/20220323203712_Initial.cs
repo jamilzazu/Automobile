@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Automobile.Proprietarios.API.Migrations
 {
-    public partial class Proprietarios4 : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,8 +14,9 @@ namespace Automobile.Proprietarios.API.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Nome = table.Column<string>(type: "varchar(200)", nullable: false),
                     Email = table.Column<string>(type: "varchar(254)", nullable: true),
-                    Cpf = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: true),
-                    Cancelado = table.Column<bool>(nullable: false),
+                    TipoDocumento = table.Column<int>(nullable: false),
+                    Documento = table.Column<string>(type: "varchar(14)", maxLength: 14, nullable: true),
+                    Cancelado = table.Column<int>(nullable: false),
                     DataCadastro = table.Column<DateTime>(nullable: false),
                     DataAlteracao = table.Column<DateTime>(nullable: true)
                 },

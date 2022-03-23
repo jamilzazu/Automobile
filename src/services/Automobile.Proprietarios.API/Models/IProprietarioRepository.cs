@@ -10,7 +10,7 @@ namespace Automobile.Proprietarios.API.Models
         void Adicionar(Proprietario proprietario);
         void Atualizar(Proprietario proprietario);
         Task<IEnumerable<Proprietario>> ObterTodos();
-        Task<Proprietario> ObterPorCpf(string cpf);
+        Task<Proprietario> ObterPorDocumento(string documento);
         Task<Proprietario> ObterPorId(Guid id);
     }
 }

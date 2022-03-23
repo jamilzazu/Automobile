@@ -2,17 +2,17 @@
 
 namespace Automobile.Core.DomainObjects
 {
-    public class Cpf
+    public class Documento
     {
-        public const int CpfMaxLength = 11;
+        public const int DocumentoMaxLength = 14;
         public string Numero { get; private set; }
 
         //Construtor do EntityFramework
-        protected Cpf() { }
+        protected Documento() { }
 
-        public Cpf(string numero)
+        public Documento(string numero)
         {
-            if (!Validar(numero)) throw new DomainException("CPF inválido");
+            if (!Validar(numero)) throw new DomainException("Documento inválido");
             Numero = numero;
         }
 

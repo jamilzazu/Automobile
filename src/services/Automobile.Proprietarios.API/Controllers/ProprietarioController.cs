@@ -1,6 +1,7 @@
 ﻿using Automobile.Core.Mediator;
 using Automobile.Proprietarios.API.Application.Commands;
 using Automobile.Proprietarios.API.Models;
+using Automobile.Proprietarios.API.Models.Enums;
 using Automobile.Proprietarios.API.ViewModel;
 using Automobile.WebAPI.Core.Controllers;
 using Microsoft.AspNetCore.Mvc;
@@ -50,7 +51,8 @@ namespace Automobile.Proprietarios.API.Controllers
             var resultado = await _mediator.EnviarComando(
                   new RegistrarProprietarioCommand(Guid.NewGuid(),
                   viewModel.Nome,
-                  viewModel.Cpf,
+                  viewModel.TipoDocumento,
+                  viewModel.Documento,
                   viewModel.Email)
                   );
 
@@ -59,13 +61,14 @@ namespace Automobile.Proprietarios.API.Controllers
 
         [HttpPut("alterar")]
         public async Task<IActionResult> AlterarProprietario(ProprietarioViewModel
-            view)
+            viewModel)
         {
             var resultado = await _mediator.EnviarComando(
-                  new AlterarProprietarioCommand(view.Id,
-                  view.Nome,
-                  view.Cpf,
-                  view.Email)
+                  new AlterarProprietarioCommand((Guid)viewModel.Id,
+                  viewModel.Nome,
+                  viewModel.TipoDocumento,
+                  viewModel.Documento,
+                  viewModel.Email)
                   );
 
             return CustomResponse(resultado);
@@ -75,7 +78,7 @@ namespace Automobile.Proprietarios.API.Controllers
         [HttpPatch("ativar")]
         public async Task<IActionResult> Ativar(Guid id)
         {
-            var resultado = await _mediator.EnviarComando(new AtivarProprietarioCommand(id, false));
+            var resultado = await _mediator.EnviarComando(new AtivarProprietarioCommand(id, Cancelado.Nao));
 
             return CustomResponse(resultado);
         }
@@ -83,7 +86,7 @@ namespace Automobile.Proprietarios.API.Controllers
         [HttpPatch("cancelar")]
         public async Task<IActionResult> Cancelar(Guid id)
         {
-            var resultado = await _mediator.EnviarComando(new CancelarProprietarioCommand(id, true));
+            var resultado = await _mediator.EnviarComando(new CancelarProprietarioCommand(id, Cancelado.Nao));
 
             return CustomResponse(resultado);
 

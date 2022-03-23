@@ -1,6 +1,7 @@
 ﻿using Automobile.Core.Messages;
 using Automobile.Proprietarios.API.Application.Events;
 using Automobile.Proprietarios.API.Models;
+using Automobile.Proprietarios.API.Models.Enums;
 using FluentValidation.Results;
 using MediatR;
 using System.Threading;
@@ -26,19 +27,19 @@ namespace Automobile.Proprietarios.API.Application.Commands
         {
             if (!message.EhValido()) return message.ValidationResult;
 
-            var proprietario = new Proprietario(message.Id, message.Nome, message.Email, message.Cpf);
+            var proprietario = new Proprietario(message.Id, message.Nome, message.TipoDocumento, message.Documento, message.Email);
 
-            var proprietarioExistente = await _proprietarioRepository.ObterPorCpf(proprietario.Cpf.Numero);
+            var proprietarioExistente = await _proprietarioRepository.ObterPorDocumento(proprietario.Documento.Numero);
 
             if (proprietarioExistente != null)
             {
-                AdicionarErro("Este CPF já está em uso.");
+                AdicionarErro("Este Documento já está em uso.");
                 return ValidationResult;
             }
 
             _proprietarioRepository.Adicionar(proprietario);
 
-            proprietario.AdicionarEvento(new ProprietarioRegistradoEvent(message.Id, message.Nome, message.Email, message.Cpf));
+            proprietario.AdicionarEvento(new ProprietarioRegistradoEvent(message.Id, message.Nome, message.TipoDocumento, message.Documento, message.Email));
 
             return await PersistirDados(_proprietarioRepository.UnitOfWork);
         }
@@ -55,17 +56,17 @@ namespace Automobile.Proprietarios.API.Application.Commands
                 return ValidationResult;
             }
 
-            if (proprietario != null && proprietario.Cpf.Numero != message.Cpf)
+            if (proprietario != null && proprietario.Documento.Numero != message.Documento)
             {
                 AdicionarErro("CPF não pode ser alterado.");
                 return ValidationResult;
             }
 
-            proprietario.Alterar(message.Nome,message.Email);
+            proprietario.Alterar(message.Nome, message.Email);
 
             _proprietarioRepository.Atualizar(proprietario);
 
-            proprietario.AdicionarEvento(new ProprietarioAlteradoEvent(message.Id, message.Nome, message.Email, message.Cpf, message.Status));
+            proprietario.AdicionarEvento(new ProprietarioAlteradoEvent(message.Id, message.Nome, message.TipoDocumento, message.Documento, message.Email));
 
             return await PersistirDados(_proprietarioRepository.UnitOfWork);
         }
@@ -76,7 +77,7 @@ namespace Automobile.Proprietarios.API.Application.Commands
 
             var proprietario = await _proprietarioRepository.ObterPorId(message.Id);
 
-            if (proprietario.Cancelado)
+            if (proprietario.Cancelado == Cancelado.Sim)
             {
                 AdicionarErro("Proprietario já está cancelado.");
                 return ValidationResult;
@@ -97,7 +98,7 @@ namespace Automobile.Proprietarios.API.Application.Commands
 
             var proprietario = await _proprietarioRepository.ObterPorId(message.Id);
 
-            if (!proprietario.Cancelado)
+            if (proprietario.Cancelado == Cancelado.Nao)
             {
                 AdicionarErro("Proprietario já está ativado.");
                 return ValidationResult;

@@ -23,9 +23,9 @@ namespace Automobile.Proprietarios.API.Data.Repository
             return await _context.Proprietarios.AsNoTracking().ToListAsync();
         }
 
-        public async Task<Proprietario> ObterPorCpf(string cpf)
+        public async Task<Proprietario> ObterPorDocumento(string documento)
         {
-            return await _context.Proprietarios.FirstOrDefaultAsync(c => c.Cpf.Numero == cpf);
+            return await _context.Proprietarios.FirstOrDefaultAsync(c => c.Documento.Numero == documento);
         }
 
         public async Task<Proprietario> ObterPorId(Guid id)

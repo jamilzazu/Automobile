@@ -3,10 +3,10 @@ using Automobile.Proprietarios.API.Data;
 using Automobile.Proprietarios.API.Data.Repository;
 using Automobile.Proprietarios.API.Models;
 using Automobile.Core.Mediator;
-using MediatR;
 using FluentValidation.Results;
 using Automobile.Proprietarios.API.Application.Commands;
 using Automobile.Proprietarios.API.Application.Events;
+using MediatR;
 
 namespace Automobile.Proprietarios.API.Configuration
 {

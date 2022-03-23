@@ -1,4 +1,5 @@
-﻿using Automobile.Proprietarios.API.ViewModel;
+﻿using Automobile.Proprietarios.API.Models.Enums;
+using Automobile.Proprietarios.API.ViewModel;
 using System.Collections.Generic;
 
 namespace Automobile.Proprietarios.API.Models
@@ -13,9 +14,10 @@ namespace Automobile.Proprietarios.API.Models
                 {
                     Id = item.Id,
                     Nome = item.Nome,
-                    Cpf = item.FormatarCPF(item.Cpf.Numero),
+                    TipoDocumento = item.TipoDocumento,
+                    Documento = item.FormatarCPF(item.Documento.Numero),
                     Email = item.Email.Endereco,
-                    Status = item.Cancelado ? "Cancelado" : "Ativo"
+                    Cancelado = item.Cancelado
                 };
             }
         }
@@ -26,9 +28,10 @@ namespace Automobile.Proprietarios.API.Models
             {
                 Id = proprietario.Id,
                 Nome = proprietario.Nome,
-                Cpf = proprietario.FormatarCPF(proprietario.Cpf.Numero),
+                TipoDocumento = proprietario.TipoDocumento,
+                Documento = proprietario.FormatarCPF(proprietario.Documento.Numero),
                 Email = proprietario.Email.Endereco,
-                Status = proprietario.Cancelado ? "Cancelado" : "Ativo"
+                Cancelado = proprietario.Cancelado
             };
         }
     }

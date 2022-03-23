@@ -15,13 +15,13 @@ namespace Automobile.Proprietarios.API.Data.Mappings
                 .IsRequired()
                 .HasColumnType("varchar(200)");
 
-            builder.OwnsOne(c => c.Cpf, tf =>
+            builder.OwnsOne(c => c.Documento, tf =>
             {
                 tf.Property(c => c.Numero)
                     .IsRequired()
-                    .HasMaxLength(Cpf.CpfMaxLength)
-                    .HasColumnName("Cpf")
-                    .HasColumnType($"varchar({Cpf.CpfMaxLength})");
+                    .HasMaxLength(Documento.DocumentoMaxLength)
+                    .HasColumnName("Documento")
+                    .HasColumnType($"varchar({Documento.DocumentoMaxLength})");
             });
 
             builder.OwnsOne(c => c.Email, tf =>
