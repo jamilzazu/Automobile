@@ -30,7 +30,7 @@ namespace Automobile.Enderecos.API.Controllers
         public async Task<EnderecoViewModel> EnderecoPorProprietario(Guid proprietarioId)
         {
 
-            var endereco = _enderecoModelBuilder.CarregaInformacaoProprietario(await _enderecoRepository.ObterPorProprietarioId(proprietarioId));
+            var endereco = _enderecoModelBuilder.CarregaInformacaoEndereco(await _enderecoRepository.ObterPorProprietarioId(proprietarioId));
 
             return endereco;
         }

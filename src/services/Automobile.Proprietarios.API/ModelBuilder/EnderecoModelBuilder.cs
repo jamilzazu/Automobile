@@ -4,7 +4,7 @@ namespace Automobile.Proprietarios.API.Models
 {
     public class EnderecoModelBuilder
     {
-        public EnderecoViewModel CarregaInformacaoProprietario(Endereco endereco)
+        public EnderecoViewModel CarregaInformacaoEndereco(Endereco endereco)
         {
             return new EnderecoViewModel
             {
