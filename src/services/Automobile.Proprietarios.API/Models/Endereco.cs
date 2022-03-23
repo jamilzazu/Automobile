@@ -3,7 +3,7 @@ using Automobile.Core.DomainObjects;
 
 namespace Automobile.Proprietarios.API.Models
 {
-    public class Endereco : Entity
+    public class Endereco : Entity, IAggregateRoot
     {
         public string Logradouro { get; private set; }
         public string Numero { get; private set; }
@@ -28,6 +28,17 @@ namespace Automobile.Proprietarios.API.Models
             Cidade = cidade;
             Estado = estado;
             ProprietarioId = proprietarioId;
+        }
+
+        public void Alterar(string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado)
+        {
+            Logradouro = logradouro;
+            Numero = numero;
+            Complemento = complemento;
+            Bairro = bairro;
+            Cep = cep;
+            Cidade = cidade;
+            Estado = estado;
         }
     }
 }

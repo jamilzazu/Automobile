@@ -16,9 +16,14 @@ namespace Automobile.Proprietarios.API.Application.Commands
         public string Estado { get; private set; }
         public Guid ProprietarioId { get; private set; }
 
-        public RegistrarEnderecoCommand(Guid id, string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado)
+        public RegistrarEnderecoCommand()
+        {
+        }
+
+        public RegistrarEnderecoCommand(Guid id, Guid proprietarioId, string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado)
         {
             AggregateId = id;
+            ProprietarioId = proprietarioId;
             Id = id;
             Logradouro = logradouro;
             Numero = numero;
@@ -41,37 +46,29 @@ namespace Automobile.Proprietarios.API.Application.Commands
     {
         public RegistrarEnderecoValidation()
         {
-            RuleFor(c => c.ProprietarioId)
-                .NotEqual(Guid.Empty)
-                .WithMessage("Id do proprietário inválido");
-
-            RuleFor(c => c.Id)
-                .NotEqual(Guid.Empty)
-                .WithMessage("Id do endereço inválido");
-
             RuleFor(c => c.Logradouro)
-                .NotEmpty()
-                .WithMessage("O logradouro do endereço não foi informado");
+                   .NotEmpty()
+                   .WithMessage("Informe o Logradouro");
 
             RuleFor(c => c.Numero)
                 .NotEmpty()
-                .WithMessage("O número do endereço não foi informado");
-
-            RuleFor(c => c.Bairro)
-                .NotEmpty()
-                .WithMessage("O bairro do endereço não foi informado");
+                .WithMessage("Informe o Número");
 
             RuleFor(c => c.Cep)
                 .NotEmpty()
-                .WithMessage("O cep do endereço não foi informado");
+                .WithMessage("Informe o CEP");
+
+            RuleFor(c => c.Bairro)
+                .NotEmpty()
+                .WithMessage("Informe o Bairro");
 
             RuleFor(c => c.Cidade)
                 .NotEmpty()
-                .WithMessage("O cidade do endereço não foi informado");
+                .WithMessage("Informe o Cidade");
 
             RuleFor(c => c.Estado)
                 .NotEmpty()
-                .WithMessage("O estado do endereço não foi informado");
+                .WithMessage("Informe o Estado");
         }
     }
 }

@@ -43,7 +43,7 @@ namespace Automobile.Proprietarios.API.Controllers
             return proprietarios;
         }
 
-        [HttpPost("cadastro")]
+        [HttpPost("cadastrar")]
         public async Task<ActionResult<ProprietarioViewModel>> RegistrarProprietario(ProprietarioViewModel
             viewModel)
         {
