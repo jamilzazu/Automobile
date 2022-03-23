@@ -7,6 +7,7 @@ using Automobile.Core.Data;
 using Automobile.Core.Mediator;
 using Automobile.Core.Messages;
 using Automobile.Core.DomainObjects;
+using System;
 
 namespace Automobile.Proprietarios.API.Data
 {
@@ -42,6 +43,22 @@ namespace Automobile.Proprietarios.API.Data
 
         public async Task<bool> Commit()
         {
+            foreach (var entry in ChangeTracker.Entries()
+               .Where(entry => entry.Entity.GetType().GetProperty("DataCadastro") != null ||
+               entry.Entity.GetType().GetProperty("DataAlteracao") != null))
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    entry.Property("DataCadastro").CurrentValue = DateTime.Now;
+                }
+
+                if (entry.State == EntityState.Modified)
+                {
+                    entry.Property("DataCadastro").IsModified = false;
+                    entry.Property("DataAlteracao").CurrentValue = DateTime.Now;
+                }
+            }
+
             var sucesso = await base.SaveChangesAsync() > 0;
             if (sucesso) await _mediatorHandler.PublicarEventos(this);
 

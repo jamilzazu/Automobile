@@ -20,8 +20,6 @@ namespace Automobile.Proprietarios.API.ViewModel
         [StringLength(14, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 11)]
         public string Cpf { get; set; }
 
-        public EnderecoViewModel Endereco { get; set; }
-
-        public bool Cancelado { get; set; }
+        public string Status { get; set; }
     }
 }

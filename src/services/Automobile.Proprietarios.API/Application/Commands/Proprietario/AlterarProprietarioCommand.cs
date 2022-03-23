@@ -1,20 +1,19 @@
 ﻿using Automobile.Core.Messages;
-using Automobile.Proprietarios.API.Models;
 using FluentValidation;
 using System;
 
 namespace Automobile.Proprietarios.API.Application.Commands
 {
-    public class RegistrarProprietarioCommand : Command
+    public class AlterarProprietarioCommand : Command
     {
         public Guid Id { get; private set; }
         public string Nome { get; private set; }
         public string Cpf { get; private set; }
         public string Email { get; private set; }
-        public Endereco Endereco { get; private set; }
+        public bool Status { get; private set; }
 
 
-        public RegistrarProprietarioCommand(Guid id, string nome, string cpf, string email)
+        public AlterarProprietarioCommand(Guid id, string nome, string cpf, string email)
         {
             AggregateId = id;
             Id = id;
@@ -25,14 +24,14 @@ namespace Automobile.Proprietarios.API.Application.Commands
 
         public override bool EhValido()
         {
-            ValidationResult = new RegistrarProprietarioValidation().Validate(this);
+            ValidationResult = new AlterarProprietarioValidation().Validate(this);
             return ValidationResult.IsValid;
         }
     }
 
-    public class RegistrarProprietarioValidation : AbstractValidator<RegistrarProprietarioCommand>
+    public class AlterarProprietarioValidation : AbstractValidator<AlterarProprietarioCommand>
     {
-        public RegistrarProprietarioValidation()
+        public AlterarProprietarioValidation()
         {
             RuleFor(c => c.Id)
                 .NotEqual(Guid.Empty)

@@ -17,8 +17,9 @@ namespace Automobile.Proprietarios.API.Models
         // EF Relation
         public Proprietario Proprietario { get; protected set; }
 
-        public Endereco(string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado)
+        public Endereco(Guid id, string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado, Guid proprietarioId)
         {
+            Id = id;
             Logradouro = logradouro;
             Numero = numero;
             Complemento = complemento;
@@ -26,6 +27,7 @@ namespace Automobile.Proprietarios.API.Models
             Cep = cep;
             Cidade = cidade;
             Estado = estado;
+            ProprietarioId = proprietarioId;
         }
     }
 }
