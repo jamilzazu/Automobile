@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Queries\Scripts\ObterProprietarioPeloNumeroDocumento.sql" />
+    <None Remove="Queries\Scripts\ObterProprietarioPorId.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Queries\Scripts\ObterProprietarioPeloNumeroDocumento.sql" />
+    <EmbeddedResource Include="Queries\Scripts\ObterProprietarioPorId.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Queries\Request\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\building blocks\Automobile.Core\Automobile.Core.csproj" />
+    <ProjectReference Include="..\Automobile.Proprietarios.Domain\Automobile.Proprietarios.Domain.csproj" />
+    <ProjectReference Include="..\Automobile.Proprietarios.Infra.EF\Automobile.Proprietarios.Infra.EF.csproj" />
+  </ItemGroup>
+
+</Project>
