@@ -1,12 +1,18 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Automobile.Proprietarios.API.Data;
-using Automobile.Proprietarios.API.Data.Repository;
-using Automobile.Proprietarios.API.Models;
 using Automobile.Core.Mediator;
-using FluentValidation.Results;
-using Automobile.Proprietarios.API.Application.Commands;
-using Automobile.Proprietarios.API.Application.Events;
+using Automobile.Proprietarios.Domain.Repositories;
+using Automobile.Proprietarios.Infra.EF.Configurations.Contexts;
+using Automobile.Proprietarios.Infra.EF;
+using Automobile.Proprietarios.Application.Queries.Interfaces;
+using Automobile.Proprietarios.Domain.Queries;
+using System.Data;
+using Automobile.Proprietarios.Domain.Handlers;
 using MediatR;
+using Automobile.Proprietarios.Domain.Commands.Proprietario;
+using System.Reflection;
+using FluentValidation.Results;
+using Automobile.Proprietarios.Application.Services;
+using Automobile.Proprietarios.Application.Services.Interfaces;
 
 namespace Automobile.Proprietarios.API.Configuration
 {
@@ -14,35 +20,46 @@ namespace Automobile.Proprietarios.API.Configuration
     {
         public static void RegisterServices(this IServiceCollection services)
         {
-            services.AddScoped<IMediatorHandler, MediatorHandler>();
+            services.AddTransient<IMediatorHandler, MediatorHandler>();
 
             // Proprietário
+
             services.AddScoped<IProprietarioRepository, ProprietarioRepository>();
-            services.AddScoped<ProprietarioModelBuilder>();
+            services.AddScoped<IProprietarioQueries, ProprietarioQueries>();
+            services.AddScoped<IProprietarioService, ProprietarioService>();
+            
+            services.AddScoped<IRequestHandler<CadastrarProprietarioCommand, ValidationResult>, ProprietarioCommandHandler>();
+            //services.AddScoped<IRequestHandler<AlterarProprietarioCommand, ValidationResult>, ProprietarioCommandHandler>();
+            //services.AddScoped<IRequestHandler<CancelarProprietarioCommand, ValidationResult>, ProprietarioCommandHandler>();
+            //services.AddScoped<IRequestHandler<AtivarProprietarioCommand, ValidationResult>, ProprietarioCommandHandler>();
 
-            services.AddScoped<IRequestHandler<RegistrarProprietarioCommand, ValidationResult>, ProprietarioCommandHandler>();
-            services.AddScoped<INotificationHandler<ProprietarioRegistradoEvent>, ProprietarioEventHandler>();
+            //// Proprietário
+            //services.AddScoped<IProprietarioRepository, ProprietarioRepository>();
+            //services.AddScoped<ProprietarioModelBuilder>();
 
-            services.AddScoped<IRequestHandler<AlterarProprietarioCommand, ValidationResult>, ProprietarioCommandHandler>();
-            services.AddScoped<INotificationHandler<ProprietarioAlteradoEvent>, ProprietarioEventHandler>();
+            //services.AddScoped<IRequestHandler<CadastrarProprietarioCommand, ValidationResult>, ProprietarioCommandHandler>();
+            //services.AddScoped<INotificationHandler<ProprietarioRegistradoEvent>, ProprietarioEventHandler>();
 
-            services.AddScoped<IRequestHandler<CancelarProprietarioCommand, ValidationResult>, ProprietarioCommandHandler>();
-            services.AddScoped<INotificationHandler<ProprietarioCanceladoEvent>, ProprietarioEventHandler>();
+            //services.AddScoped<IRequestHandler<AlterarProprietarioCommand, ValidationResult>, ProprietarioCommandHandler>();
+            //services.AddScoped<INotificationHandler<ProprietarioAlteradoEvent>, ProprietarioEventHandler>();
 
-            services.AddScoped<IRequestHandler<AtivarProprietarioCommand, ValidationResult>, ProprietarioCommandHandler>();
-            services.AddScoped<INotificationHandler<ProprietarioAtivadoEvent>,ProprietarioEventHandler>();
+            //services.AddScoped<IRequestHandler<CancelarProprietarioCommand, ValidationResult>, ProprietarioCommandHandler>();
+            //services.AddScoped<INotificationHandler<ProprietarioCanceladoEvent>, ProprietarioEventHandler>();
+
+            //services.AddScoped<IRequestHandler<AtivarProprietarioCommand, ValidationResult>, ProprietarioCommandHandler>();
+            //services.AddScoped<INotificationHandler<ProprietarioAtivadoEvent>,ProprietarioEventHandler>();
 
 
-            // Endereço
+            //// Endereço
 
-            services.AddScoped<IEnderecoRepository, EnderecoRepository>();
-            services.AddScoped<EnderecoModelBuilder>();
+            //services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+            //services.AddScoped<EnderecoModelBuilder>();
 
-            services.AddScoped<IRequestHandler<RegistrarEnderecoCommand, ValidationResult>, EnderecoCommandHandler>();
-            services.AddScoped<INotificationHandler<EnderecoRegistradoEvent>, EnderecoEventHandler>();
+            //services.AddScoped<IRequestHandler<RegistrarEnderecoCommand, ValidationResult>, EnderecoCommandHandler>();
+            //services.AddScoped<INotificationHandler<EnderecoRegistradoEvent>, EnderecoEventHandler>();
 
-            services.AddScoped<IRequestHandler<AlterarEnderecoCommand, ValidationResult>, EnderecoCommandHandler>();
-            services.AddScoped<INotificationHandler<EnderecoAlteradoEvent>, EnderecoEventHandler>();
+            //services.AddScoped<IRequestHandler<AlterarEnderecoCommand, ValidationResult>, EnderecoCommandHandler>();
+            //services.AddScoped<INotificationHandler<EnderecoAlteradoEvent>, EnderecoEventHandler>();
 
 
             // Context

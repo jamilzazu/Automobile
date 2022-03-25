@@ -1,8 +1,6 @@
 ﻿using Automobile.Core.Mediator;
-using Automobile.Proprietarios.API.Application.Commands;
-using Automobile.Proprietarios.API.Models;
-using Automobile.Proprietarios.API.Models.Enums;
-using Automobile.Proprietarios.API.ViewModel;
+using Automobile.Proprietarios.Application.Queries.Interfaces;
+using Automobile.Proprietarios.Domain.Commands.Proprietario;
 using Automobile.WebAPI.Core.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,82 +12,65 @@ namespace Automobile.Proprietarios.API.Controllers
     [Route("api/proprietario")]
     public class ProprietarioController : MainController
     {
-        private readonly IProprietarioRepository _proprietarioRepository;
         private readonly IMediatorHandler _mediator;
-        private readonly ProprietarioModelBuilder _proprietarioModelBuilder;
+        private readonly IProprietarioQueries _proprietarioQueries;
 
-        public ProprietarioController(IMediatorHandler mediator
-            , IProprietarioRepository proprietarioRepository
-            , ProprietarioModelBuilder proprietarioModelBuilder)
+        public ProprietarioController(IMediatorHandler mediator, IProprietarioQueries proprietarioQueries)
         {
             _mediator = mediator;
-            _proprietarioRepository = proprietarioRepository;
-            _proprietarioModelBuilder = proprietarioModelBuilder;
+            _proprietarioQueries = proprietarioQueries;
         }
 
-        [HttpGet("lista")]
-        public async Task<IEnumerable<ProprietarioViewModel>> Index()
-        {
-            var proprietarios = _proprietarioModelBuilder.ListaProprietarioViewModel(await _proprietarioRepository.ObterTodos());
+        //[HttpGet("lista")]
+        //public IEnumerable<IActionResult> Index()
+        //{
+        //    var proprietarios = _proprietarioModelBuilder.ListaProprietarioViewModel(_proprietarioRepository.ObterTodos());
 
-            return proprietarios;
-        }
+        //    return proprietarios;
+        //}
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProprietarioViewModel>> ProprietarioPorId(Guid id)
+        public async Task<IActionResult> ProprietarioPorId(Guid id)
         {
-            var proprietarios = _proprietarioModelBuilder.CarregaInformacaoProprietario(await _proprietarioRepository.ObterPorId(id));
+            var resultado = await _proprietarioQueries.ObterProprietarioPorId(id);
 
-            return proprietarios;
+            return CustomResponse(resultado);
         }
 
         [HttpPost("cadastrar")]
-        public async Task<ActionResult<ProprietarioViewModel>> RegistrarProprietario(ProprietarioViewModel
-            viewModel)
+        public async Task<IActionResult> CadastrarProprietario(CadastrarProprietarioCommand command)
         {
-            var resultado = await _mediator.EnviarComando(
-                  new RegistrarProprietarioCommand(Guid.NewGuid(),
-                  viewModel.Nome,
-                  viewModel.TipoDocumento,
-                  viewModel.Documento,
-                  viewModel.Email)
-                  );
+            var resultado = await _mediator.EnviarComando(command);
 
             return CustomResponse(resultado);
         }
 
-        [HttpPut("alterar")]
-        public async Task<IActionResult> AlterarProprietario(ProprietarioViewModel
-            viewModel)
-        {
-            var resultado = await _mediator.EnviarComando(
-                  new AlterarProprietarioCommand((Guid)viewModel.Id,
-                  viewModel.Nome,
-                  viewModel.TipoDocumento,
-                  viewModel.Documento,
-                  viewModel.Email)
-                  );
+        //[HttpPut("alterar")]
+        //public async Task<ActionResult<ProprietarioViewModel>> AlterarProprietario(ProprietarioViewModel view)
+        //{
+        //    var resultado = await _mediator.EnviarComando(new AlterarProprietarioCommand(view.Id, view.Nome, view.Documento, view.Email));
 
-            return CustomResponse(resultado);
-        }
+        //    return CustomResponse(resultado);
+        //}
 
 
-        [HttpPatch("ativar")]
-        public async Task<IActionResult> Ativar(Guid id)
-        {
-            var resultado = await _mediator.EnviarComando(new AtivarProprietarioCommand(id, Cancelado.Nao));
+        //[HttpPatch("ativar")]
+        //public async Task<ActionResult<ProprietarioViewModel>> Ativar(Guid id)
+        //{
+        //    var resultado = await _mediator.EnviarComando(new AtivarProprietarioCommand(id));
 
-            return CustomResponse(resultado);
-        }
+        //    return CustomResponse(resultado);
+        //}
 
-        [HttpPatch("cancelar")]
-        public async Task<IActionResult> Cancelar(Guid id)
-        {
-            var resultado = await _mediator.EnviarComando(new CancelarProprietarioCommand(id, Cancelado.Nao));
 
-            return CustomResponse(resultado);
+        //[HttpPatch("cancelar")]
+        //public async Task<ActionResult<ProprietarioViewModel>> Cancelar(Guid id)
+        //{
+        //    var resultado = await _mediator.EnviarComando(new CancelarProprietarioCommand(id));
 
-        }
+        //    return CustomResponse(resultado);
+
+        //}
     }
 }

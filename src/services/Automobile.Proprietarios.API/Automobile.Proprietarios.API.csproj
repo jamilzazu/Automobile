@@ -25,8 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\building blocks\Automobile.Core\Automobile.Core.csproj" />
     <ProjectReference Include="..\..\building blocks\Automobile.WebAPI.Core\Automobile.WebAPI.Core.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Application\Queries\" />
+    <ProjectReference Include="..\Automobile.Proprietarios.Application\Automobile.Proprietarios.Application.csproj" />
+    <ProjectReference Include="..\Automobile.Proprietarios.Domain\Automobile.Proprietarios.Domain.csproj" />
   </ItemGroup>
 </Project>

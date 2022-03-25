@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Automobile.Proprietarios.Infra.EF.Configurations.Contexts;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Automobile.Proprietarios.API.Data;
+using System.Data;
 
 namespace Automobile.Proprietarios.API.Configuration
 {
@@ -12,6 +14,9 @@ namespace Automobile.Proprietarios.API.Configuration
     {
         public static void AddApiConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddTransient<IDbConnection>(options =>
+                new SqlConnection(configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDbContext<ProprietariosContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
