@@ -29,6 +29,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automobile.Proprietarios.Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automobile.Proprietarios.Infra.EF", "src\services\Automobile.Proprietarios.Infra.EF\Automobile.Proprietarios.Infra.EF.csproj", "{E2099B6C-E4A6-48C0-986C-519A4E7EAE27}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{B57FA08F-8D87-413D-85B9-DB8D8EFD2C84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automobile.Database.SqlServer", "src\building blocks\Automobile.Database.SqlServer\Automobile.Database.SqlServer.csproj", "{1106267D-1D7A-43B5-84CD-8DD89E77E3FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +63,10 @@ Global
 		{E2099B6C-E4A6-48C0-986C-519A4E7EAE27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2099B6C-E4A6-48C0-986C-519A4E7EAE27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2099B6C-E4A6-48C0-986C-519A4E7EAE27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1106267D-1D7A-43B5-84CD-8DD89E77E3FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1106267D-1D7A-43B5-84CD-8DD89E77E3FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1106267D-1D7A-43B5-84CD-8DD89E77E3FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1106267D-1D7A-43B5-84CD-8DD89E77E3FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +84,8 @@ Global
 		{BAEA0112-D6B3-4933-88AF-49EB8ACB07A8} = {4E595F3F-6885-4289-9445-8A4F3DE1D034}
 		{5E2E5243-6121-4F03-A8CC-41FCB3C58E2D} = {4E595F3F-6885-4289-9445-8A4F3DE1D034}
 		{E2099B6C-E4A6-48C0-986C-519A4E7EAE27} = {4E595F3F-6885-4289-9445-8A4F3DE1D034}
+		{B57FA08F-8D87-413D-85B9-DB8D8EFD2C84} = {10E3B62F-950A-437C-9628-E6FA74C9B47F}
+		{1106267D-1D7A-43B5-84CD-8DD89E77E3FC} = {B57FA08F-8D87-413D-85B9-DB8D8EFD2C84}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {07A51463-0D91-43FD-9C8D-7B39DE253B73}

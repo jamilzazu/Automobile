@@ -1,7 +1,11 @@
 ﻿using Automobile.Core.Mediator;
+using Automobile.Database.SqlServer.Order;
 using Automobile.Proprietarios.Application.Queries.Interfaces;
+using Automobile.Proprietarios.Application.Queries.Proprietario.Request;
+using Automobile.Proprietarios.Application.Queries.Response;
 using Automobile.Proprietarios.Domain.Commands.Proprietario;
 using Automobile.WebAPI.Core.Controllers;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -20,17 +24,16 @@ namespace Automobile.Proprietarios.API.Controllers
             _proprietarioQueries = proprietarioQueries;
         }
 
-        //[HttpGet("lista")]
-        //public IEnumerable<IActionResult> Index()
-        //{
-        //    var proprietarios = _proprietarioModelBuilder.ListaProprietarioViewModel(_proprietarioRepository.ObterTodos());
+        [HttpPost("listar")]
+        public async Task<IActionResult> ListarProprietariosAsync([FromBody] FiltroListaProprietariosRequest filtro)
+        {
+            var resultado = await _proprietarioQueries.ListarProprietariosAsync(filtro);
 
-        //    return proprietarios;
-        //}
-
+            return CustomResponse(resultado);
+        }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> ProprietarioPorId(Guid id)
+        public async Task<IActionResult> ObterProprietarioPorId(Guid id)
         {
             var resultado = await _proprietarioQueries.ObterProprietarioPorId(id);
 
@@ -61,14 +64,12 @@ namespace Automobile.Proprietarios.API.Controllers
             return CustomResponse(resultado);
         }
 
-
         [HttpPatch("cancelar")]
         public async Task<IActionResult> Cancelar(Guid id)
         {
             var resultado = await _mediator.EnviarComando(new CancelarProprietarioCommand(id));
 
             return CustomResponse(resultado);
-
         }
     }
 }

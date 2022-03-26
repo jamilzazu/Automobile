@@ -5,17 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Queries\Proprietario\Scripts\ListaProprietario.sql" />
     <None Remove="Queries\Proprietario\Scripts\ObterProprietarioPeloNumeroDocumento.sql" />
     <None Remove="Queries\Proprietario\Scripts\ObterProprietarioPorId.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Queries\Proprietario\Scripts\ObterProprietarioPeloNumeroDocumento.sql" />
+    <EmbeddedResource Include="Queries\Proprietario\Scripts\ListaProprietario.sql" />
     <EmbeddedResource Include="Queries\Proprietario\Scripts\ObterProprietarioPorId.sql" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Queries\Proprietario\Request\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\building blocks\Automobile.Core\Automobile.Core.csproj" />
+    <ProjectReference Include="..\..\building blocks\Automobile.Database.SqlServer\Automobile.Database.SqlServer.csproj" />
     <ProjectReference Include="..\Automobile.Proprietarios.Domain\Automobile.Proprietarios.Domain.csproj" />
     <ProjectReference Include="..\Automobile.Proprietarios.Infra.EF\Automobile.Proprietarios.Infra.EF.csproj" />
   </ItemGroup>
