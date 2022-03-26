@@ -1,11 +1,10 @@
-﻿using Automobile.Proprietarios.Domain.Events.Proprietario;
-using MediatR;
+﻿using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Automobile.Proprietarios.Domain.Events.Events
+namespace Automobile.Proprietarios.Domain.Events.Proprietario.Handlers
 {
-    public class ProprietarioEventHandler : INotificationHandler<ProprietarioCadastradoEvent>
+    public class ProprietarioCadastradoEventHandler : INotificationHandler<ProprietarioCadastradoEvent>
     {
         public Task Handle(ProprietarioCadastradoEvent notification, CancellationToken cancellationToken)
         {
