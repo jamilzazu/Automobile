@@ -27,8 +27,9 @@ namespace Automobile.Proprietarios.API.Configuration
             services.AddScoped<IProprietarioRepository, ProprietarioRepository>();
             services.AddScoped<IProprietarioQueries, ProprietarioQueries>();
             services.AddScoped<IProprietarioService, ProprietarioService>();
-            
-            services.AddScoped<IRequestHandler<CadastrarProprietarioCommand, ValidationResult>, ProprietarioCommandHandler>();
+
+            services.AddScoped<IRequestHandler<CadastrarProprietarioCommand, ValidationResult>, CadastrarProprietarioCommandHandler>();
+            services.AddScoped<IRequestHandler<AtualizarProprietarioCommand, ValidationResult>, AlterarProprietarioCommandHandler>();
             //services.AddScoped<IRequestHandler<AlterarProprietarioCommand, ValidationResult>, ProprietarioCommandHandler>();
             //services.AddScoped<IRequestHandler<CancelarProprietarioCommand, ValidationResult>, ProprietarioCommandHandler>();
             //services.AddScoped<IRequestHandler<AtivarProprietarioCommand, ValidationResult>, ProprietarioCommandHandler>();
@@ -63,7 +64,7 @@ namespace Automobile.Proprietarios.API.Configuration
 
 
             // Context
-            services.AddScoped<ProprietariosContext>();
+            //services.AddScoped<ProprietariosContext>();
         }
     }
 }

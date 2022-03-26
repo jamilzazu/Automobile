@@ -6,9 +6,9 @@ using System;
 
 namespace Automobile.Proprietarios.Application.Validators
 {
-    public class CadastrarProprietarioCommandValidator : AbstractValidator<CadastrarProprietarioCommand>
+    public class AtualizarProprietarioCommandValidator : AbstractValidator<AtualizarProprietarioCommand>
     {
-        public CadastrarProprietarioCommandValidator()
+        public AtualizarProprietarioCommandValidator()
         {
             RuleFor(c => c.Id)
                 .NotEqual(Guid.Empty)

@@ -36,10 +36,10 @@ namespace Automobile.Proprietarios.Domain.Entities
             return Convert.ToUInt64(cpf).ToString(@"000\.000\.000\-00");
         }
 
-        public void Alterar(string nome, Documento documento, string email)
+        public void Atualizar(string nome, Documento documento, string email)
         {
             Nome = nome;
-            Documento = new Documento(documento.TipoDocumento, documento.NumeroDocumento);
+            Documento = documento;
             Email = new Email(email);
         }
 

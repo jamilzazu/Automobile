@@ -18,7 +18,8 @@ namespace Automobile.Proprietarios.API.Configuration
                 new SqlConnection(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<ProprietariosContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")),
+             ServiceLifetime.Transient);
 
             services.AddControllers();
 

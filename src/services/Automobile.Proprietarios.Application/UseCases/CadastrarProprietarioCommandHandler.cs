@@ -1,6 +1,4 @@
 ﻿using Automobile.Core.Messages;
-using Automobile.Proprietarios.Application.Queries.Interfaces;
-using Automobile.Proprietarios.Application.Services.Interfaces;
 using Automobile.Proprietarios.Domain.Commands.Proprietario;
 using Automobile.Proprietarios.Domain.Entities;
 using Automobile.Proprietarios.Domain.Entities.Objects;
@@ -13,28 +11,28 @@ using System.Threading.Tasks;
 
 namespace Automobile.Proprietarios.Domain.Handlers
 {
-    public class ProprietarioCommandHandler : CommandHandler, IRequestHandler<CadastrarProprietarioCommand, ValidationResult>
+    public class CadastrarProprietarioCommandHandler : CommandHandler, IRequestHandler<CadastrarProprietarioCommand, ValidationResult>
     {
-        private readonly IProprietarioQueries _proprietarioQueries;
         private readonly IProprietarioRepository _proprietarioRepository;
-        private readonly IProprietarioService _proprietarioService;
 
-        public ProprietarioCommandHandler(IProprietarioQueries proprietarioQueries, IProprietarioRepository proprietarioRepository, IProprietarioService proprietarioService)
+        public CadastrarProprietarioCommandHandler(IProprietarioRepository proprietarioRepository)
         {
-            _proprietarioQueries = proprietarioQueries;
             _proprietarioRepository = proprietarioRepository;
-            _proprietarioService = proprietarioService;
         }
 
         public async Task<ValidationResult> Handle(CadastrarProprietarioCommand message, CancellationToken cancellationToken)
         {
             if (!message.EhValido()) return message.ValidationResult;
 
+            if (DocumentoEstaVinculadoAOutroProprietario(message.Documento))
+            {
+                AdicionarErro("Este Documento já está em uso.");
+                return ValidationResult;
+            }
+
             var proprietario = MontaObjetoProprietario(message);
 
-            await ValidaCadastroProprietario(proprietario.Documento);
-
-            CadastrarProprietario(proprietario, message);
+            _proprietarioRepository.Adicionar(proprietario);
 
             return await PersistirDados(_proprietarioRepository.UnitOfWork);
         }
@@ -42,6 +40,13 @@ namespace Automobile.Proprietarios.Domain.Handlers
         public Proprietario MontaObjetoProprietario(CadastrarProprietarioCommand message)
         {
             return new Proprietario(message.Id, message.Nome, message.Documento, message.Email);
+        }
+
+        public bool DocumentoEstaVinculadoAOutroProprietario(Documento numeroDocumento)
+        {
+            var documentoVinculadoAOutroProrprietario = _proprietarioRepository.ObterProprietarioPeloNumeroDocumento(numeroDocumento);
+
+            return documentoVinculadoAOutroProrprietario.Result != null;
         }
 
         public void CadastrarProprietario(Proprietario proprietario, CadastrarProprietarioCommand message)
@@ -54,17 +59,6 @@ namespace Automobile.Proprietarios.Domain.Handlers
         public void AdicionarEventoDeCadastroDoProrprietario(Proprietario proprietario, CadastrarProprietarioCommand message)
         {
             proprietario.AdicionarEvento(new ProprietarioCadastradoEvent(message.Id, message.Nome, message.Documento, message.Email));
-        }
-
-        public async Task<ValidationResult> ValidaCadastroProprietario(Documento documento)
-        {
-            if (await _proprietarioService.ExisteCpfJaCadastrado(documento))
-            {
-                AdicionarErro("Este Documento já está em uso.");
-                return ValidationResult;
-            }
-
-            return ValidationResult;
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using Automobile.Core.Utils;
-using Automobile.Proprietarios.Domain.Entities.Enums;
-using Automobile.Proprietarios.Domain.Exceptions;
+﻿using Automobile.Proprietarios.Domain.Entities.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace Automobile.Proprietarios.Domain.Entities.Objects
@@ -20,63 +18,101 @@ namespace Automobile.Proprietarios.Domain.Entities.Objects
 
         public Documento(TipoDocumento tipoDocumento, string numeroDocumento)
         {
-            if (!Validar(numeroDocumento)) throw new DomainException("Documento inválido");
             NumeroDocumento = numeroDocumento;
-            TipoDocumento = TipoDocumento;
+            TipoDocumento = tipoDocumento;
+        }
+        public string TipoDocumentoDescricao()
+        {
+            return TipoDocumento.GetDescription().ToUpper();
         }
 
-        public static bool Validar(string cpf)
+        public static bool ValidarDocumento(TipoDocumento tipoDocumento, string documento)
         {
-            cpf = cpf.ApenasNumeros(cpf);
+            return (IsCpf(tipoDocumento, documento) || IsCnpj(tipoDocumento, documento));
+        }
 
-            if (cpf.Length > 11)
+        private static bool IsCpf(TipoDocumento tipoDocumento, string documento)
+        {
+            if (tipoDocumento == TipoDocumento.Cnpj) { return false; }
+
+            int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+            int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+
+            documento = documento.Trim().Replace(".", "").Replace("-", "");
+            if (documento.Length != 11)
                 return false;
 
-            while (cpf.Length != 11)
-                cpf = '0' + cpf;
-
-            var igual = true;
-            for (var i = 1; i < 11 && igual; i++)
-                if (cpf[i] != cpf[0])
-                    igual = false;
-
-            if (igual || cpf == "12345678909")
-                return false;
-
-            var numeros = new int[11];
-
-            for (var i = 0; i < 11; i++)
-                numeros[i] = int.Parse(cpf[i].ToString());
-
-            var soma = 0;
-            for (var i = 0; i < 9; i++)
-                soma += (10 - i) * numeros[i];
-
-            var resultado = soma % 11;
-
-            if (resultado == 1 || resultado == 0)
-            {
-                if (numeros[9] != 0)
+            for (int j = 0; j < 10; j++)
+                if (j.ToString().PadLeft(11, char.Parse(j.ToString())) == documento)
                     return false;
-            }
-            else if (numeros[9] != 11 - resultado)
-                return false;
 
+            string tempdocumento = documento.Substring(0, 9);
+            int soma = 0;
+
+            for (int i = 0; i < 9; i++)
+                soma += int.Parse(tempdocumento[i].ToString()) * multiplicador1[i];
+
+            int resto = soma % 11;
+            if (resto < 2)
+                resto = 0;
+            else
+                resto = 11 - resto;
+
+            string digito = resto.ToString();
+            tempdocumento = tempdocumento + digito;
             soma = 0;
-            for (var i = 0; i < 10; i++)
-                soma += (11 - i) * numeros[i];
+            for (int i = 0; i < 10; i++)
+                soma += int.Parse(tempdocumento[i].ToString()) * multiplicador2[i];
 
-            resultado = soma % 11;
+            resto = soma % 11;
+            if (resto < 2)
+                resto = 0;
+            else
+                resto = 11 - resto;
 
-            if (resultado == 1 || resultado == 0)
-            {
-                if (numeros[10] != 0)
-                    return false;
-            }
-            else if (numeros[10] != 11 - resultado)
+            digito = digito + resto.ToString();
+
+            return documento.EndsWith(digito);
+        }
+
+        private static bool IsCnpj(TipoDocumento tipoDocumento, string cnpj)
+        {
+            if (tipoDocumento == TipoDocumento.Cpf) { return false; }
+
+            int[] multiplicador1 = new int[12] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+            int[] multiplicador2 = new int[13] { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+
+            cnpj = cnpj.Trim().Replace(".", "").Replace("-", "").Replace("/", "");
+            if (cnpj.Length != 14)
                 return false;
 
-            return true;
+            string tempCnpj = cnpj.Substring(0, 12);
+            int soma = 0;
+
+            for (int i = 0; i < 12; i++)
+                soma += int.Parse(tempCnpj[i].ToString()) * multiplicador1[i];
+
+            int resto = (soma % 11);
+            if (resto < 2)
+                resto = 0;
+            else
+                resto = 11 - resto;
+
+            string digito = resto.ToString();
+            tempCnpj = tempCnpj + digito;
+            soma = 0;
+            for (int i = 0; i < 13; i++)
+                soma += int.Parse(tempCnpj[i].ToString()) * multiplicador2[i];
+
+            resto = (soma % 11);
+            if (resto < 2)
+                resto = 0;
+            else
+                resto = 11 - resto;
+
+            digito = digito + resto.ToString();
+
+            return cnpj.EndsWith(digito);
         }
     }
 }

@@ -4,7 +4,6 @@ using Automobile.Proprietarios.Domain.Commands.Proprietario;
 using Automobile.WebAPI.Core.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Automobile.Proprietarios.API.Controllers
@@ -46,13 +45,13 @@ namespace Automobile.Proprietarios.API.Controllers
             return CustomResponse(resultado);
         }
 
-        //[HttpPut("alterar")]
-        //public async Task<ActionResult<ProprietarioViewModel>> AlterarProprietario(ProprietarioViewModel view)
-        //{
-        //    var resultado = await _mediator.EnviarComando(new AlterarProprietarioCommand(view.Id, view.Nome, view.Documento, view.Email));
+        [HttpPut("atualizar")]
+        public async Task<IActionResult> AtualizarProprietario(AtualizarProprietarioCommand command)
+        {
+            var resultado = await _mediator.EnviarComando(command);
 
-        //    return CustomResponse(resultado);
-        //}
+            return CustomResponse(resultado);
+        }
 
 
         //[HttpPatch("ativar")]
