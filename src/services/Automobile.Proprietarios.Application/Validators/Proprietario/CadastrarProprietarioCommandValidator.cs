@@ -4,7 +4,7 @@ using Automobile.Proprietarios.Domain.Entities.Objects;
 using FluentValidation;
 using System;
 
-namespace Automobile.Proprietarios.Application.Validators
+namespace Automobile.Proprietarios.Application.Validators.Proprietario
 {
     public class CadastrarProprietarioCommandValidator : AbstractValidator<CadastrarProprietarioCommand>
     {

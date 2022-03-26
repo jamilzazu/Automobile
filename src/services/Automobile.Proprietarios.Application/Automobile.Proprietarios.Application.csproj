@@ -5,17 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Queries\Scripts\ObterProprietarioPeloNumeroDocumento.sql" />
-    <None Remove="Queries\Scripts\ObterProprietarioPorId.sql" />
+    <None Remove="Queries\Proprietario\Scripts\ObterProprietarioPeloNumeroDocumento.sql" />
+    <None Remove="Queries\Proprietario\Scripts\ObterProprietarioPorId.sql" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Queries\Scripts\ObterProprietarioPeloNumeroDocumento.sql" />
-    <EmbeddedResource Include="Queries\Scripts\ObterProprietarioPorId.sql" />
+    <EmbeddedResource Include="Queries\Proprietario\Scripts\ObterProprietarioPeloNumeroDocumento.sql" />
+    <EmbeddedResource Include="Queries\Proprietario\Scripts\ObterProprietarioPorId.sql" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Queries\Request\" />
+    <Folder Include="Queries\Proprietario\Request\" />
   </ItemGroup>
 
   <ItemGroup>

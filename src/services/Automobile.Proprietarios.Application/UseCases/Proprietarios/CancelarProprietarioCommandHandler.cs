@@ -9,18 +9,18 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Automobile.Proprietarios.Domain.Handlers
+namespace Automobile.Proprietarios.Domain.Handlers.Proprietarioss
 {
-    public class AtivarProprietarioCommandHandler : CommandHandler, IRequestHandler<AtivarProprietarioCommand, ValidationResult>
+    public class CancelarProprietarioCommandHandler : CommandHandler, IRequestHandler<CancelarProprietarioCommand, ValidationResult>
     {
         private readonly IProprietarioRepository _proprietarioRepository;
 
-        public AtivarProprietarioCommandHandler(IProprietarioRepository proprietarioRepository)
+        public CancelarProprietarioCommandHandler(IProprietarioRepository proprietarioRepository)
         {
             _proprietarioRepository = proprietarioRepository;
         }
 
-        public async Task<ValidationResult> Handle(AtivarProprietarioCommand message, CancellationToken cancellationToken)
+        public async Task<ValidationResult> Handle(CancelarProprietarioCommand message, CancellationToken cancellationToken)
         {
             if (!message.EhValido()) return message.ValidationResult;
 
@@ -32,27 +32,27 @@ namespace Automobile.Proprietarios.Domain.Handlers
                 return ValidationResult;
             }
 
-            if (proprietario.Cancelado == Cancelado.Nao)
+            if (proprietario.Cancelado == Cancelado.Sim)
             {
-                AdicionarErro($"O proprietário {proprietario.Nome} já está ativado.");
+                AdicionarErro($"O proprietário {proprietario.Nome} já está cancelado.");
                 return ValidationResult;
             }
 
-            AtivarProprietario(proprietario, message);
+            CancelarProprietario(proprietario, message);
 
             return await PersistirDados(_proprietarioRepository.UnitOfWork);
         }
 
-        public void AtivarProprietario(Proprietario proprietario, AtivarProprietarioCommand message)
+        public void CancelarProprietario(Proprietario proprietario, CancelarProprietarioCommand message)
         {
-            proprietario.Ativar();
+            proprietario.Cancelar();
 
             _proprietarioRepository.Atualizar(proprietario);
 
-            AdicionarEventoDeAtivarProrprietario(proprietario, message);
+            AdicionarEventoDeCancelarProprietario(proprietario, message);
         }
 
-        public void AdicionarEventoDeAtivarProrprietario(Proprietario proprietario, AtivarProprietarioCommand message)
+        public void AdicionarEventoDeCancelarProprietario(Proprietario proprietario, CancelarProprietarioCommand message)
         {
             proprietario.AdicionarEvento(new ProprietarioCanceladoEvent(message.Id, proprietario.Nome, proprietario.Documento, proprietario.Email.Endereco));
         }

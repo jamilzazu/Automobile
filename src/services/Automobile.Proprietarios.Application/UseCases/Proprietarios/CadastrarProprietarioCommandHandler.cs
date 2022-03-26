@@ -9,7 +9,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Automobile.Proprietarios.Domain.Handlers
+namespace Automobile.Proprietarios.Domain.Handlers.Proprietarios
 {
     public class CadastrarProprietarioCommandHandler : CommandHandler, IRequestHandler<CadastrarProprietarioCommand, ValidationResult>
     {
@@ -26,7 +26,7 @@ namespace Automobile.Proprietarios.Domain.Handlers
 
             if (DocumentoEstaVinculadoAOutroProprietario(message.Documento))
             {
-                AdicionarErro("Este Documento já está em uso.");
+                AdicionarErro($"Este {message.Documento.TipoDocumentoDescricao()} já está em uso.");
                 return ValidationResult;
             }
 
@@ -44,19 +44,19 @@ namespace Automobile.Proprietarios.Domain.Handlers
 
         public bool DocumentoEstaVinculadoAOutroProprietario(Documento numeroDocumento)
         {
-            var documentoVinculadoAOutroProrprietario = _proprietarioRepository.ObterProprietarioPeloNumeroDocumento(numeroDocumento);
+            var documentoVinculadoAOutroProprietario = _proprietarioRepository.ObterProprietarioPeloNumeroDocumento(numeroDocumento);
 
-            return documentoVinculadoAOutroProrprietario.Result != null;
+            return documentoVinculadoAOutroProprietario.Result != null;
         }
 
         public void CadastrarProprietario(Proprietario proprietario, CadastrarProprietarioCommand message)
         {
             _proprietarioRepository.Adicionar(proprietario);
 
-            AdicionarEventoDeCadastroDoProrprietario(proprietario, message);
+            AdicionarEventoDeCadastroDoProprietario(proprietario, message);
         }
 
-        public void AdicionarEventoDeCadastroDoProrprietario(Proprietario proprietario, CadastrarProprietarioCommand message)
+        public void AdicionarEventoDeCadastroDoProprietario(Proprietario proprietario, CadastrarProprietarioCommand message)
         {
             proprietario.AdicionarEvento(new ProprietarioCadastradoEvent(message.Id, message.Nome, message.Documento, message.Email));
         }

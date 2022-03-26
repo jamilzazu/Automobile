@@ -9,7 +9,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Automobile.Proprietarios.Domain.Handlers
+namespace Automobile.Proprietarios.Domain.Handlers.Proprietarios
 {
     public class AtualizarProprietarioCommandHandler : CommandHandler, IRequestHandler<AtualizarProprietarioCommand, ValidationResult>
     {
@@ -48,9 +48,9 @@ namespace Automobile.Proprietarios.Domain.Handlers
         {
             if (documentoProprietario.NumeroDocumento != documentoCommand.NumeroDocumento)
             {
-                var documentoVinculadoAOutroProrprietario = _proprietarioRepository.ObterProprietarioPeloNumeroDocumento(documentoCommand);
+                var documentoVinculadoAOutroProprietario = _proprietarioRepository.ObterProprietarioPeloNumeroDocumento(documentoCommand);
 
-                return documentoVinculadoAOutroProrprietario.Result != null;
+                return documentoVinculadoAOutroProprietario.Result != null;
             }
 
             return false;
@@ -62,10 +62,10 @@ namespace Automobile.Proprietarios.Domain.Handlers
 
             _proprietarioRepository.Atualizar(proprietario);
 
-            AdicionarEventoDeAtualizacaoDoProrprietario(proprietario, message);
+            AdicionarEventoDeAtualizacaoDoProprietario(proprietario, message);
         }
 
-        public void AdicionarEventoDeAtualizacaoDoProrprietario(Proprietario proprietario, AtualizarProprietarioCommand message)
+        public void AdicionarEventoDeAtualizacaoDoProprietario(Proprietario proprietario, AtualizarProprietarioCommand message)
         {
             proprietario.AdicionarEvento(new ProprietarioAtualizadoEvent(message.Id, message.Nome, message.Documento, message.Email));
         }

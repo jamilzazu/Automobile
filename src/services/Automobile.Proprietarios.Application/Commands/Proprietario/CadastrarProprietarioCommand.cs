@@ -1,5 +1,5 @@
 ﻿using Automobile.Core.Messages;
-using Automobile.Proprietarios.Application.Validators;
+using Automobile.Proprietarios.Application.Validators.Proprietario;
 using Automobile.Proprietarios.Domain.Entities.Objects;
 using System;
 

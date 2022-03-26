@@ -1,5 +1,5 @@
 ﻿using Automobile.Core.Messages;
-using Automobile.Proprietarios.Application.Validators;
+using Automobile.Proprietarios.Application.Validators.Proprietario;
 using System;
 
 namespace Automobile.Proprietarios.Domain.Commands.Proprietario

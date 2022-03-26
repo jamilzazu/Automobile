@@ -1,13 +1,12 @@
 ﻿using Automobile.Proprietarios.Domain.Commands.Proprietario;
-using Automobile.Proprietarios.Domain.Entities.Objects;
 using FluentValidation;
 using System;
 
-namespace Automobile.Proprietarios.Application.Validators
+namespace Automobile.Proprietarios.Application.Validators.Proprietario
 {
-    public class CancelarProprietarioCommandValidator : AbstractValidator<CancelarProprietarioCommand>
+    public class AtivarProprietarioCommandValidator : AbstractValidator<AtivarProprietarioCommand>
     {
-        public CancelarProprietarioCommandValidator()
+        public AtivarProprietarioCommandValidator()
         {
             RuleFor(c => c.Id)
                 .NotEqual(Guid.Empty)
