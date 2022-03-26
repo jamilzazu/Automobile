@@ -53,23 +53,22 @@ namespace Automobile.Proprietarios.API.Controllers
             return CustomResponse(resultado);
         }
 
+        [HttpPatch("ativar")]
+        public async Task<IActionResult> Ativar(Guid id)
+        {
+            var resultado = await _mediator.EnviarComando(new AtivarProprietarioCommand(id));
 
-        //[HttpPatch("ativar")]
-        //public async Task<ActionResult<ProprietarioViewModel>> Ativar(Guid id)
-        //{
-        //    var resultado = await _mediator.EnviarComando(new AtivarProprietarioCommand(id));
-
-        //    return CustomResponse(resultado);
-        //}
+            return CustomResponse(resultado);
+        }
 
 
-        //[HttpPatch("cancelar")]
-        //public async Task<ActionResult<ProprietarioViewModel>> Cancelar(Guid id)
-        //{
-        //    var resultado = await _mediator.EnviarComando(new CancelarProprietarioCommand(id));
+        [HttpPatch("cancelar")]
+        public async Task<IActionResult> Cancelar(Guid id)
+        {
+            var resultado = await _mediator.EnviarComando(new CancelarProprietarioCommand(id));
 
-        //    return CustomResponse(resultado);
+            return CustomResponse(resultado);
 
-        //}
+        }
     }
 }

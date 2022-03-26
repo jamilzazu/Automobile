@@ -6,17 +6,16 @@ using Automobile.Proprietarios.Domain.Events.Proprietario;
 using Automobile.Proprietarios.Domain.Repositories;
 using FluentValidation.Results;
 using MediatR;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Automobile.Proprietarios.Domain.Handlers
 {
-    public class AlterarProprietarioCommandHandler : CommandHandler, IRequestHandler<AtualizarProprietarioCommand, ValidationResult>
+    public class AtualizarProprietarioCommandHandler : CommandHandler, IRequestHandler<AtualizarProprietarioCommand, ValidationResult>
     {
         private readonly IProprietarioRepository _proprietarioRepository;
 
-        public AlterarProprietarioCommandHandler(IProprietarioRepository proprietarioRepository)
+        public AtualizarProprietarioCommandHandler(IProprietarioRepository proprietarioRepository)
         {
             _proprietarioRepository = proprietarioRepository;
         }
@@ -29,7 +28,7 @@ namespace Automobile.Proprietarios.Domain.Handlers
 
             if (proprietario == null)
             {
-                AdicionarErro("Proprietario não encontrado.");
+                AdicionarErro("Proprietário não encontrado.");
                 return ValidationResult;
             }
 

@@ -1,5 +1,5 @@
 ﻿using Automobile.Core.Messages;
-using FluentValidation;
+using Automobile.Proprietarios.Application.Validators;
 using System;
 
 namespace Automobile.Proprietarios.Domain.Commands.Proprietario
@@ -16,18 +16,8 @@ namespace Automobile.Proprietarios.Domain.Commands.Proprietario
 
         public override bool EhValido()
         {
-            ValidationResult = new CancelarProprietarioValidation().Validate(this);
+            ValidationResult = new CancelarProprietarioCommandValidator().Validate(this);
             return ValidationResult.IsValid;
-        }
-    }
-
-    public class CancelarProprietarioValidation : AbstractValidator<CancelarProprietarioCommand>
-    {
-        public CancelarProprietarioValidation()
-        {
-            RuleFor(c => c.Id)
-                 .NotEqual(Guid.Empty)
-                 .WithMessage("Id do proprietário inválido");
         }
     }
 }
