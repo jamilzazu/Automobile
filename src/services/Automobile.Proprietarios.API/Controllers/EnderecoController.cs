@@ -1,6 +1,6 @@
 ﻿using Automobile.Core.Mediator;
-using Automobile.Proprietarios.Application.Services.Interfaces;
-using Automobile.Proprietarios.Domain.Commands.Endereco;
+using Automobile.Application.Services.Interfaces;
+using Automobile.Domain.Commands.Endereco;
 using Automobile.WebAPI.Core.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using System;

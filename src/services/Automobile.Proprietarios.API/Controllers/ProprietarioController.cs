@@ -1,7 +1,7 @@
 ﻿using Automobile.Core.Mediator;
-using Automobile.Proprietarios.Application.Queries.Proprietario.Request;
-using Automobile.Proprietarios.Application.Services.Interfaces;
-using Automobile.Proprietarios.Domain.Commands.Proprietario;
+using Automobile.Application.Queries.Proprietario.Request;
+using Automobile.Application.Services.Interfaces;
+using Automobile.Domain.Commands.Proprietario;
 using Automobile.WebAPI.Core.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using System;
