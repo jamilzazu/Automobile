@@ -4,14 +4,16 @@ using Automobile.Proprietarios.Infra.EF.Configurations.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Automobile.Proprietarios.Infra.EF.Migrations
 {
     [DbContext(typeof(ProprietariosContext))]
-    partial class ProprietariosContextModelSnapshot : ModelSnapshot
+    [Migration("20220327162848_Endereco")]
+    partial class Endereco
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

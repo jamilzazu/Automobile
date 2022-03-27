@@ -32,7 +32,6 @@ namespace Automobile.Proprietarios.Domain.Test.Entities
             Assert.IsTrue(Guid.TryParse(_proprietario.Id.ToString(), out Guid guidResult));
             Assert.IsNotNull(guidResult);
         }
-
     }
 
     #endregion Testes 
