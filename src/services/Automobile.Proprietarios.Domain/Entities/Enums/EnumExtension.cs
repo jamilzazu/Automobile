@@ -8,12 +8,10 @@ namespace Automobile.Proprietarios.Domain.Entities.Enums
     {
         public static string GetDescription(this Enum value)
         {
-            DescriptionAttribute attribute = value.GetType()
+            return value.GetType()
                 .GetField(value.ToString())
                 .GetCustomAttributes(typeof(DescriptionAttribute), false)
-                .SingleOrDefault() as DescriptionAttribute;
-
-            return attribute == null ? value.ToString() : attribute.Description;
+                .SingleOrDefault() is not DescriptionAttribute attribute ? value.ToString() : attribute.Description;
         }
     }
 }

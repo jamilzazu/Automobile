@@ -52,7 +52,7 @@ namespace Automobile.Proprietarios.Domain.Handlers.Proprietarios
             AdicionarEventoDeAtivarProprietario(proprietario, message);
         }
 
-        public void AdicionarEventoDeAtivarProprietario(Proprietario proprietario, AtivarProprietarioCommand message)
+        public static void AdicionarEventoDeAtivarProprietario(Proprietario proprietario, AtivarProprietarioCommand message)
         {
             proprietario.AdicionarEvento(new ProprietarioCanceladoEvent(message.Id, proprietario.Nome, proprietario.Documento, proprietario.Email.Endereco));
         }

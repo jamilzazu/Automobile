@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\src\building blocks\Automobile.Core\Automobile.Core.csproj" />
     <ProjectReference Include="..\..\..\src\services\Automobile.Proprietarios.Domain\Automobile.Proprietarios.Domain.csproj" />
   </ItemGroup>
 

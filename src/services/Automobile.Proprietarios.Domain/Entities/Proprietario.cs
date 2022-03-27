@@ -21,13 +21,14 @@ namespace Automobile.Proprietarios.Domain.Entities
         public Proprietario(Guid id,
                             string nome,
                             Documento documento,
-                            string email)
+                            string email,
+                            Cancelado cancelado)
         {
             Id = id;
             Nome = nome;
-            Email = new Email(email);
             Documento = documento;
-            Cancelado = Cancelado.Nao;
+            Email = new Email(email);
+            Cancelado = cancelado;
         }
 
 

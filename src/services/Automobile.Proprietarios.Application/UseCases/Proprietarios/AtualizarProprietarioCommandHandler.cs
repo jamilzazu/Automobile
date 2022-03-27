@@ -65,7 +65,7 @@ namespace Automobile.Proprietarios.Domain.Handlers.Proprietarios
             AdicionarEventoDeAtualizacaoDoProprietario(proprietario, message);
         }
 
-        public void AdicionarEventoDeAtualizacaoDoProprietario(Proprietario proprietario, AtualizarProprietarioCommand message)
+        public static void AdicionarEventoDeAtualizacaoDoProprietario(Proprietario proprietario, AtualizarProprietarioCommand message)
         {
             proprietario.AdicionarEvento(new ProprietarioAtualizadoEvent(message.Id, message.Nome, message.Documento, message.Email));
         }

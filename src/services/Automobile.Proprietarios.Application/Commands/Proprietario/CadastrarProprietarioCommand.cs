@@ -11,7 +11,7 @@ namespace Automobile.Proprietarios.Domain.Commands.Proprietario
         public string Nome { get; set; }
         public Documento Documento { get; set; }
         public string Email { get; set; }
-         
+
         public CadastrarProprietarioCommand(string nome, Documento documento, string email)
         {
             Id = Guid.NewGuid();

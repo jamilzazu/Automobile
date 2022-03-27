@@ -1,6 +1,7 @@
 ﻿using Automobile.Core.Messages;
 using Automobile.Proprietarios.Domain.Commands.Proprietario;
 using Automobile.Proprietarios.Domain.Entities;
+using Automobile.Proprietarios.Domain.Entities.Enums;
 using Automobile.Proprietarios.Domain.Entities.Objects;
 using Automobile.Proprietarios.Domain.Events.Proprietario;
 using Automobile.Proprietarios.Domain.Repositories;
@@ -37,9 +38,9 @@ namespace Automobile.Proprietarios.Domain.Handlers.Proprietarios
             return await PersistirDados(_proprietarioRepository.UnitOfWork);
         }
 
-        public Proprietario MontaObjetoProprietario(CadastrarProprietarioCommand message)
+        public static Proprietario MontaObjetoProprietario(CadastrarProprietarioCommand message)
         {
-            return new Proprietario(message.Id, message.Nome, message.Documento, message.Email);
+            return new Proprietario(message.Id, message.Nome, message.Documento, message.Email,Cancelado.Nao);
         }
 
         public bool DocumentoEstaVinculadoAOutroProprietario(Documento numeroDocumento)
@@ -56,7 +57,7 @@ namespace Automobile.Proprietarios.Domain.Handlers.Proprietarios
             AdicionarEventoDeCadastroDoProprietario(proprietario, message);
         }
 
-        public void AdicionarEventoDeCadastroDoProprietario(Proprietario proprietario, CadastrarProprietarioCommand message)
+        public static void AdicionarEventoDeCadastroDoProprietario(Proprietario proprietario, CadastrarProprietarioCommand message)
         {
             proprietario.AdicionarEvento(new ProprietarioCadastradoEvent(message.Id, message.Nome, message.Documento, message.Email));
         }

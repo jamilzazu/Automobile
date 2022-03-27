@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Text.RegularExpressions;
 
-namespace Automobile.Proprietarios.Domain.Test.Entities
+namespace Automobile.Proprietarios.Domain.Test.Tests
 {
     [TestClass]
     public class ProprietarioTests
@@ -18,7 +18,7 @@ namespace Automobile.Proprietarios.Domain.Test.Entities
         [TestCategory("Proprietario.Domain.Entity.Proprietario")]
         public void Dado_um_novo_cadastro_ou_atualizacao_o_campo_Nome_deve_ser_obrigatorio()
         {
-            Proprietario _proprietario_CampoNomeVazio = new Proprietario(Guid.NewGuid(), "Jamil Zazu", new Documento(TipoDocumento.Cpf, "77753102001"), "teste@teste.com");
+            Proprietario _proprietario_CampoNomeVazio = new(Guid.NewGuid(), "Jamil Zazu", new Documento(TipoDocumento.Cpf, "77753102001"), "teste@teste.com", Cancelado.Nao);
 
             Assert.AreNotEqual(_proprietario_CampoNomeVazio.Nome, string.Empty);
             Assert.IsNotNull(_proprietario_CampoNomeVazio.Nome);
@@ -32,11 +32,11 @@ namespace Automobile.Proprietarios.Domain.Test.Entities
         [TestCategory("Proprietario.Domain.Entity.Proprietario")]
         public void Dado_uma_novo_cadastro_ou_atualizacao_o_campo_Guid_Id_deve_ser_valido()
         {
-            Proprietario _proprietario_CampoIdValido = new Proprietario(Guid.NewGuid(), "Jamil Zazu", new Documento(TipoDocumento.Cpf, "77753102001"), "teste@teste.com");
+            Proprietario _proprietario_CampoIdValido = new(Guid.NewGuid(), "Jamil Zazu", new Documento(TipoDocumento.Cpf, "77753102001"), "teste@teste.com", Cancelado.Nao);
 
-            bool ehValido = Guid.TryParse(_proprietario_CampoIdValido.Id.ToString(), out Guid guidOutput);
 
-            Assert.IsTrue(ehValido);
+            Assert.IsTrue(Guid.TryParse(_proprietario_CampoIdValido.Id.ToString(), out Guid guidResult));
+            Assert.IsNotNull(guidResult);
         }
 
         #endregion Id
@@ -85,7 +85,7 @@ namespace Automobile.Proprietarios.Domain.Test.Entities
         [TestCategory("Proprietario.Domain.Entity.Proprietario")]
         public void Dado_uma_nova_atualizacao_o_Nome_Documento_Email_deve_ser_Alterado()
         {
-            Proprietario proprietario = new Proprietario(Guid.NewGuid(), "Jamil Zazu", new Documento(TipoDocumento.Cpf, "77753102001"), "teste@teste.com");
+            Proprietario proprietario = new(Guid.NewGuid(), "Jamil Zazu", new Documento(TipoDocumento.Cpf, "77753102001"), "teste@teste.com", Cancelado.Nao);
 
             string nome_cadastrado = proprietario.Nome;
             Documento document_cadastrado = proprietario.Documento;
@@ -106,7 +106,7 @@ namespace Automobile.Proprietarios.Domain.Test.Entities
         [TestCategory("Proprietario.Domain.Entity.Proprietario")]
         public void Dado_um_novo_cancelamento_o_Status_deve_ser_Cancelado()
         {
-            Proprietario _proprietario_Cancelamento = new Proprietario(Guid.NewGuid(), "Jamil Zazu", new Documento(TipoDocumento.Cpf, "77753102001"), "teste@teste.com");
+            Proprietario _proprietario_Cancelamento = new(Guid.NewGuid(), "Jamil Zazu", new Documento(TipoDocumento.Cpf, "77753102001"), "teste@teste.com", Cancelado.Nao);
 
             _proprietario_Cancelamento.Cancelar();
 
@@ -121,7 +121,7 @@ namespace Automobile.Proprietarios.Domain.Test.Entities
         [TestCategory("Proprietario.Domain.Entity.Proprietario")]
         public void Dado_um_novo_ativamento_o_Status_deve_ser_Ativado()
         {
-            Proprietario _proprietario_Cancelamento = new Proprietario(Guid.NewGuid(), "Jamil Zazu", new Documento(TipoDocumento.Cpf, "77753102001"), "teste@teste.com");
+            Proprietario _proprietario_Cancelamento = new(Guid.NewGuid(), "Jamil Zazu", new Documento(TipoDocumento.Cpf, "77753102001"), "teste@teste.com", Cancelado.Sim);
 
             _proprietario_Cancelamento.Ativar();
 
@@ -136,18 +136,18 @@ namespace Automobile.Proprietarios.Domain.Test.Entities
 
         #region Métodos 
 
-        public bool ValidarDocumento(string email)
+        public static bool ValidarDocumento(string email)
         {
             var regexEmail = new Regex(@"^(?("")("".+?""@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-Z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,6}))$");
             return regexEmail.IsMatch(email);
         }
 
-        public bool ValidarDocumento(TipoDocumento tipoDocumento, string documento)
+        public static bool ValidarDocumento(TipoDocumento tipoDocumento, string documento)
         {
             return (IsCpf(tipoDocumento, documento) || IsCnpj(tipoDocumento, documento));
         }
 
-        private bool IsCpf(TipoDocumento tipoDocumento, string documento)
+        private static bool IsCpf(TipoDocumento tipoDocumento, string documento)
         {
             if (tipoDocumento == TipoDocumento.Cnpj) { return false; }
 
@@ -175,7 +175,7 @@ namespace Automobile.Proprietarios.Domain.Test.Entities
                 resto = 11 - resto;
 
             string digito = resto.ToString();
-            tempdocumento = tempdocumento + digito;
+            tempdocumento += digito;
             soma = 0;
             for (int i = 0; i < 10; i++)
                 soma += int.Parse(tempdocumento[i].ToString()) * multiplicador2[i];
@@ -186,12 +186,12 @@ namespace Automobile.Proprietarios.Domain.Test.Entities
             else
                 resto = 11 - resto;
 
-            digito = digito + resto.ToString();
+            digito += resto.ToString();
 
             return documento.EndsWith(digito);
         }
 
-        private bool IsCnpj(TipoDocumento tipoDocumento, string cnpj)
+        private static bool IsCnpj(TipoDocumento tipoDocumento, string cnpj)
         {
             if (tipoDocumento == TipoDocumento.Cpf) { return false; }
 
@@ -215,7 +215,7 @@ namespace Automobile.Proprietarios.Domain.Test.Entities
                 resto = 11 - resto;
 
             string digito = resto.ToString();
-            tempCnpj = tempCnpj + digito;
+            tempCnpj += digito;
             soma = 0;
             for (int i = 0; i < 13; i++)
                 soma += int.Parse(tempCnpj[i].ToString()) * multiplicador2[i];
@@ -226,7 +226,7 @@ namespace Automobile.Proprietarios.Domain.Test.Entities
             else
                 resto = 11 - resto;
 
-            digito = digito + resto.ToString();
+            digito += resto.ToString();
 
             return cnpj.EndsWith(digito);
         }

@@ -13,4 +13,13 @@
     <PackageReference Include="coverlet.collector" Version="3.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Fake\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\services\Automobile.Proprietarios.Application\Automobile.Proprietarios.Application.csproj" />
+    <ProjectReference Include="..\..\..\src\services\Automobile.Proprietarios.Domain\Automobile.Proprietarios.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

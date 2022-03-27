@@ -59,7 +59,7 @@ namespace Automobile.Proprietarios.Domain.Entities.Objects
                 resto = 11 - resto;
 
             string digito = resto.ToString();
-            tempdocumento = tempdocumento + digito;
+            tempdocumento += digito;
             soma = 0;
             for (int i = 0; i < 10; i++)
                 soma += int.Parse(tempdocumento[i].ToString()) * multiplicador2[i];
@@ -70,7 +70,7 @@ namespace Automobile.Proprietarios.Domain.Entities.Objects
             else
                 resto = 11 - resto;
 
-            digito = digito + resto.ToString();
+            digito += resto.ToString();
 
             return documento.EndsWith(digito);
         }
@@ -99,7 +99,7 @@ namespace Automobile.Proprietarios.Domain.Entities.Objects
                 resto = 11 - resto;
 
             string digito = resto.ToString();
-            tempCnpj = tempCnpj + digito;
+            tempCnpj += digito;
             soma = 0;
             for (int i = 0; i < 13; i++)
                 soma += int.Parse(tempCnpj[i].ToString()) * multiplicador2[i];
@@ -110,7 +110,7 @@ namespace Automobile.Proprietarios.Domain.Entities.Objects
             else
                 resto = 11 - resto;
 
-            digito = digito + resto.ToString();
+            digito += resto.ToString();
 
             return cnpj.EndsWith(digito);
         }
