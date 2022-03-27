@@ -1,4 +1,5 @@
-﻿using Automobile.Proprietarios.Domain.Entities.Enums;
+﻿using Automobile.Core.Enums;
+using Automobile.Proprietarios.Domain.Entities.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace Automobile.Proprietarios.Domain.Entities.Objects

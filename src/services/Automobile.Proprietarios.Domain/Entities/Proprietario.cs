@@ -1,5 +1,6 @@
 ﻿using System;
 using Automobile.Core.DomainObjects;
+using Automobile.Core.Enums;
 using Automobile.Proprietarios.Domain.Entities.Enums;
 using Automobile.Proprietarios.Domain.Entities.Objects;
 

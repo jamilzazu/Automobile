@@ -1,4 +1,4 @@
-﻿using Automobile.Proprietarios.Domain.Exceptions;
+﻿using Automobile.Core.DomainObjects;
 using System.Text.RegularExpressions;
 
 namespace Automobile.Proprietarios.Domain.Entities.Objects

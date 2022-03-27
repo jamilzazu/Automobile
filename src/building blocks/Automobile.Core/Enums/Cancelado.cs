@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Automobile.Proprietarios.Domain.Entities.Enums
+namespace Automobile.Core.Enums
 {
     public enum Cancelado
     {
