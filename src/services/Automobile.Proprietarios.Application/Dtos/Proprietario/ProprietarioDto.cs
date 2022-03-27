@@ -2,15 +2,15 @@
 using Automobile.Proprietarios.Domain.Entities.Objects;
 using System;
 
-namespace Automobile.Proprietarios.Application.Queries.Dto
+namespace Automobile.Proprietarios.Application.Dto
 {
     public class ProprietarioDto
     {
-        public Guid Id { get; set; }
         public string Nome { get; set; }
-        public string Email { get; set; }
-        public string TipoDocumento{ get; set; }
-        public string Documento { get; set; }
+        public Email Email { get; set; }
+        public Documento Documento { get; set; }
         public Cancelado Cancelado { get; set; }
+        public DateTime DataCadastro { get; set; }
+        public DateTime? DataAlteracao { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace Automobile.Proprietarios.Application.Validators.Proprietario
 
             RuleFor(c => c.Documento)
                 .NotEmpty().WithMessage("O documento do proprietário não foi informado")
-                .Must((o, documento) => { return TerDocumentoValido(documento); }).WithMessage(x => $"O {x.Documento.TipoDocumento.GetDescription().ToUpper()} do proprietário informado não é válido");
+                .Must((o, documento) => { return TerDocumentoValido(documento); }).WithMessage(x => $"O {x.Documento.TipoDocumentoDescricao()} do proprietário informado não é válido");
 
             RuleFor(c => c.Email)
                 .NotEmpty().WithMessage("O e-mail do proprietário não foi informado")

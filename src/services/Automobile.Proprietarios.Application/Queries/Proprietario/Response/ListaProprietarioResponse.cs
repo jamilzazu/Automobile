@@ -10,6 +10,8 @@ namespace Automobile.Proprietarios.Application.Queries.Response
         public string Email { get; set; }
         public string TipoDocumento { get; set; }
         public string NumeroDocumento { get; set; }
-        public Cancelado Cancelado { get; set; }
+        public string Cancelado { get; set; }
+        public string DataCadastro { get; set; }
+        public string DataAlteracao { get; set; }
     }
 }

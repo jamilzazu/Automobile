@@ -25,7 +25,7 @@ namespace Automobile.Proprietarios.Infra.EF.Configurations.Mappings
                 tf.Property(c => c.NumeroDocumento)
                    .IsRequired()
                    .HasMaxLength(Documento.DocumentoMaxLength)
-                   .HasColumnName("Documento")
+                   .HasColumnName("NumeroDocumento")
                    .HasColumnType($"varchar({Documento.DocumentoMaxLength})");
             });
 

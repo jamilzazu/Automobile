@@ -3,9 +3,9 @@
       Nome,
       Email,
       TipoDocumento,
-      Documento,
+      NumeroDocumento,
       Cancelado,
       DataCadastro,
       DataAlteracao
 from Automobile.dbo.proprietarios
-where Documento = @numeroDocumento
+where NumeroDocumento = @numeroDocumento

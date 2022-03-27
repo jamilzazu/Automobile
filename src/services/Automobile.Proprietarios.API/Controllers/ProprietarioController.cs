@@ -1,11 +1,8 @@
 ﻿using Automobile.Core.Mediator;
-using Automobile.Database.SqlServer.Order;
-using Automobile.Proprietarios.Application.Queries.Interfaces;
 using Automobile.Proprietarios.Application.Queries.Proprietario.Request;
-using Automobile.Proprietarios.Application.Queries.Response;
+using Automobile.Proprietarios.Application.Services.Interfaces;
 using Automobile.Proprietarios.Domain.Commands.Proprietario;
 using Automobile.WebAPI.Core.Controllers;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -16,18 +13,18 @@ namespace Automobile.Proprietarios.API.Controllers
     public class ProprietarioController : MainController
     {
         private readonly IMediatorHandler _mediator;
-        private readonly IProprietarioQueries _proprietarioQueries;
+        private readonly IProprietarioService _proprietarioService;
 
-        public ProprietarioController(IMediatorHandler mediator, IProprietarioQueries proprietarioQueries)
+        public ProprietarioController(IMediatorHandler mediator, IProprietarioService proprietarioService)
         {
             _mediator = mediator;
-            _proprietarioQueries = proprietarioQueries;
+            _proprietarioService = proprietarioService;
         }
 
         [HttpPost("listar")]
-        public async Task<IActionResult> ListarProprietariosAsync([FromBody] FiltroListaProprietariosRequest filtro)
+        public IActionResult ListarProprietarios([FromBody] FiltroListaProprietariosRequest filtro)
         {
-            var resultado = await _proprietarioQueries.ListarProprietariosAsync(filtro);
+            var resultado = _proprietarioService.ListarProprietarios(filtro);
 
             return CustomResponse(resultado);
         }
@@ -35,7 +32,7 @@ namespace Automobile.Proprietarios.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> ObterProprietarioPorId(Guid id)
         {
-            var resultado = await _proprietarioQueries.ObterProprietarioPorId(id);
+            var resultado = await _proprietarioService.ObterProprietarioPeloId(id);
 
             return CustomResponse(resultado);
         }

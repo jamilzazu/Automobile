@@ -3,7 +3,7 @@
       Nome,
       Email,
       TipoDocumento,
-      Documento,
+      NumeroDocumento,
       Cancelado,
       DataCadastro,
       DataAlteracao

@@ -27,4 +27,8 @@
     <ProjectReference Include="..\Automobile.Proprietarios.Infra.EF\Automobile.Proprietarios.Infra.EF.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Mapper\" />
+  </ItemGroup>
+
 </Project>

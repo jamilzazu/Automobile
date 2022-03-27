@@ -23,7 +23,6 @@ namespace Automobile.Proprietarios.Domain.Entities
                             Documento documento,
                             string email)
         {
-
             Id = id;
             Nome = nome;
             Email = new Email(email);
@@ -31,10 +30,6 @@ namespace Automobile.Proprietarios.Domain.Entities
             Cancelado = Cancelado.Nao;
         }
 
-        public string FormatarCPF(string cpf)
-        {
-            return Convert.ToUInt64(cpf).ToString(@"000\.000\.000\-00");
-        }
 
         public void Atualizar(string nome, Documento documento, string email)
         {
