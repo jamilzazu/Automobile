@@ -6,13 +6,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Automobile.Proprietarios.Application.Test.Commands.Proprietario
 {
     [TestClass]
-    public class CadastrarProprietarioCommandTests
+    public class AtualizarProprietarioCommandTests
     {
+        private readonly CadastrarProprietarioCommand _proprietarioCommand = new("Jamil", new Documento(TipoDocumento.Cpf, "77753102001"), "teste@teste.com");
+
         [TestMethod]
         [TestCategory("Proprietario.Application.Commands")]
-        public void Dado_um_novo_comando_de_cadastro_invalido_o_proprietario_nao_deve_ser_gerado()
+        public void Dado_uma_novo_comando_atualizacao_invalida_o_proprietario_nao_deve_ser_atualizado()
         {
-            var command = new CadastrarProprietarioCommand("", new Documento(TipoDocumento.Cpf, "77753102001"), "teste@teste.com");
+            var command = new AtualizarProprietarioCommand(_proprietarioCommand.Id, "", new Documento(TipoDocumento.Cpf, "77753102001"), "teste@teste.com");
 
             Assert.AreEqual(command.EhValido(), false);
         }

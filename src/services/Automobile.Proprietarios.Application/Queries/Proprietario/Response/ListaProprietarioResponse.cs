@@ -1,5 +1,4 @@
-﻿using Automobile.Proprietarios.Domain.Entities.Enums;
-using System;
+﻿using System;
 
 namespace Automobile.Proprietarios.Application.Queries.Response
 {
