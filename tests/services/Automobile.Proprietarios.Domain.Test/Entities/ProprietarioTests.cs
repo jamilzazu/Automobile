@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Text.RegularExpressions;
 
-namespace Automobile.Proprietarios.Domain.Test.Tests
+namespace Automobile.Proprietarios.Domain.Test.Entities
 {
     [TestClass]
     public class ProprietarioTests

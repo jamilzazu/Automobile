@@ -39,9 +39,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{98
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Proprietario", "Proprietario", "{6DC3AE9C-8FAB-415F-AC62-05EB63C94E87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automobile.Proprietarios.Domain.Test", "tests\services\Automobile.Proprietarios.Domain.Test\Automobile.Proprietarios.Domain.Test.csproj", "{FF21A00B-DB89-42AA-8748-74293ED33C72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automobile.Proprietarios.Domain.Test", "tests\services\Automobile.Proprietarios.Domain.Test\Automobile.Proprietarios.Domain.Test.csproj", "{FF21A00B-DB89-42AA-8748-74293ED33C72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automobile.Proprietarios.Application.Test", "tests\services\Automobile.Proprietarios.Application.Test\Automobile.Proprietarios.Application.Test.csproj", "{74DEBD9C-8316-41C7-A7B0-D524D27A1E02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automobile.Proprietarios.Application.Test", "tests\services\Automobile.Proprietarios.Application.Test\Automobile.Proprietarios.Application.Test.csproj", "{74DEBD9C-8316-41C7-A7B0-D524D27A1E02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
