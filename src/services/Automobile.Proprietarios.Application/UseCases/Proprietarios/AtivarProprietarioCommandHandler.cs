@@ -1,4 +1,5 @@
-﻿using Automobile.Core.Messages;
+﻿using Automobile.Core.Enums;
+using Automobile.Core.Messages;
 using Automobile.Proprietarios.Domain.Commands.Proprietario;
 using Automobile.Proprietarios.Domain.Entities;
 using Automobile.Proprietarios.Domain.Entities.Enums;

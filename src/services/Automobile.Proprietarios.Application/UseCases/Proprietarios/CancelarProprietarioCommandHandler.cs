@@ -1,4 +1,5 @@
-﻿using Automobile.Core.Messages;
+﻿using Automobile.Core.Enums;
+using Automobile.Core.Messages;
 using Automobile.Proprietarios.Domain.Commands.Proprietario;
 using Automobile.Proprietarios.Domain.Entities;
 using Automobile.Proprietarios.Domain.Entities.Enums;
@@ -52,7 +53,7 @@ namespace Automobile.Proprietarios.Domain.Handlers.Proprietarioss
             AdicionarEventoDeCancelarProprietario(proprietario, message);
         }
 
-        public void AdicionarEventoDeCancelarProprietario(Proprietario proprietario, CancelarProprietarioCommand message)
+        public static void AdicionarEventoDeCancelarProprietario(Proprietario proprietario, CancelarProprietarioCommand message)
         {
             proprietario.AdicionarEvento(new ProprietarioCanceladoEvent(message.Id, proprietario.Nome, proprietario.Documento, proprietario.Email.Endereco));
         }

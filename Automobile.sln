@@ -47,6 +47,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Veiculo", "Veiculo", "{4D2B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automobile.Veiculos.Domain", "src\services\Automobile.Veiculos.Domain\Automobile.Veiculos.Domain.csproj", "{3FD9E52F-0228-4021-80DD-D8A9C75A0E5C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Veiculo", "Veiculo", "{E629113B-4BEB-4015-9DC0-E21910D71501}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automobile.Veiculos.Domain.Test", "tests\services\Automobile.Veiculos.Domain.Test\Automobile.Veiculos.Domain.Test.csproj", "{7C510F2E-3718-456B-A79E-7EB31E95E343}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +97,10 @@ Global
 		{3FD9E52F-0228-4021-80DD-D8A9C75A0E5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FD9E52F-0228-4021-80DD-D8A9C75A0E5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FD9E52F-0228-4021-80DD-D8A9C75A0E5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C510F2E-3718-456B-A79E-7EB31E95E343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C510F2E-3718-456B-A79E-7EB31E95E343}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C510F2E-3718-456B-A79E-7EB31E95E343}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C510F2E-3718-456B-A79E-7EB31E95E343}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -118,6 +126,8 @@ Global
 		{74DEBD9C-8316-41C7-A7B0-D524D27A1E02} = {6DC3AE9C-8FAB-415F-AC62-05EB63C94E87}
 		{4D2BFEEB-B509-4F4F-B7CA-780E4A0CEE3E} = {1A904D26-3AD1-4A56-8496-052C81DC77CE}
 		{3FD9E52F-0228-4021-80DD-D8A9C75A0E5C} = {4D2BFEEB-B509-4F4F-B7CA-780E4A0CEE3E}
+		{E629113B-4BEB-4015-9DC0-E21910D71501} = {98C37B95-7421-4B97-9938-DDF5920CEE20}
+		{7C510F2E-3718-456B-A79E-7EB31E95E343} = {E629113B-4BEB-4015-9DC0-E21910D71501}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {07A51463-0D91-43FD-9C8D-7B39DE253B73}

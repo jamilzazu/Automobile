@@ -1,5 +1,5 @@
-﻿using Automobile.Proprietarios.Domain.Entities;
-using Automobile.Proprietarios.Domain.Entities.Enums;
+﻿using Automobile.Core.Enums;
+using Automobile.Proprietarios.Domain.Entities;
 using System;
 using System.Linq.Expressions;
 

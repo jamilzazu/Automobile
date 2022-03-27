@@ -1,4 +1,5 @@
-﻿using Automobile.Proprietarios.Domain.Entities;
+﻿using Automobile.Core.Enums;
+using Automobile.Proprietarios.Domain.Entities;
 using Automobile.Proprietarios.Domain.Entities.Enums;
 using Automobile.Proprietarios.Domain.Entities.Objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
