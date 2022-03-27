@@ -26,7 +26,7 @@ namespace Automobile.Proprietarios.Domain.Entities.Objects
             return TipoDocumento.GetDescription().ToUpper();
         }
 
-        public static bool ValidarDocumento(TipoDocumento tipoDocumento, string documento)
+        public bool ValidarDocumento(TipoDocumento tipoDocumento, string documento)
         {
             return (IsCpf(tipoDocumento, documento) || IsCnpj(tipoDocumento, documento));
         }
