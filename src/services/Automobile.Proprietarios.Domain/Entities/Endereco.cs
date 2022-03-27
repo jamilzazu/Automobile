@@ -12,6 +12,8 @@ namespace Automobile.Proprietarios.Domain.Entities
         public string Cep { get; private set; }
         public string Cidade { get; private set; }
         public string Estado { get; private set; }
+        public DateTime DataCadastro { get; private set; }
+        public DateTime? DataAlteracao { get; private set; }
         public Guid ProprietarioId { get; private set; }
 
         // EF Relation
