@@ -27,7 +27,7 @@ namespace Automobile.Proprietarios.Application.Validators.Endereco
                 .NotEmpty()
                 .WithMessage("Informe o Bairro")
                 .Length(3, 100)
-                .WithMessage("O campo Bairro deve ter entre 5 e 100 caracteres");
+                .WithMessage("O campo Bairro deve ter entre 3 e 100 caracteres");
 
             RuleFor(c => c.Cidade)
                 .NotEmpty()
@@ -38,8 +38,8 @@ namespace Automobile.Proprietarios.Application.Validators.Endereco
             RuleFor(c => c.Estado)
                 .NotEmpty()
                 .WithMessage("Informe o Estado")
-                .Length(5, 50)
-                .WithMessage("O campo Bairro deve ter entre 5 e 50 caracteres");
+                .Length(2, 50)
+                .WithMessage("O campo Bairro deve ter entre 2 e 50 caracteres");
         }
     }
 }

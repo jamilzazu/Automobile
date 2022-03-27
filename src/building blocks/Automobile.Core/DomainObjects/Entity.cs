@@ -1,11 +1,14 @@
 ﻿using Automobile.Core.Messages;
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Automobile.Core.DomainObjects
 {
     public abstract class Entity
     {
+        [JsonPropertyOrder(-10)]
+
         public Guid Id { get; set; }
 
         protected Entity()

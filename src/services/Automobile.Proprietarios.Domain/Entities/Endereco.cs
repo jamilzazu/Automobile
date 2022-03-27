@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Automobile.Core.DomainObjects;
 
 namespace Automobile.Proprietarios.Domain.Entities
@@ -14,14 +16,18 @@ namespace Automobile.Proprietarios.Domain.Entities
         public string Estado { get; private set; }
         public DateTime DataCadastro { get; private set; }
         public DateTime? DataAlteracao { get; private set; }
+        
+        [JsonPropertyOrder(1)]
         public Guid ProprietarioId { get; private set; }
 
         // EF Relation
+        [JsonIgnore]
         public Proprietario Proprietario { get; protected set; }
 
-        public Endereco(Guid id, string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado, Guid proprietarioId)
+        public Endereco(Guid id, Guid proprietarioId, string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado)
         {
             Id = id;
+            ProprietarioId = proprietarioId;
             Logradouro = logradouro;
             Numero = numero;
             Complemento = complemento;
@@ -29,10 +35,9 @@ namespace Automobile.Proprietarios.Domain.Entities
             Cep = cep;
             Cidade = cidade;
             Estado = estado;
-            ProprietarioId = proprietarioId;
         }
 
-        public void Alterar(string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado)
+        public void Atualizar(string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado)
         {
             Logradouro = logradouro;
             Numero = numero;

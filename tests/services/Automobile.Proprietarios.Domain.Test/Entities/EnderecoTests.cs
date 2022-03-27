@@ -3,7 +3,6 @@ using Automobile.Proprietarios.Domain.Entities.Enums;
 using Automobile.Proprietarios.Domain.Entities.Objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Text.RegularExpressions;
 
 namespace Automobile.Proprietarios.Domain.Test.Entities
 {
@@ -19,7 +18,7 @@ namespace Automobile.Proprietarios.Domain.Test.Entities
         [TestCategory("Proprietario.Domain.Entity.Endereco")]
         public void Dado_um_novo_cadastro_ou_atualizacao_todos_os_campos_devem_ser_obrigatorios_exceto_Complemento()
         {
-            Endereco endereco = new(Guid.NewGuid(), "Rua 1", "44", "", "Centro", "78005000", "Cuiabá", "MT", _proprietario.Id);
+            Endereco endereco = new(Guid.NewGuid(), _proprietario.Id, "Rua 1", "44", "", "Centro", "78005000", "Cuiabá", "MT");
 
             Assert.AreNotEqual(endereco.Logradouro, string.Empty);
             Assert.IsNotNull(endereco.Logradouro);

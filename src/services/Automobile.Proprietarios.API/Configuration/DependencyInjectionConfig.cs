@@ -11,6 +11,10 @@ using FluentValidation.Results;
 using Automobile.Proprietarios.Application.Services;
 using Automobile.Proprietarios.Application.Services.Interfaces;
 using Automobile.Proprietarios.Domain.Handlers.Proprietarioss;
+using Automobile.Enderecos.Infra.EF;
+using Automobile.Proprietarios.Domain.Commands.Endereco;
+using Automobile.Proprietarios.Domain.Handlers.Enderecos;
+using Automobile.Enderecos.Domain.Handlers.Enderecos;
 
 namespace Automobile.Proprietarios.API.Configuration
 {
@@ -30,6 +34,15 @@ namespace Automobile.Proprietarios.API.Configuration
             services.AddScoped<IRequestHandler<AtualizarProprietarioCommand, ValidationResult>, AtualizarProprietarioCommandHandler>();
             services.AddScoped<IRequestHandler<AtivarProprietarioCommand, ValidationResult>, AtivarProprietarioCommandHandler>();
             services.AddScoped<IRequestHandler<CancelarProprietarioCommand, ValidationResult>, CancelarProprietarioCommandHandler>();
+
+
+            // Endereço
+
+            services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+            services.AddScoped<IEnderecoService, EnderecoService>();
+
+            services.AddScoped<IRequestHandler<CadastrarEnderecoCommand, ValidationResult>, CadastrarEnderecoCommandHandler>();
+            services.AddScoped<IRequestHandler<AtualizarEnderecoCommand, ValidationResult>, AtualizarEnderecoCommandHandler>();
         }
     }
 }

@@ -6,20 +6,22 @@ namespace Automobile.Proprietarios.Domain.Commands.Endereco
 {
     public class AtualizarEnderecoCommand : Command
     {
-        public Guid Id { get; private set; }
-        public string Logradouro { get; private set; }
-        public string Numero { get; private set; }
-        public string Complemento { get; private set; }
-        public string Bairro { get; private set; }
-        public string Cep { get; private set; }
-        public string Cidade { get; private set; }
-        public string Estado { get; private set; }
-        public Guid ProprietarioId { get; private set; }
+        public Guid Id { get; set; }
+        public Guid ProprietarioId { get; set; }
+        public string Logradouro { get; set; }
+        public string Numero { get; set; }
+        public string Complemento { get; set; }
+        public string Bairro { get; set; }
+        public string Cep { get; set; }
+        public string Cidade { get; set; }
+        public string Estado { get; set; }
+        public DateTime DataAlteracao { get; private set; }
 
-        public AtualizarEnderecoCommand(Guid id, Guid proprietarioId, string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado)
+        public AtualizarEnderecoCommand(Guid id, Guid proprietarioId, string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado, DateTime dataAlteracao)
         {
-            AggregateId = id;
             Id = id;
+            AggregateId = id;
+            ProprietarioId = proprietarioId;
             Logradouro = logradouro;
             Numero = numero;
             Complemento = complemento;
@@ -27,7 +29,7 @@ namespace Automobile.Proprietarios.Domain.Commands.Endereco
             Cep = cep;
             Cidade = cidade;
             Estado = estado;
-            ProprietarioId = proprietarioId;
+            DataAlteracao = dataAlteracao;
         }
 
         public override bool EhValido()

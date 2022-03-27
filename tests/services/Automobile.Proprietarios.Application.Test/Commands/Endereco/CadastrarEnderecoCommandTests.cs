@@ -16,7 +16,7 @@ namespace Automobile.Proprietarios.Application.Test.Commands.Endereco
         [TestCategory("Proprietario.Application.Commands")]
         public void Dado_um_novo_comando_de_cadastro_invalido_o_endereco_nao_deve_ser_gerado()
         {
-            var command = new CadastrarEnderecoCommand(_proprietarioCommand.Id, "", "44", "", "Centro", "78005000", "Cuiabá", "MT");
+            var command = new CadastrarEnderecoCommand(_proprietarioCommand.Id, "", "44", "", "Centro", "78005000", "Cuiabá", "MT", DateTime.Now);
 
             Assert.AreEqual(command.EhValido(), false);
         }

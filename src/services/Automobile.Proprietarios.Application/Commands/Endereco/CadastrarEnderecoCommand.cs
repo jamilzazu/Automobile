@@ -7,20 +7,21 @@ namespace Automobile.Proprietarios.Domain.Commands.Endereco
     public class CadastrarEnderecoCommand : Command
     {
         public Guid Id { get; private set; }
-        public string Logradouro { get; private set; }
-        public string Numero { get; private set; }
-        public string Complemento { get; private set; }
-        public string Bairro { get; private set; }
-        public string Cep { get; private set; }
-        public string Cidade { get; private set; }
-        public string Estado { get; private set; }
-        public Guid ProprietarioId { get; private set; }
+        public Guid ProprietarioId { get; set; }
+        public string Logradouro { get; set; }
+        public string Numero { get; set; }
+        public string Complemento { get; set; }
+        public string Bairro { get; set; }
+        public string Cep { get; set; }
+        public string Cidade { get; set; }
+        public string Estado { get; set; }
+        public DateTime DataCadastro { get; private set; }
 
         public CadastrarEnderecoCommand()
         {
         }
 
-        public CadastrarEnderecoCommand(Guid proprietarioId, string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado)
+        public CadastrarEnderecoCommand(Guid proprietarioId, string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado, DateTime dataCadastro)
         {
             Id = Guid.NewGuid();
             AggregateId = Id;
@@ -32,6 +33,7 @@ namespace Automobile.Proprietarios.Domain.Commands.Endereco
             Cep = cep;
             Cidade = cidade;
             Estado = estado;
+            DataCadastro = dataCadastro;
         }
 
 

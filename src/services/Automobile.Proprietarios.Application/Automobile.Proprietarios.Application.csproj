@@ -27,8 +27,4 @@
     <ProjectReference Include="..\Automobile.Proprietarios.Infra.EF\Automobile.Proprietarios.Infra.EF.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\Endereco\" />
-  </ItemGroup>
-
 </Project>
