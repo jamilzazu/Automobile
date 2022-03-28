@@ -7,7 +7,7 @@ namespace Automobile.Application.Test.Commands.Proprietario
     public class AtivarProprietarioCommandTests
     {
         [TestMethod]
-        [TestCategory("Proprietario.Application.Commands")]
+        [TestCategory("Application.Commands")]
         public void Dado_um_comando_ativamento_invalido_o_proprietario_nao_deve_ser_ativado()
         {
             bool proprietarioIdValido = Guid.TryParse("", out _);

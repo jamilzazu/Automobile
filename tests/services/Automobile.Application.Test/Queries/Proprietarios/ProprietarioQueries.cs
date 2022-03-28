@@ -3,7 +3,7 @@ using Automobile.Domain.Entities;
 using System;
 using System.Linq.Expressions;
 
-namespace Automobile.Application.Test.Queries.Proprietarios
+namespace Automobile.Application.Queriess.Proprietarios
 {
     public static class ProprietarioQueries
     {

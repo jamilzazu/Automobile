@@ -1,8 +1,8 @@
-﻿using Automobile.Domain.Commands.Proprietario;
+﻿using Automobile.Domain.Commands.Marca;
 using FluentValidation;
 using System;
 
-namespace Automobile.Application.Validators.Proprietario
+namespace Automobile.Application.Validators.Marca
 {
     public class CadastrarMarcaCommandValidator : AbstractValidator<CadastrarMarcaCommand>
     {

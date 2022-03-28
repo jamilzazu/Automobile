@@ -31,7 +31,7 @@ namespace Automobile.Domain.Handlers.Proprietarios
                 return ValidationResult;
             }
 
-            if (marca.Cancelado == Cancelado.Sim)
+            if (marca.Cancelado == Cancelado.Nao)
             {
                 AdicionarErro($"A marca {marca.Nome} já está ativada.");
                 return ValidationResult;

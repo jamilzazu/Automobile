@@ -40,7 +40,7 @@ namespace Automobile.Proprietarios.API.Configuration
                                 Id = "Bearer"
                             }
                         },
-                        new string[] {}
+                        Array.Empty<string>()
                     }
                 });
 

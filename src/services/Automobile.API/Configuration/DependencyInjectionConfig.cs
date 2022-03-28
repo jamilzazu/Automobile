@@ -15,6 +15,9 @@ using Automobile.Enderecos.Infra.EF;
 using Automobile.Domain.Commands.Endereco;
 using Automobile.Domain.Handlers.Enderecos;
 using Automobile.Enderecos.Domain.Handlers.Enderecos;
+using Automobile.Domain.Handlers.Marcas;
+using Automobile.Domain.Handlers.Marcass;
+using Automobile.Domain.Commands.Marca;
 
 namespace Automobile.Proprietarios.API.Configuration
 {
@@ -43,6 +46,17 @@ namespace Automobile.Proprietarios.API.Configuration
 
             services.AddScoped<IRequestHandler<CadastrarEnderecoCommand, ValidationResult>, CadastrarEnderecoCommandHandler>();
             services.AddScoped<IRequestHandler<AtualizarEnderecoCommand, ValidationResult>, AtualizarEnderecoCommandHandler>();
+
+
+            // Marca
+
+            services.AddScoped<IMarcaRepository, MarcaRepository>();
+            services.AddScoped<IMarcaQueries, MarcaQueries>();
+            services.AddScoped<IMarcaService, MarcaService>();
+
+            services.AddScoped<IRequestHandler<CadastrarMarcaCommand, ValidationResult>, CadastrarMarcaCommandHandler>();
+            services.AddScoped<IRequestHandler<AtivarMarcaCommand, ValidationResult>, AtivarMarcaCommandHandler>();
+            services.AddScoped<IRequestHandler<CancelarMarcaCommand, ValidationResult>, CancelarMarcaCommandHandler>();
         }
     }
 }

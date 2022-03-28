@@ -9,7 +9,7 @@ namespace Automobile.Application.Test.Commands.Proprietario
     public class CadastrarProprietarioCommandTests
     {
         [TestMethod]
-        [TestCategory("Proprietario.Application.Commands")]
+        [TestCategory("Application.Commands")]
         public void Dado_um_novo_comando_de_cadastro_invalido_o_proprietario_nao_deve_ser_gerado()
         {
             var command = new CadastrarProprietarioCommand("", new Documento(TipoDocumento.Cpf, "77753102001"), "teste@teste.com");

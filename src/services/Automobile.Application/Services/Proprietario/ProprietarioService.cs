@@ -1,7 +1,7 @@
 ﻿using Automobile.Core.Messages;
 using Automobile.Database.SqlServer.Order;
 using Automobile.Application.Queries.Interfaces;
-using Automobile.Application.Queries.Proprietario.Request;
+using Automobile.Application.Queries.Request;
 using Automobile.Application.Queries.Response;
 using Automobile.Application.Services.Interfaces;
 using Automobile.Domain.Entities;

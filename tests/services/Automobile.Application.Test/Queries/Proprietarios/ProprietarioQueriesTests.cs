@@ -1,5 +1,5 @@
-﻿using Automobile.Core.Enums;
-using Automobile.Application.Test.Queries.Proprietarios;
+﻿using Automobile.Application.Queriess.Proprietarios;
+using Automobile.Core.Enums;
 using Automobile.Domain.Entities;
 using Automobile.Domain.Entities.Enums;
 using Automobile.Domain.Entities.Objects;
@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Automobile.Application.Test.Queries.Tests
+namespace Automobile.Application.Queries.Proprietarios
 {
     [TestClass]
     public class ProprietarioQueriesTests
@@ -32,7 +32,7 @@ namespace Automobile.Application.Test.Queries.Tests
         }
 
         [TestMethod]
-        [TestCategory("Proprietario.Application.Queries")]
+        [TestCategory("Application.Queries")]
         public void Dado_a_consulta_de_Proprietarios_deve_retornar_Todos()
         {
             var resultado = _proprietario.AsQueryable().Where(ProprietarioQueries.ListarTodosProprietarios());
@@ -40,7 +40,7 @@ namespace Automobile.Application.Test.Queries.Tests
         }
 
         [TestMethod]
-        [TestCategory("Proprietario.Application.Queries")]
+        [TestCategory("Application.Queries")]
         public void Dado_a_consulta_de_Proprietarios_deve_retornar_Os_Cancelados()
         {
             var resultado = _proprietario.AsQueryable().Where(ProprietarioQueries.ListarProprietariosCancelados());
@@ -48,7 +48,7 @@ namespace Automobile.Application.Test.Queries.Tests
         }
 
         [TestMethod]
-        [TestCategory("Proprietario.Application.Queries")]
+        [TestCategory("Application.Queries")]
         public void Dado_a_consulta_de_Proprietarios_deve_retornar_Os_Ativos()
         {
             var resultado = _proprietario.AsQueryable().Where(ProprietarioQueries.ListarProprietariosAtivos());

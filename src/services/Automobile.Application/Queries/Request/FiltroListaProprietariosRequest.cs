@@ -1,6 +1,6 @@
 ﻿using Automobile.Database.SqlServer.Order;
 
-namespace Automobile.Application.Queries.Proprietario.Request
+namespace Automobile.Application.Queries.Request
 {
     public class FiltroListaProprietariosRequest : PaginateFilter
     {

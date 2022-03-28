@@ -1,6 +1,6 @@
 ﻿using Automobile.Core.Enums;
 using Automobile.Core.Messages;
-using Automobile.Domain.Commands.Proprietario;
+using Automobile.Domain.Commands.Marca;
 using Automobile.Domain.Entitites;
 using Automobile.Domain.Repositories;
 using FluentValidation.Results;

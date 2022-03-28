@@ -1,5 +1,5 @@
 ﻿using Automobile.Database.SqlServer.Order;
-using Automobile.Application.Queries.Proprietario.Request;
+using Automobile.Application.Queries.Request;
 using Automobile.Application.Queries.Response;
 using Automobile.Domain.Entities;
 using Automobile.Domain.Entities.Objects;

@@ -1,5 +1,5 @@
 ﻿using Automobile.Core.Mediator;
-using Automobile.Application.Queries.Proprietario.Request;
+using Automobile.Application.Queries.Request;
 using Automobile.Application.Services.Interfaces;
 using Automobile.Domain.Commands.Proprietario;
 using Automobile.WebAPI.Core.Controllers;
