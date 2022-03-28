@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Automobile.Proprietarios.Infra.EF.Migrations
+namespace Automobile.Infra.EF.Migrations
 {
     public partial class Endereco : Migration
     {

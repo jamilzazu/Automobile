@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Automobile.Core.Mediator;
 using Automobile.Domain.Repositories;
-using Automobile.Proprietarios.Infra.EF;
+using Automobile.Infra.EF;
 using Automobile.Application.Queries.Interfaces;
 using Automobile.Domain.Queries;
 using Automobile.Domain.Handlers.Proprietarios;

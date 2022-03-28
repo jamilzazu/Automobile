@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Automobile.Proprietarios.Infra.EF.Configurations.Mappings
+namespace Automobile.Infra.EF.Configurations.Mappings
 {
     public class EnderecoMapping : IEntityTypeConfiguration<Endereco>
     {

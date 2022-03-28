@@ -1,4 +1,4 @@
-﻿using Automobile.Proprietarios.Infra.EF.Configurations.Contexts;
+﻿using Automobile.Infra.EF.Configurations.Contexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Data.SqlClient;

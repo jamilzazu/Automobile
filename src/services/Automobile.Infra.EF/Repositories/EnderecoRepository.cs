@@ -1,7 +1,7 @@
 ﻿using Automobile.Core.Data;
 using Automobile.Domain.Entities;
 using Automobile.Domain.Repositories;
-using Automobile.Proprietarios.Infra.EF.Configurations.Contexts;
+using Automobile.Infra.EF.Configurations.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;

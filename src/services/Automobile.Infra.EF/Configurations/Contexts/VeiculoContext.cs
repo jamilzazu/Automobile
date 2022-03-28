@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Automobile.Core.Data;
 using Automobile.Core.Mediator;
 using Automobile.Core.Messages;
-using Automobile.Core.DomainObjects;
 using System;
 using Automobile.Domain.Entities;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -14,13 +13,13 @@ using Automobile.Infra.EF.Configurations.Extensions;
 
 namespace Automobile.Infra.EF.Configurations.Contexts
 {
-    public sealed class ProprietariosContext : DbContext, IUnitOfWork
+    public sealed class VeiculoContext : DbContext, IUnitOfWork
     {
         private readonly IMediatorHandler _mediatorHandler;
         private IDbContextTransaction _currentTransaction;
 
 
-        public ProprietariosContext(DbContextOptions<ProprietariosContext> options, IMediatorHandler mediatorHandler)
+        public VeiculoContext(DbContextOptions<VeiculoContext> options, IMediatorHandler mediatorHandler)
             : base(options)
         {
             _mediatorHandler = mediatorHandler;

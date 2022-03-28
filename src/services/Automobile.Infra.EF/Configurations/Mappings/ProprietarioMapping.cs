@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Automobile.Domain.Entities;
 using Automobile.Domain.Entities.Objects;
 
-namespace Automobile.Proprietarios.Infra.EF.Configurations.Mappings
+namespace Automobile.Infra.EF.Configurations.Mappings
 {
     public class ProprietarioMapping : IEntityTypeConfiguration<Proprietario>
     {

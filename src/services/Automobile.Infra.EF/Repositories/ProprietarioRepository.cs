@@ -2,12 +2,12 @@
 using Automobile.Domain.Entities;
 using Automobile.Domain.Entities.Objects;
 using Automobile.Domain.Repositories;
-using Automobile.Proprietarios.Infra.EF.Configurations.Contexts;
+using Automobile.Infra.EF.Configurations.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 
-namespace Automobile.Proprietarios.Infra.EF
+namespace Automobile.Infra.EF
 {
 
     public class ProprietarioRepository : IProprietarioRepository
