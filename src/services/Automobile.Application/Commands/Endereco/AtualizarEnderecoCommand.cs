@@ -12,12 +12,12 @@ namespace Automobile.Domain.Commands.Endereco
         public string Numero { get; set; }
         public string Complemento { get; set; }
         public string Bairro { get; set; }
-        public int Cep { get; set; }
-        public int CodigoIbgeCidade { get; set; }
-        public int CodigoIbgeEstado { get; set; }
+        public string Cep { get; set; }
+        public string Cidade { get; set; }
+        public string Estado { get; set; }
         public DateTime DataAlteracao { get; private set; }
 
-        public AtualizarEnderecoCommand(Guid id, Guid proprietarioId, string logradouro, string numero, string complemento, string bairro, int cep, int codigoIbgeCidade, int codigoIbgeEstado, DateTime dataAlteracao)
+        public AtualizarEnderecoCommand(Guid id, Guid proprietarioId, string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado, DateTime dataAlteracao)
         {
             Id = id;
             AggregateId = id;
@@ -27,8 +27,8 @@ namespace Automobile.Domain.Commands.Endereco
             Complemento = complemento;
             Bairro = bairro;
             Cep = cep;
-            CodigoIbgeCidade = codigoIbgeCidade;
-            CodigoIbgeEstado = codigoIbgeEstado;
+            Cidade = cidade;
+            Estado = estado;
             DataAlteracao = dataAlteracao;
         }
 

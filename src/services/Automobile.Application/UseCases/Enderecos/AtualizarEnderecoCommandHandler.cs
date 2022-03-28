@@ -32,18 +32,6 @@ namespace Automobile.Domain.Handlers.Enderecos
                 return ValidationResult;
             }
 
-            if (!CodigoCidadeIbgeValido(message.CodigoIbgeCidade))
-            {
-                AdicionarErro("Código Ibge Cidade inválido");
-                return ValidationResult;
-            }
-
-            if (!CodigoEstadoIbgeValido(message.CodigoIbgeEstado))
-            {
-                AdicionarErro("Código Ibge Estado inválido");
-                return ValidationResult;
-            }
-
             var endereco = _enderecoRepository.ObterEnderecoPeloProprietarioId(message.ProprietarioId).Result;
 
             if (endereco == null)
@@ -57,20 +45,6 @@ namespace Automobile.Domain.Handlers.Enderecos
             return await PersistirDados(_enderecoRepository.UnitOfWork);
         }
 
-        public static bool CodigoCidadeIbgeValido(int codigoCidadeIbge)
-        {
-            bool codigoCidadeIbgeValido = int.TryParse(codigoCidadeIbge.ToString(), out _);
-
-            return codigoCidadeIbgeValido;
-        }
-
-        public static bool CodigoEstadoIbgeValido(int codigoEstadoIbge)
-        {
-            bool codigoEstadoIbgeValido = int.TryParse(codigoEstadoIbge.ToString(), out _);
-
-            return codigoEstadoIbgeValido;
-        }
-
         public bool VerificaSeExisteProprietario(Guid proprietarioId)
         {
             bool existeProprietario = _proprietarioRepository.ObterProprietarioPeloId(proprietarioId).Result != null;
@@ -80,7 +54,7 @@ namespace Automobile.Domain.Handlers.Enderecos
 
         public void AtualizarEndereco(Endereco endereco, AtualizarEnderecoCommand message)
         {
-            endereco.Atualizar(message.Logradouro, message.Numero, message.Complemento, message.Bairro, message.Cep, message.CodigoIbgeCidade, message.CodigoIbgeEstado);
+            endereco.Atualizar(message.Logradouro, message.Numero, message.Complemento, message.Bairro, message.Cep, message.Cidade, message.Estado);
 
             _enderecoRepository.Atualizar(endereco);
 
@@ -89,7 +63,7 @@ namespace Automobile.Domain.Handlers.Enderecos
 
         public static void AdicionarEventoDeAtualizacaoDoEndereco(Endereco endereco, AtualizarEnderecoCommand message)
         {
-            endereco.AdicionarEvento(new EnderecoAtualizadoEvent(message.Id, message.ProprietarioId, message.Logradouro, message.Numero, message.Complemento, message.Bairro, message.Cep, message.CodigoIbgeCidade, message.CodigoIbgeEstado, message.DataAlteracao));
+            endereco.AdicionarEvento(new EnderecoAtualizadoEvent(message.Id, message.ProprietarioId, message.Logradouro, message.Numero, message.Complemento, message.Bairro, message.Cep, message.Cidade, message.Estado, message.DataAlteracao));
         }
     }
 }

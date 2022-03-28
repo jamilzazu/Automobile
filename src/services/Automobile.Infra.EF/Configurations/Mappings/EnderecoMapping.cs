@@ -29,13 +29,13 @@ namespace Automobile.Infra.EF.Configurations.Mappings
                 .IsRequired()
                 .HasColumnType("varchar(100)");
 
-            builder.Property(c => c.CodigoIbgeCidade)
+            builder.Property(c => c.Cidade)
                 .IsRequired()
-                .HasPrecision(7, 0);
+                .HasColumnType("varchar(100)");
 
-            builder.Property(c => c.CodigoIbgeEstado)
+            builder.Property(c => c.Estado)
                 .IsRequired()
-                .HasPrecision(7, 0);
+                .HasColumnType("varchar(50)");
 
             builder.ToTable("ProprietarioEnderecos");
         }
