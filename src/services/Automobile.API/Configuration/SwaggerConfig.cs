@@ -13,8 +13,8 @@ namespace Automobile.Proprietarios.API.Configuration
             {
                 c.SwaggerDoc("v1", new OpenApiInfo()
                 {
-                    Title = "Automobile Proprietário API",
-                    Description = "Esta API administra os registros de Proprietário ",
+                    Title = "Automobile API",
+                    Description = "Esta API administra a revenda de veículos",
                     Contact = new OpenApiContact() { Name = "Jamil Zazu", Email = "jamillzazu@hotmail.com" },
                     License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
                 });
