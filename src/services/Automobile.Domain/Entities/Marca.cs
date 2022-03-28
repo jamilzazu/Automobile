@@ -21,11 +21,6 @@ namespace Automobile.Domain.Entitites
             Cancelado = cancelado;
         }
 
-        public void Atualizar(string nome)
-        {
-            Nome = nome;
-        }
-
         public void Cancelar()
         {
             Cancelado = Cancelado.Sim;

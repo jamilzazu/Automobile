@@ -17,7 +17,7 @@ namespace Automobile.Proprietarios.API.Configuration
             services.AddTransient<IDbConnection>(options =>
                 new SqlConnection(configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDbContext<ProprietariosContext>(options =>
+            services.AddDbContext<AutomobileContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")),
              ServiceLifetime.Transient);
 

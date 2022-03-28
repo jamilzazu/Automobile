@@ -16,7 +16,7 @@ namespace Automobile.Domain.Test.Entities
         #region Nome
 
         [TestMethod]
-        [TestCategory("Proprietario.Domain.Entity.Proprietario")]
+        [TestCategory("Domain.Entity.Proprietario")]
         public void Dado_um_novo_cadastro_ou_atualizacao_o_campo_Nome_deve_ser_obrigatorio()
         {
             Proprietario _proprietario_CampoNomeVazio = new(Guid.NewGuid(), "Jamil Zazu", new Documento(TipoDocumento.Cpf, "77753102001"), "teste@teste.com", Cancelado.Nao);
@@ -30,7 +30,7 @@ namespace Automobile.Domain.Test.Entities
         #region Id
 
         [TestMethod]
-        [TestCategory("Proprietario.Domain.Entity.Proprietario")]
+        [TestCategory("Domain.Entity.Proprietario")]
         public void Dado_uma_novo_cadastro_ou_atualizacao_o_campo_Guid_Id_deve_ser_valido()
         {
             Proprietario _proprietario_CampoIdValido = new(Guid.NewGuid(), "Jamil Zazu", new Documento(TipoDocumento.Cpf, "77753102001"), "teste@teste.com", Cancelado.Nao);
@@ -45,7 +45,7 @@ namespace Automobile.Domain.Test.Entities
         #region E-mail
 
         [TestMethod]
-        [TestCategory("Proprietario.Domain.Entity.Proprietario")]
+        [TestCategory("Domain.Entity.Proprietario")]
         public void Dado_um_novo_cadastro_ou_atualizacao_o_campo_Email_deve_ser_valido()
         {
             bool emailValido = ValidarDocumento("teste@teste.com");
@@ -60,7 +60,7 @@ namespace Automobile.Domain.Test.Entities
         #region Documento
 
         [TestMethod]
-        [TestCategory("Proprietario.Domain.Entity.Proprietario")]
+        [TestCategory("Domain.Entity.Proprietario")]
         public void Dado_um_novo_cadastro_ou_atualizacao_o_campo_Documento_deve_ser_valido_como_CPF()
         {
             var documento = ValidarDocumento(TipoDocumento.Cpf, "77753102001");
@@ -70,7 +70,7 @@ namespace Automobile.Domain.Test.Entities
 
 
         [TestMethod]
-        [TestCategory("Proprietario.Domain.Entity.Proprietario")]
+        [TestCategory("Domain.Entity.Proprietario")]
         public void Dado_um_novo_cadastro_ou_atualizacao_o_campo_Documento_deve_ser_valido_como_CNPJ()
         {
             var documento = ValidarDocumento(TipoDocumento.Cnpj, "72873649000128");
@@ -83,7 +83,7 @@ namespace Automobile.Domain.Test.Entities
         #region Atualizar
 
         [TestMethod]
-        [TestCategory("Proprietario.Domain.Entity.Proprietario")]
+        [TestCategory("Domain.Entity.Proprietario")]
         public void Dado_uma_nova_atualizacao_o_Nome_Documento_Email_deve_ser_Alterado()
         {
             Proprietario proprietario = new(Guid.NewGuid(), "Jamil Zazu", new Documento(TipoDocumento.Cpf, "77753102001"), "teste@teste.com", Cancelado.Nao);
@@ -104,7 +104,7 @@ namespace Automobile.Domain.Test.Entities
         #region Cancelar
 
         [TestMethod]
-        [TestCategory("Proprietario.Domain.Entity.Proprietario")]
+        [TestCategory("Domain.Entity.Proprietario")]
         public void Dado_um_novo_cancelamento_o_Status_deve_ser_Cancelado()
         {
             Proprietario _proprietario_Cancelamento = new(Guid.NewGuid(), "Jamil Zazu", new Documento(TipoDocumento.Cpf, "77753102001"), "teste@teste.com", Cancelado.Nao);
@@ -119,7 +119,7 @@ namespace Automobile.Domain.Test.Entities
         #region Ativar
 
         [TestMethod]
-        [TestCategory("Proprietario.Domain.Entity.Proprietario")]
+        [TestCategory("Domain.Entity.Proprietario")]
         public void Dado_um_novo_ativamento_o_Status_deve_ser_Ativado()
         {
             Proprietario _proprietario_Cancelamento = new(Guid.NewGuid(), "Jamil Zazu", new Documento(TipoDocumento.Cpf, "77753102001"), "teste@teste.com", Cancelado.Sim);

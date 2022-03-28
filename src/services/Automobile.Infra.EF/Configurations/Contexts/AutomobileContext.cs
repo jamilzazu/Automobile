@@ -10,16 +10,16 @@ using Automobile.Domain.Entities;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
 using Automobile.Infra.EF.Configurations.Extensions;
+using Automobile.Domain.Entitites;
 
 namespace Automobile.Infra.EF.Configurations.Contexts
 {
-    public sealed class VeiculoContext : DbContext, IUnitOfWork
+    public sealed class AutomobileContext : DbContext, IUnitOfWork
     {
         private readonly IMediatorHandler _mediatorHandler;
         private IDbContextTransaction _currentTransaction;
 
-
-        public VeiculoContext(DbContextOptions<VeiculoContext> options, IMediatorHandler mediatorHandler)
+        public AutomobileContext(DbContextOptions<AutomobileContext> options, IMediatorHandler mediatorHandler)
             : base(options)
         {
             _mediatorHandler = mediatorHandler;
@@ -29,6 +29,7 @@ namespace Automobile.Infra.EF.Configurations.Contexts
 
         public DbSet<Proprietario> Proprietarios { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
+        public DbSet<Marca> Marcas { get; set; }
 
         public bool HasActiveTransaction => _currentTransaction != null;
 
@@ -44,7 +45,7 @@ namespace Automobile.Infra.EF.Configurations.Contexts
             foreach (var relationship in modelBuilder.Model.GetEntityTypes()
                 .SelectMany(e => e.GetForeignKeys())) relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
 
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProprietariosContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AutomobileContext).Assembly);
         }
 
         public async Task<bool> Commit()

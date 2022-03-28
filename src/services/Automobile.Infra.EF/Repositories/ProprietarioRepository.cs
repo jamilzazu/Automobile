@@ -12,9 +12,9 @@ namespace Automobile.Infra.EF
 
     public class ProprietarioRepository : IProprietarioRepository
     {
-        private readonly ProprietariosContext _context;
+        private readonly AutomobileContext _context;
 
-        public ProprietarioRepository(ProprietariosContext context)
+        public ProprietarioRepository(AutomobileContext context)
         {
             _context = context;
         }

@@ -11,9 +11,9 @@ namespace Automobile.Enderecos.Infra.EF
 
     public class EnderecoRepository : IEnderecoRepository
     {
-        private readonly ProprietariosContext _context;
+        private readonly AutomobileContext _context;
 
-        public EnderecoRepository(ProprietariosContext context)
+        public EnderecoRepository(AutomobileContext context)
         {
             _context = context;
         }

@@ -16,7 +16,7 @@ namespace Automobile.Domain.Test.Entities
 
 
         [TestMethod]
-        [TestCategory("Proprietario.Domain.Entity.Endereco")]
+        [TestCategory("Domain.Entity.Endereco")]
         public void Dado_um_novo_cadastro_ou_atualizacao_todos_os_campos_devem_ser_obrigatorios_exceto_Complemento()
         {
             Endereco endereco = new(Guid.NewGuid(), _proprietario.Id, "Rua 1", "44", "", "Centro", "78005000", "Cuiabá", "MT");
@@ -26,7 +26,7 @@ namespace Automobile.Domain.Test.Entities
         }
 
         [TestMethod]
-        [TestCategory("Proprietario.Domain.Entity.Endereco")]
+        [TestCategory("Domain.Entity.Endereco")]
         public void Dado_uma_novo_cadastro_ou_atualizacao_o_campo_Guid_Id_deve_ser_valido()
         {
             Assert.IsTrue(Guid.TryParse(_proprietario.Id.ToString(), out Guid guidResult));

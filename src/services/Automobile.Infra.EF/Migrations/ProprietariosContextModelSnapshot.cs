@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Automobile.Infra.EF.Migrations
 {
-    [DbContext(typeof(ProprietariosContext))]
+    [DbContext(typeof(AutomobileContext))]
     partial class ProprietariosContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

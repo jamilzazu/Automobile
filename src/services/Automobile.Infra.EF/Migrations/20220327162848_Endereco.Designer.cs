@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Automobile.Infra.EF.Migrations
 {
-    [DbContext(typeof(ProprietariosContext))]
+    [DbContext(typeof(AutomobileContext))]
     [Migration("20220327162848_Endereco")]
     partial class Endereco
     {
