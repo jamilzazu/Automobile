@@ -50,8 +50,8 @@ namespace Automobile.Infra.EF.Migrations
                     Complemento = table.Column<string>(type: "varchar(250)", nullable: true),
                     Bairro = table.Column<string>(type: "varchar(100)", nullable: false),
                     Cep = table.Column<string>(type: "varchar(20)", nullable: false),
-                    Cidade = table.Column<string>(type: "varchar(100)", nullable: false),
-                    Estado = table.Column<string>(type: "varchar(50)", nullable: false),
+                    CodigoIbgeCidade = table.Column<string>(type: "varchar(100)", nullable: false),
+                    CodigoIbgeEstado = table.Column<string>(type: "varchar(50)", nullable: false),
                     DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataAlteracao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ProprietarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)

@@ -54,7 +54,7 @@ namespace Automobile.Domain.Handlers.Enderecos
 
         public void AtualizarEndereco(Endereco endereco, AtualizarEnderecoCommand message)
         {
-            endereco.Atualizar(message.Logradouro, message.Numero, message.Complemento, message.Bairro, message.Cep, message.Cidade, message.Estado);
+            endereco.Atualizar(message.Logradouro, message.Numero, message.Complemento, message.Bairro, message.Cep, message.CodigoIbgeCidade, message.CodigoIbgeEstado);
 
             _enderecoRepository.Atualizar(endereco);
 
@@ -63,7 +63,7 @@ namespace Automobile.Domain.Handlers.Enderecos
 
         public static void AdicionarEventoDeAtualizacaoDoEndereco(Endereco endereco, AtualizarEnderecoCommand message)
         {
-            endereco.AdicionarEvento(new EnderecoAtualizadoEvent(message.Id, message.ProprietarioId, message.Logradouro, message.Numero, message.Complemento, message.Bairro, message.Cep, message.Cidade, message.Estado, message.DataAlteracao));
+            endereco.AdicionarEvento(new EnderecoAtualizadoEvent(message.Id, message.ProprietarioId, message.Logradouro, message.Numero, message.Complemento, message.Bairro, message.Cep, message.CodigoIbgeCidade, message.CodigoIbgeEstado, message.DataAlteracao));
         }
     }
 }

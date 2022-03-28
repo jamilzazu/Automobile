@@ -11,11 +11,11 @@ namespace Automobile.Domain.Entities
         public string Complemento { get; private set; }
         public string Bairro { get; private set; }
         public string Cep { get; private set; }
-        public string Cidade { get; private set; }
-        public string Estado { get; private set; }
+        public string CodigoIbgeCidade { get; private set; }
+        public string CodigoIbgeEstado { get; private set; }
         public DateTime DataCadastro { get; private set; }
         public DateTime? DataAlteracao { get; private set; }
-        
+
         [JsonPropertyOrder(1)]
         public Guid ProprietarioId { get; private set; }
 
@@ -23,7 +23,7 @@ namespace Automobile.Domain.Entities
         [JsonIgnore]
         public Proprietario Proprietario { get; protected set; }
 
-        public Endereco(Guid id, Guid proprietarioId, string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado)
+        public Endereco(Guid id, Guid proprietarioId, string logradouro, string numero, string complemento, string bairro, string cep, string codigoIbgeCidade, string codigoIbgeEstado)
         {
             Id = id;
             ProprietarioId = proprietarioId;
@@ -32,19 +32,19 @@ namespace Automobile.Domain.Entities
             Complemento = complemento;
             Bairro = bairro;
             Cep = cep;
-            Cidade = cidade;
-            Estado = estado;
+            CodigoIbgeCidade = codigoIbgeCidade;
+            CodigoIbgeEstado = codigoIbgeEstado;
         }
 
-        public void Atualizar(string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado)
+        public void Atualizar(string logradouro, string numero, string complemento, string bairro, string cep, string codigoIbgeCidade, string codigoIbgeEstado)
         {
             Logradouro = logradouro;
             Numero = numero;
             Complemento = complemento;
             Bairro = bairro;
             Cep = cep;
-            Cidade = cidade;
-            Estado = estado;
+            CodigoIbgeCidade = codigoIbgeCidade;
+            CodigoIbgeEstado = codigoIbgeEstado;
         }
     }
 }

@@ -48,7 +48,7 @@ namespace Automobile.Enderecos.Domain.Handlers.Enderecos
 
         public static Endereco MontaObjetoEndereco(CadastrarEnderecoCommand message)
         {
-            return new Endereco(message.Id, message.ProprietarioId, message.Logradouro, message.Numero, message.Complemento, message.Bairro, message.Cep, message.Cidade, message.Estado);
+            return new Endereco(message.Id, message.ProprietarioId, message.Logradouro, message.Numero, message.Complemento, message.Bairro, message.Cep, message.CodigoIbgeCidade, message.CodigoIbgeEstado);
         }
 
         public void CadastrarEndereco(Endereco endereco, CadastrarEnderecoCommand message)
@@ -60,7 +60,7 @@ namespace Automobile.Enderecos.Domain.Handlers.Enderecos
 
         public static void AdicionarEventoDeCadastroDoEndereco(Endereco endereco, CadastrarEnderecoCommand message)
         {
-            endereco.AdicionarEvento(new EnderecoCadastradoEvent(message.Id, message.ProprietarioId, message.Logradouro, message.Numero, message.Complemento, message.Bairro, message.Cep, message.Cidade, message.Estado, message.DataCadastro));
+            endereco.AdicionarEvento(new EnderecoCadastradoEvent(message.Id, message.ProprietarioId, message.Logradouro, message.Numero, message.Complemento, message.Bairro, message.Cep, message.CodigoIbgeCidade, message.CodigoIbgeEstado, message.DataCadastro));
         }
     }
 }

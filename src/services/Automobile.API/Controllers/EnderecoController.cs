@@ -43,5 +43,13 @@ namespace Automobile.Proprietarios.API.Controllers
 
             return CustomResponse(resultado);
         }
+
+        [HttpPost("consulta-cep")]
+        public async Task<IActionResult> ConsultaCEP(CadastrarEnderecoCommand command)
+        {
+            var resultado = await _mediator.EnviarComando(command);
+
+            return CustomResponse(resultado);
+        }
     }
 }

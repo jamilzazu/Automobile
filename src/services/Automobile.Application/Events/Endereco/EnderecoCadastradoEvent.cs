@@ -12,12 +12,12 @@ namespace Automobile.Domain.Events.Endereco
         public string Complemento { get; private set; }
         public string Bairro { get; private set; }
         public string Cep { get; private set; }
-        public string Cidade { get; private set; }
-        public string Estado { get; private set; }
+        public string CodigoIbgeCidade { get; private set; }
+        public string CodigoIbgeEstado { get; private set; }
         public DateTime DataCadastro { get; private set; }
 
 
-        public EnderecoCadastradoEvent(Guid id, Guid proprietarioId, string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado, DateTime dataCadastro)
+        public EnderecoCadastradoEvent(Guid id, Guid proprietarioId, string logradouro, string numero, string complemento, string bairro, string cep, string codigoIbgeCidade, string codigoIbgeEstado, DateTime dataCadastro)
         {
             Id = id;
             ProprietarioId = proprietarioId;
@@ -26,8 +26,8 @@ namespace Automobile.Domain.Events.Endereco
             Complemento = complemento;
             Bairro = bairro;
             Cep = cep;
-            Cidade = cidade;
-            Estado = estado;
+            CodigoIbgeCidade = codigoIbgeCidade;
+            CodigoIbgeEstado = codigoIbgeEstado;
             DataCadastro = dataCadastro;
         }
     }
