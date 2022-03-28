@@ -19,9 +19,7 @@ namespace Automobile.Application.Validators.Endereco
 
             RuleFor(c => c.Cep)
                 .NotEmpty()
-                .WithMessage("Informe o CEP")
-                .Length(8)
-                .WithMessage("O campo CEP deve ter 8 caracteres");
+                .WithMessage("Informe o CEP");
 
             RuleFor(c => c.Bairro)
                 .NotEmpty()

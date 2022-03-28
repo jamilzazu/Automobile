@@ -11,13 +11,13 @@ namespace Automobile.Domain.Events.Endereco
         public string Numero { get; private set; }
         public string Complemento { get; private set; }
         public string Bairro { get; private set; }
-        public string Cep { get; private set; }
-        public string CodigoIbgeCidade { get; private set; }
-        public string CodigoIbgeEstado { get; private set; }
+        public int Cep { get; private set; }
+        public int CodigoIbgeCidade { get; private set; }
+        public int CodigoIbgeEstado { get; private set; }
         public DateTime DataAlteracao { get; private set; }
 
 
-        public EnderecoAtualizadoEvent(Guid id, Guid proprietarioId, string logradouro, string numero, string complemento, string bairro, string cep, string codigoIbgeCidade, string codigoIbgeEstado, DateTime dataAlteracao)
+        public EnderecoAtualizadoEvent(Guid id, Guid proprietarioId, string logradouro, string numero, string complemento, string bairro, int cep, int codigoIbgeCidade, int codigoIbgeEstado, DateTime dataAlteracao)
         {
             Id = id;
             ProprietarioId = proprietarioId;

@@ -33,9 +33,13 @@ namespace Automobile.Infra.EF.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(20)");
 
-                    b.Property<string>("CodigoIbgeCidade")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
+                    b.Property<int>("CodigoIbgeCidade")
+                        .HasPrecision(7)
+                        .HasColumnType("int");
+
+                    b.Property<int>("CodigoIbgeEstado")
+                        .HasPrecision(7)
+                        .HasColumnType("int");
 
                     b.Property<string>("Complemento")
                         .HasColumnType("varchar(250)");
@@ -45,10 +49,6 @@ namespace Automobile.Infra.EF.Migrations
 
                     b.Property<DateTime>("DataCadastro")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("CodigoIbgeEstado")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Logradouro")
                         .IsRequired()

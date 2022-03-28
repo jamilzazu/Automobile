@@ -32,6 +32,18 @@ namespace Automobile.Domain.Handlers.Enderecos
                 return ValidationResult;
             }
 
+            if (!CodigoCidadeIbgeValido(message.CodigoIbgeCidade))
+            {
+                AdicionarErro("Código Ibge Cidade inválido");
+                return ValidationResult;
+            }
+
+            if (!CodigoEstadoIbgeValido(message.CodigoIbgeEstado))
+            {
+                AdicionarErro("Código Ibge Estado inválido");
+                return ValidationResult;
+            }
+
             var endereco = _enderecoRepository.ObterEnderecoPeloProprietarioId(message.ProprietarioId).Result;
 
             if (endereco == null)
@@ -43,6 +55,20 @@ namespace Automobile.Domain.Handlers.Enderecos
             AtualizarEndereco(endereco, message);
 
             return await PersistirDados(_enderecoRepository.UnitOfWork);
+        }
+
+        public static bool CodigoCidadeIbgeValido(int codigoCidadeIbge)
+        {
+            bool codigoCidadeIbgeValido = int.TryParse(codigoCidadeIbge.ToString(), out _);
+
+            return codigoCidadeIbgeValido;
+        }
+
+        public static bool CodigoEstadoIbgeValido(int codigoEstadoIbge)
+        {
+            bool codigoEstadoIbgeValido = int.TryParse(codigoEstadoIbge.ToString(), out _);
+
+            return codigoEstadoIbgeValido;
         }
 
         public bool VerificaSeExisteProprietario(Guid proprietarioId)

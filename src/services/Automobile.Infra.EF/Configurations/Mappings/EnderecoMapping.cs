@@ -31,11 +31,11 @@ namespace Automobile.Infra.EF.Configurations.Mappings
 
             builder.Property(c => c.CodigoIbgeCidade)
                 .IsRequired()
-                .HasColumnType("varchar(7)");
+                .HasPrecision(7, 0);
 
             builder.Property(c => c.CodigoIbgeEstado)
                 .IsRequired()
-                .HasColumnType("varchar(2)");
+                .HasPrecision(7, 0);
 
             builder.ToTable("ProprietarioEnderecos");
         }

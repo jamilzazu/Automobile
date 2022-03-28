@@ -19,7 +19,7 @@ namespace Automobile.Domain.Test.Entities
         [TestCategory("Domain.Entity.Endereco")]
         public void Dado_um_novo_cadastro_ou_atualizacao_todos_os_campos_devem_ser_obrigatorios_exceto_Complemento()
         {
-            Endereco endereco = new(Guid.NewGuid(), _proprietario.Id, "Rua 1", "44", "", "Centro", "78005000", "Cuiabá", "MT");
+            Endereco endereco = new(Guid.NewGuid(), _proprietario.Id, "Rua 1", "44", "", "Centro", 78005000, 5103403, 51);
 
             Assert.AreNotEqual(endereco.Logradouro, string.Empty);
             Assert.IsNotNull(endereco.Logradouro);
