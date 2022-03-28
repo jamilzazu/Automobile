@@ -2,7 +2,6 @@
 using Automobile.Core.Messages;
 using Automobile.Domain.Commands.Proprietario;
 using Automobile.Domain.Entities;
-using Automobile.Domain.Entities.Enums;
 using Automobile.Domain.Events.Proprietario;
 using Automobile.Domain.Repositories;
 using FluentValidation.Results;

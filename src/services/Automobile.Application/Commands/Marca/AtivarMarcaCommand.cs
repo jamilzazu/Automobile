@@ -2,13 +2,13 @@
 using Automobile.Core.Messages;
 using System;
 
-namespace Automobile.Domain.Commands.Proprietario
+namespace Automobile.Domain.Commands.Marca
 {
-    public class AtivarProprietarioCommand : Command
+    public class AtivarMarcaCommand : Command
     {
         public Guid Id { get; set; }
 
-        public AtivarProprietarioCommand(Guid id)
+        public AtivarMarcaCommand(Guid id)
         {
             AggregateId = id;
             Id = id;
@@ -16,7 +16,7 @@ namespace Automobile.Domain.Commands.Proprietario
 
         public override bool EhValido()
         {
-            ValidationResult = new AtivarProprietarioCommandValidator().Validate(this);
+            ValidationResult = new AtivarMarcaCommandValidator().Validate(this);
             return ValidationResult.IsValid;
         }
     }

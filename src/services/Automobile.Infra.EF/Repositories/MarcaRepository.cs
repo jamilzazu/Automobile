@@ -30,6 +30,11 @@ namespace Automobile.Infra.EF
             _context.Marcas.Add(marca);
         }
 
+        public void Atualizar(Marca marca)
+        {
+            _context.Marcas.Update(marca);
+        }
+
         public void Dispose()
         {
             _context.Dispose();

@@ -1,5 +1,5 @@
-﻿using Automobile.Core.Messages;
-using FluentValidation;
+﻿using Automobile.Application.Validators.Endereco;
+using Automobile.Core.Messages;
 using System;
 
 namespace Automobile.Domain.Commands.Endereco
@@ -34,42 +34,8 @@ namespace Automobile.Domain.Commands.Endereco
 
         public override bool EhValido()
         {
-            ValidationResult = new AlterarEnderecoValidation().Validate(this);
+            ValidationResult = new AtualizarEnderecoCommandValidator().Validate(this);
             return ValidationResult.IsValid;
-        }
-    }
-
-    public class AlterarEnderecoValidation : AbstractValidator<AtualizarEnderecoCommand>
-    {
-        public AlterarEnderecoValidation()
-        {
-            RuleFor(c => c.Id)
-                .NotEqual(Guid.Empty)
-                .WithMessage("Id do endereço inválido");
-
-            RuleFor(c => c.Logradouro)
-                .NotEmpty()
-                .WithMessage("O logradouro do endereço não foi informado");
-
-            RuleFor(c => c.Numero)
-                .NotEmpty()
-                .WithMessage("O número do endereço não foi informado");
-
-            RuleFor(c => c.Bairro)
-                .NotEmpty()
-                .WithMessage("O bairro do endereço não foi informado");
-
-            RuleFor(c => c.Cep)
-                .NotEmpty()
-                .WithMessage("O cep do endereço não foi informado");
-
-            RuleFor(c => c.Cidade)
-                .NotEmpty()
-                .WithMessage("O cidade do endereço não foi informado");
-
-            RuleFor(c => c.Estado)
-                .NotEmpty()
-                .WithMessage("O estado do endereço não foi informado");
         }
     }
 }

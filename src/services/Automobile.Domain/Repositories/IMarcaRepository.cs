@@ -8,6 +8,7 @@ namespace Automobile.Domain.Repositories
     public interface IMarcaRepository : IRepository<Marca>
     {
         void Adicionar(Marca marca);
+        void Atualizar(Marca marca);
         Task<Marca> ObterMarcaPeloId(Guid id);
     }
 }
