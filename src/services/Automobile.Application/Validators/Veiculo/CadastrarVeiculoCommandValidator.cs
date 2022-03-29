@@ -1,4 +1,5 @@
 ﻿using Automobile.Domain.Commands.Proprietario;
+using Automobile.Domain.Commands.Veiculo;
 using FluentValidation;
 using System;
 

@@ -1,8 +1,8 @@
-﻿using Automobile.Core.Enums;
+﻿using Automobile.Application.Events.Veiculo;
 using Automobile.Core.Messages;
 using Automobile.Domain.Commands.Proprietario;
 using Automobile.Domain.Entities;
-using Automobile.Domain.Events.Proprietario;
+using Automobile.Domain.Entities.Enums;
 using Automobile.Domain.Repositories;
 using FluentValidation.Results;
 using MediatR;
@@ -11,50 +11,50 @@ using System.Threading.Tasks;
 
 namespace Automobile.Domain.Handlers.Veiculos
 {
-    public class AtivarProprietarioCommandHandler : CommandHandler, IRequestHandler<AtivarProprietarioCommand, ValidationResult>
+    public class IndisponibilizarVeiculoCommandHandler : CommandHandler, IRequestHandler<IndisponibilizarVeiculoCommand, ValidationResult>
     {
-        private readonly IProprietarioRepository _proprietarioRepository;
+        private readonly IVeiculoRepository _veiculoRepository;
 
-        public AtivarProprietarioCommandHandler(IProprietarioRepository proprietarioRepository)
+        public IndisponibilizarVeiculoCommandHandler(IVeiculoRepository veiculoRepository)
         {
-            _proprietarioRepository = proprietarioRepository;
+            _veiculoRepository = veiculoRepository;
         }
 
-        public async Task<ValidationResult> Handle(AtivarProprietarioCommand message, CancellationToken cancellationToken)
+        public async Task<ValidationResult> Handle(IndisponibilizarVeiculoCommand message, CancellationToken cancellationToken)
         {
             if (!message.EhValido()) return message.ValidationResult;
 
-            var proprietario = await _proprietarioRepository.ObterProprietarioPeloId(message.Id);
+            var veiculo = await _veiculoRepository.ObterVeiculoPeloId(message.Id);
 
-            if (proprietario == null)
+            if (veiculo == null)
             {
-                AdicionarErro("Proprietário não encontrado.");
+                AdicionarErro("Veículo não encontrado.");
                 return ValidationResult;
             }
 
-            if (proprietario.Cancelado == Cancelado.Nao)
+            if (veiculo.Status == FluxoRevenda.Indisponivel)
             {
-                AdicionarErro($"O proprietário {proprietario.Nome} já está ativado.");
+                AdicionarErro($"O veículo com renavam {veiculo.Renavam} já está indisponivel.");
                 return ValidationResult;
             }
 
-            AtivarProprietario(proprietario, message);
+            IndisponibilizarVeiculo(veiculo, message);
 
-            return await PersistirDados(_proprietarioRepository.UnitOfWork);
+            return await PersistirDados(_veiculoRepository.UnitOfWork);
         }
 
-        public void AtivarProprietario(Proprietario proprietario, AtivarProprietarioCommand message)
+        public void IndisponibilizarVeiculo(Veiculo veiculo, IndisponibilizarVeiculoCommand message)
         {
-            proprietario.Ativar();
+            veiculo.Indisponibilizar();
 
-            _proprietarioRepository.Atualizar(proprietario);
+            _veiculoRepository.Atualizar(veiculo);
 
-            AdicionarEventoDeAtivarProprietario(proprietario, message);
+            AdicionarEventoDeIndisponibilizarVeiculo(veiculo, message);
         }
 
-        public static void AdicionarEventoDeAtivarProprietario(Proprietario proprietario, AtivarProprietarioCommand message)
+        public static void AdicionarEventoDeIndisponibilizarVeiculo(Veiculo veiculo, IndisponibilizarVeiculoCommand message)
         {
-            proprietario.AdicionarEvento(new ProprietarioCanceladoEvent(message.Id, proprietario.Nome, proprietario.Documento, proprietario.Email.Endereco));
+            veiculo.AdicionarEvento(new VeiculoIndisponibilizadoEvent(message.Id, veiculo.Renavam, veiculo.Modelo, veiculo.Quilometragem, veiculo.Valor));
         }
     }
 }

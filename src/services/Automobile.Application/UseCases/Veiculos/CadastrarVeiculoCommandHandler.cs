@@ -1,9 +1,8 @@
-﻿using Automobile.Core.Enums;
+﻿using Automobile.Application.Events.Veiculo;
 using Automobile.Core.Messages;
-using Automobile.Domain.Commands.Proprietario;
+using Automobile.Domain.Commands.Veiculo;
 using Automobile.Domain.Entities;
-using Automobile.Domain.Entities.Objects;
-using Automobile.Domain.Events.Proprietario;
+using Automobile.Domain.Entities.Enums;
 using Automobile.Domain.Repositories;
 using FluentValidation.Results;
 using MediatR;
@@ -12,54 +11,55 @@ using System.Threading.Tasks;
 
 namespace Automobile.Domain.Handlers.Veiculos
 {
-    public class CadastrarVeiculoCommandHandler : CommandHandler, IRequestHandler<CadastrarProprietarioCommand, ValidationResult>
+    public class CadastrarVeiculoCommandHandler : CommandHandler, IRequestHandler<CadastrarVeiculoCommand, ValidationResult>
     {
-        private readonly IProprietarioRepository _proprietarioRepository;
+        private readonly IVeiculoRepository _veiculoRepository;
 
-        public CadastrarVeiculoCommandHandler(IProprietarioRepository proprietarioRepository)
+        public CadastrarVeiculoCommandHandler(IVeiculoRepository veiculoRepository)
         {
-            _proprietarioRepository = proprietarioRepository;
+            _veiculoRepository = veiculoRepository;
         }
 
-        public async Task<ValidationResult> Handle(CadastrarProprietarioCommand message, CancellationToken cancellationToken)
+        public async Task<ValidationResult> Handle(CadastrarVeiculoCommand message, CancellationToken cancellationToken)
         {
             if (!message.EhValido()) return message.ValidationResult;
 
-            if (DocumentoEstaVinculadoAOutroProprietario(message.Documento))
+            if (RenavamEstaVinculadoAOutroVeiculo(message.Renavam))
             {
-                AdicionarErro($"Este {message.Documento.TipoDocumentoDescricao()} já está em uso.");
+                AdicionarErro($"Este renavam {message.Renavam} já está em uso.");
                 return ValidationResult;
             }
 
-            var proprietario = MontaObjetoProprietario(message);
+            var veiculo = MontaObjetoVeiculo(message);
 
-            _proprietarioRepository.Adicionar(proprietario);
+            _veiculoRepository.Adicionar(veiculo);
 
-            return await PersistirDados(_proprietarioRepository.UnitOfWork);
+            return await PersistirDados(_veiculoRepository.UnitOfWork);
         }
 
-        public static Proprietario MontaObjetoProprietario(CadastrarProprietarioCommand message)
+        public bool RenavamEstaVinculadoAOutroVeiculo(string renavam)
         {
-            return new Proprietario(message.Id, message.Nome, message.Documento, message.Email,Cancelado.Nao);
+            var renavamEstaVinculadoAOutroVeiculo = _veiculoRepository.ObterVeiculoPeloNumeroRenavam(renavam);
+
+            return renavamEstaVinculadoAOutroVeiculo.Result != null;
         }
 
-        public bool DocumentoEstaVinculadoAOutroProprietario(Documento numeroDocumento)
+        public static Veiculo MontaObjetoVeiculo(CadastrarVeiculoCommand message)
         {
-            var documentoVinculadoAOutroProprietario = _proprietarioRepository.ObterProprietarioPeloNumeroDocumento(numeroDocumento);
-
-            return documentoVinculadoAOutroProprietario.Result != null;
+            return new Veiculo(message.Id, message.ProprietarioId, message.MarcaId, message.Modelo, message.Renavam, message.Quilometragem, message.Valor, FluxoRevenda.Disponivel);
         }
 
-        public void CadastrarProprietario(Proprietario proprietario, CadastrarProprietarioCommand message)
-        {
-            _proprietarioRepository.Adicionar(proprietario);
 
-            AdicionarEventoDeCadastroDoProprietario(proprietario, message);
+        public void CadastrarVeiculo(Veiculo veiculo)
+        {
+            _veiculoRepository.Adicionar(veiculo);
+
+            AdicionarEventoDeCadastroDoVeiculo(veiculo);
         }
 
-        public static void AdicionarEventoDeCadastroDoProprietario(Proprietario proprietario, CadastrarProprietarioCommand message)
+        public static void AdicionarEventoDeCadastroDoVeiculo(Veiculo veiculo)
         {
-            proprietario.AdicionarEvento(new ProprietarioCadastradoEvent(message.Id, message.Nome, message.Documento, message.Email));
+            veiculo.AdicionarEvento(new VeiculoCadastradoEvent(veiculo.Renavam, veiculo.Modelo, veiculo.Quilometragem, veiculo.Valor));
         }
     }
 }

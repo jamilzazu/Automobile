@@ -3,7 +3,7 @@ using System;
 using Automobile.Domain.Entities;
 using Automobile.Application.Validators.Veiculo;
 
-namespace Automobile.Domain.Commands.Proprietario
+namespace Automobile.Domain.Commands.Veiculo
 {
     public class AtualizarVeiculoCommand : Command
     {

@@ -1,8 +1,8 @@
-﻿using Automobile.Core.Enums;
+﻿using Automobile.Application.Events.Veiculo;
 using Automobile.Core.Messages;
 using Automobile.Domain.Commands.Proprietario;
 using Automobile.Domain.Entities;
-using Automobile.Domain.Events.Proprietario;
+using Automobile.Domain.Entities.Enums;
 using Automobile.Domain.Repositories;
 using FluentValidation.Results;
 using MediatR;
@@ -11,50 +11,50 @@ using System.Threading.Tasks;
 
 namespace Automobile.Domain.Handlers.Veiculos
 {
-    public class CancelarProprietarioCommandHandler : CommandHandler, IRequestHandler<CancelarProprietarioCommand, ValidationResult>
+    public class VenderVeiculoCommandHandler : CommandHandler, IRequestHandler<VenderVeiculoCommand, ValidationResult>
     {
-        private readonly IProprietarioRepository _proprietarioRepository;
+        private readonly IVeiculoRepository _veiculoRepository;
 
-        public CancelarProprietarioCommandHandler(IProprietarioRepository proprietarioRepository)
+        public VenderVeiculoCommandHandler(IVeiculoRepository veiculoRepository)
         {
-            _proprietarioRepository = proprietarioRepository;
+            _veiculoRepository = veiculoRepository;
         }
 
-        public async Task<ValidationResult> Handle(CancelarProprietarioCommand message, CancellationToken cancellationToken)
+        public async Task<ValidationResult> Handle(VenderVeiculoCommand message, CancellationToken cancellationToken)
         {
             if (!message.EhValido()) return message.ValidationResult;
 
-            var proprietario = await _proprietarioRepository.ObterProprietarioPeloId(message.Id);
+            var veiculo = await _veiculoRepository.ObterVeiculoPeloId(message.Id);
 
-            if (proprietario == null)
+            if (veiculo == null)
             {
-                AdicionarErro("Proprietário não encontrado.");
+                AdicionarErro("Veículo não encontrado.");
                 return ValidationResult;
             }
 
-            if (proprietario.Cancelado == Cancelado.Sim)
+            if (veiculo.Status == FluxoRevenda.Vendido)
             {
-                AdicionarErro($"O proprietário {proprietario.Nome} já está cancelado.");
+                AdicionarErro($"O veículo com renavam {veiculo.Renavam} já está vendido.");
                 return ValidationResult;
             }
 
-            CancelarProprietario(proprietario, message);
+            VenderVeiculo(veiculo, message);
 
-            return await PersistirDados(_proprietarioRepository.UnitOfWork);
+            return await PersistirDados(_veiculoRepository.UnitOfWork);
         }
 
-        public void CancelarProprietario(Proprietario proprietario, CancelarProprietarioCommand message)
+        public void VenderVeiculo(Veiculo veiculo, VenderVeiculoCommand message)
         {
-            proprietario.Cancelar();
+            veiculo.Vender();
 
-            _proprietarioRepository.Atualizar(proprietario);
+            _veiculoRepository.Atualizar(veiculo);
 
-            AdicionarEventoDeCancelarProprietario(proprietario, message);
+            AdicionarEventoDeVenderVeiculo(veiculo, message);
         }
 
-        public static void AdicionarEventoDeCancelarProprietario(Proprietario proprietario, CancelarProprietarioCommand message)
+        public static void AdicionarEventoDeVenderVeiculo(Veiculo veiculo, VenderVeiculoCommand message)
         {
-            proprietario.AdicionarEvento(new ProprietarioCanceladoEvent(message.Id, proprietario.Nome, proprietario.Documento, proprietario.Email.Endereco));
+            veiculo.AdicionarEvento(new VeiculoIndisponibilizadoEvent(message.Id, veiculo.Renavam, veiculo.Modelo, veiculo.Quilometragem, veiculo.Valor));
         }
     }
 }

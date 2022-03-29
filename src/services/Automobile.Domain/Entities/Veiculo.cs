@@ -18,36 +18,35 @@ namespace Automobile.Domain.Entities
         public DateTime? DataAlteracao { get; private set; }
 
 
-
         // EF Relation
         public Marca Marca { get; protected set; }
         public Proprietario Proprietario { get; protected set; }
         protected Veiculo() { }
 
 
-        public Veiculo(Guid id, Guid proprietarioId, Guid marcaId, string renavam, decimal quilometragem, decimal valor, FluxoRevenda status)
+        public Veiculo(Guid id, Guid proprietarioId, Guid marcaId, Modelo modelo, string renavam, decimal quilometragem, decimal valor, FluxoRevenda status)
         {
             Id = id;
             ProprietarioId = proprietarioId;
             MarcaId = marcaId;
+            Modelo = modelo;
             Renavam = renavam;
             Quilometragem = quilometragem;
             Valor = valor;
             Status = status;
         }
 
-        public void Atualizar(string renavam, decimal quilometragem, decimal valor, FluxoRevenda status)
+        public void Atualizar(Modelo modelo, string renavam, decimal quilometragem, decimal valor, FluxoRevenda status)
         {
+            Modelo = modelo;
             Renavam = renavam;
             Quilometragem = quilometragem;
             Valor = valor;
             Status = status;
         }
 
-        public void AtribuirModelo(Marca marca) => Marca = marca;
-        public void AtribuirProprietario(Proprietario proprietario) => Proprietario = proprietario;
-        public void Disponivel() => Status = FluxoRevenda.Disponivel;
-        public void Indisponivel() => Status = FluxoRevenda.Indisponivel;
+        public void Disponibilizar() => Status = FluxoRevenda.Disponivel;
+        public void Indisponibilizar() => Status = FluxoRevenda.Indisponivel;
         public void Vender() => Status = FluxoRevenda.Vendido;
     }
 }

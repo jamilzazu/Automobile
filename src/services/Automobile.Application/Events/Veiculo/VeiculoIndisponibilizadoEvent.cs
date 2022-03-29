@@ -4,7 +4,7 @@ using System;
 
 namespace Automobile.Application.Events.Veiculo
 {
-    public  class VeiculoIndisponibilizadoEvent : Event
+    public class VeiculoIndisponibilizadoEvent : Event
     {
         public Guid Id { get; set; }
         public string Renavam { get; set; }
@@ -12,9 +12,10 @@ namespace Automobile.Application.Events.Veiculo
         public decimal Quilometragem { get; set; }
         public decimal Valor { get; set; }
 
-        public VeiculoIndisponibilizadoEvent(string renavam, Modelo modelo, decimal quilometragem, decimal valor)
+        public VeiculoIndisponibilizadoEvent(Guid id, string renavam, Modelo modelo, decimal quilometragem, decimal valor)
         {
-            AggregateId = Id;
+            AggregateId = id;
+            Id = id;
             Renavam = renavam;
             Modelo = modelo;
             Quilometragem = quilometragem;

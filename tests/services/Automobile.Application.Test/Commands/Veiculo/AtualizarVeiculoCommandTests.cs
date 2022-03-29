@@ -1,4 +1,4 @@
-﻿using Automobile.Domain.Commands.Proprietario;
+﻿using Automobile.Domain.Commands.Veiculo;
 using Automobile.Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -8,7 +8,7 @@ namespace Automobile.Application.Test.Commands.Veiculo
     [TestClass]
     public class AtualizarVeiculoCommandTests
     {
-        private readonly CadastrarVeiculoCommand _veiculo = new("", new Modelo("Honda", 2022, 2022, Guid.NewGuid()), 100000, 50000);
+        private readonly CadastrarVeiculoCommand _veiculo = new(Guid.NewGuid(), Guid.NewGuid(), new Modelo("Modelo", 2000, 2022, Guid.NewGuid()), "12592282981", 50000, 100000);
 
         [TestMethod]
         [TestCategory("Application.Commands")]
