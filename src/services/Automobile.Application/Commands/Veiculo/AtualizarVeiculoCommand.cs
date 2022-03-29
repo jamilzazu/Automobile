@@ -13,9 +13,9 @@ namespace Automobile.Domain.Commands.Proprietario
         public decimal Quilometragem { get; set; }
         public decimal Valor { get; set; }
 
-        public AtualizarVeiculoCommand(string renavam, Modelo modelo, decimal quilometragem, decimal valor)
+        public AtualizarVeiculoCommand(Guid id,string renavam, Modelo modelo, decimal quilometragem, decimal valor)
         {
-            Id = Guid.NewGuid();
+            Id = id;
             AggregateId = Id;
             Renavam = renavam;
             Modelo = modelo;
