@@ -36,6 +36,14 @@ namespace Automobile.Domain.Entities
             Status = status;
         }
 
+        public void Atualizar(string renavam, decimal quilometragem, decimal valor, FluxoRevenda status)
+        {
+            Renavam = renavam;
+            Quilometragem = quilometragem;
+            Valor = valor;
+            Status = status;
+        }
+
         public void AtribuirModelo(Marca marca) => Marca = marca;
         public void AtribuirProprietario(Proprietario proprietario) => Proprietario = proprietario;
         public void Disponivel() => Status = FluxoRevenda.Disponivel;

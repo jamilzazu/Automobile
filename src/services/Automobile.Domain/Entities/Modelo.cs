@@ -24,5 +24,13 @@ namespace Automobile.Domain.Entities
 
         // EF Constructor
         protected Modelo() { }
+
+
+        public void Atualizar(string descricao, int anoFabricacao, int anoModelo)
+        {
+            Descricao = descricao;
+            AnoFabricacao = anoFabricacao;
+            AnoModelo = anoModelo;
+        }
     }
 }
