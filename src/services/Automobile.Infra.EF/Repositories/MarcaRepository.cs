@@ -25,6 +25,11 @@ namespace Automobile.Infra.EF
             return await _context.Marcas.FirstOrDefaultAsync(e => e.Id == id);
         }
 
+        public async Task<Marca> ObterMarcaPeloNome(string nome)
+        {
+            return await _context.Marcas.FirstOrDefaultAsync(e => e.Nome == nome);
+        }
+
         public void Adicionar(Marca marca)
         {
             _context.Marcas.Add(marca);

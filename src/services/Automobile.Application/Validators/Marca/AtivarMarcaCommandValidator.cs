@@ -10,7 +10,7 @@ namespace Automobile.Application.Validators.Proprietario
         {
             RuleFor(c => c.Id)
                 .NotEqual(Guid.Empty)
-                .WithMessage("Id do proprietário inválido");
+                .WithMessage("Id da marca inválido");
         }
     }
 }

@@ -10,5 +10,6 @@ namespace Automobile.Domain.Repositories
         void Adicionar(Marca marca);
         void Atualizar(Marca marca);
         Task<Marca> ObterMarcaPeloId(Guid id);
+        Task<Marca> ObterMarcaPeloNome(string nome);
     }
 }

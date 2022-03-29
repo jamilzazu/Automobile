@@ -47,11 +47,9 @@ namespace Automobile.Domain.Handlers.Marcas
 
         public bool MarcaJaExiste(string nomeMarca)
         {
-            var filtro = new FiltroListaMarcasRequest { Busca = nomeMarca };
+            var marcaJaExiste = _marcaService.ObterMarcaPeloNome(nomeMarca).Result != null;
 
-            var marcaJaExiste = _marcaService.ListarMarcas(filtro).Data;
-
-            return marcaJaExiste != null;
+            return marcaJaExiste;
         }
 
         public void CadastrarMarca(Marca marca)

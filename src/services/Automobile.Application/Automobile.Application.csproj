@@ -7,10 +7,12 @@
   <ItemGroup>
     <None Remove="Queries\Scripts\ListaMarcas.sql" />
     <None Remove="Queries\Scripts\ListaProprietarios.sql" />
+    <None Remove="Queries\Scripts\ListaVeiculos.sql" />
     <None Remove="Queries\Scripts\ObterProprietarioPorId.sql" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Queries\Scripts\ListaVeiculos.sql" />
     <EmbeddedResource Include="Queries\Scripts\ListaMarcas.sql" />
     <EmbeddedResource Include="Queries\Scripts\ListaProprietarios.sql" />
     <EmbeddedResource Include="Queries\Scripts\ObterProprietarioPorId.sql" />

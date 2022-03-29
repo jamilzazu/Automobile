@@ -10,6 +10,7 @@ namespace Automobile.Application.Services.Interfaces
     public interface IMarcaService
     {
         Task<Marca> ObterMarcaPeloId(Guid idProprietario);
+        Task<Marca> ObterMarcaPeloNome(string nome);
         PaginatedResult<ListaMarcaResponse> ListarMarcas(FiltroListaMarcasRequest filtro);
     }
 }

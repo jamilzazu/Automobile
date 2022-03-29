@@ -14,23 +14,28 @@ namespace Automobile.Application.Services
 {
     public class MarcaService : CommandHandler, IMarcaService
     {
-        private readonly IMarcaQueries _pmarcaQueries;
-        private readonly IMarcaRepository _pmarcaRepository;
+        private readonly IMarcaQueries marcaQueries;
+        private readonly IMarcaRepository marcaRepository;
 
         public MarcaService(IMarcaQueries pmarcaQueries, IMarcaRepository pmarcaRepository)
         {
-            _pmarcaQueries = pmarcaQueries;
-            _pmarcaRepository = pmarcaRepository;
+            marcaQueries = pmarcaQueries;
+            marcaRepository = pmarcaRepository;
         }
 
         public Task<Marca> ObterMarcaPeloId(Guid id)
         {
-            return _pmarcaRepository.ObterMarcaPeloId(id);
+            return marcaRepository.ObterMarcaPeloId(id);
+        }
+
+        public Task<Marca> ObterMarcaPeloNome(string nome)
+        {
+            return marcaRepository.ObterMarcaPeloNome(nome);
         }
 
         public PaginatedResult<ListaMarcaResponse> ListarMarcas(FiltroListaMarcasRequest filtro)
         {
-            return _pmarcaQueries.ListarMarcas(filtro);
+            return marcaQueries.ListarMarcas(filtro);
         }
     }
 }
