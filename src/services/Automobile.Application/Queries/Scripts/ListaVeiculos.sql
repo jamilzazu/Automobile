@@ -1,12 +1,13 @@
 ﻿select
+ve.Id,
 ve.Renavam,
 ma.Nome Marca,
 mo.Descricao Modelo,
 mo.AnoModelo,
 mo.AnoFabricacao,
-ve.Quilometragem,
-ve.Valor,
-CONCAT(proEnd.Cidade,' - ', proEnd.Estado) ,
+CAST(CONVERT(MONEY,ve.Quilometragem) as varchar(100)) + ' Km' Quilometragem,
+format (ve.Valor, 'c', 'pt-br') Valor,
+CONCAT(proEnd.Cidade,' - ', proEnd.Estado) Cidade,
 (case when ve.Status = 0 then 'Indisponível' 
 	  when ve.Status = 1 then 'Disponível'
 	  when ve.Status = 99 then 'Vendido' end) Status,
@@ -17,4 +18,3 @@ inner join Automobile.dbo.Modelos mo on ve.Id = mo.VeiculoId
 inner join Automobile.dbo.Marcas ma on ve.MarcaId = ma.Id
 inner join Automobile.dbo.Proprietarios pro on ve.ProprietarioId = pro.Id
 left join Automobile.dbo.ProprietarioEnderecos proEnd on pro.Id = proEnd.ProprietarioId
- 

@@ -4,13 +4,14 @@ using System.Text.Json.Serialization;
 
 namespace Automobile.Domain.Entities
 {
-    public class Modelo : Entity
+    public class Modelo
     {
+        public Guid Id { get; private set; }
         public string Descricao { get; set; }
         public int AnoFabricacao { get; set; }
         public int AnoModelo { get; set; }
 
-        public Guid VeiculoId { get; set; }
+        public Guid VeiculoId { get; private set; }
 
         // EF Relation
         [JsonIgnore]

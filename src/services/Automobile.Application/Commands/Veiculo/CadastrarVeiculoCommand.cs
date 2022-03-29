@@ -7,7 +7,7 @@ namespace Automobile.Domain.Commands.Veiculo
 {
     public class CadastrarVeiculoCommand : Command
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; }
         public Guid ProprietarioId { get; set; }
         public Guid MarcaId { get; set; }
         public string Renavam { get; set; }
