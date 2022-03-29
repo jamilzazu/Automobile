@@ -5,6 +5,8 @@ using System;
 using System.Threading.Tasks;
 using Automobile.Domain.Commands.Proprietario;
 using Automobile.Domain.Commands.Veiculo;
+using Automobile.Application.Services.Interfaces;
+using Automobile.Application.Queries.Request;
 
 namespace Automobile.Veiculos.API.Controllers
 {
@@ -12,28 +14,30 @@ namespace Automobile.Veiculos.API.Controllers
     public class VeiculoController : MainController
     {
         private readonly IMediatorHandler _mediator;
-        //private readonly IVeiculoService _veiculoService;
+        private readonly IVeiculoService _veiculoService;
 
-        public VeiculoController(IMediatorHandler mediator)
+        public VeiculoController(IMediatorHandler mediator, IVeiculoService veiculoService)
         {
             _mediator = mediator;
+            _veiculoService = veiculoService;
         }
 
-        //[HttpPost("listar")]
-        //public IActionResult ListarVeiculos([FromBody] FiltroListaVeiculosRequest filtro)
-        //{
-        //    var resultado = _veiculoService.ListarVeiculos(filtro);
 
-        //    return CustomResponse(resultado);
-        //}
+        [HttpPost("listar")]
+        public IActionResult ListarVeiculos([FromBody] FiltroListaVeiculosRequest filtro)
+        {
+            var resultado = _veiculoService.ListarVeiculos(filtro);
 
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> ObterVeiculoPorId(Guid id)
-        //{
-        //    var resultado = await _veiculoService.ObterVeiculoPeloId(id);
+            return CustomResponse(resultado);
+        }
 
-        //    return CustomResponse(resultado);
-        //}
+        [HttpGet("{id}")]
+        public async Task<IActionResult> ObterVeiculoPeloId(Guid id)
+        {
+            var resultado = await _veiculoService.ObterVeiculoPeloId(id);
+
+            return CustomResponse(resultado);
+        }
 
         [HttpPost("cadastrar")]
         public async Task<IActionResult> CadastrarVeiculo(CadastrarVeiculoCommand command)

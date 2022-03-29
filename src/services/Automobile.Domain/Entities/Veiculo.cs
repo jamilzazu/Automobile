@@ -2,6 +2,7 @@
 using Automobile.Domain.Entities.Enums;
 using Automobile.Domain.Entitites;
 using System;
+using System.Text.Json.Serialization;
 
 namespace Automobile.Domain.Entities
 {
@@ -19,7 +20,9 @@ namespace Automobile.Domain.Entities
 
 
         // EF Relation
+        [JsonIgnore]
         public Marca Marca { get; protected set; }
+        [JsonIgnore]
         public Proprietario Proprietario { get; protected set; }
         protected Veiculo() { }
 

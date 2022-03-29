@@ -1,8 +1,8 @@
-﻿using Automobile.Core.Messages;
-using Automobile.Domain.Commands.Proprietario;
+﻿using Automobile.Application.Events.Veiculo;
+using Automobile.Core.Messages;
+using Automobile.Domain.Commands.Veiculo;
 using Automobile.Domain.Entities;
-using Automobile.Domain.Entities.Objects;
-using Automobile.Domain.Events.Proprietario;
+using Automobile.Domain.Entities.Enums;
 using Automobile.Domain.Repositories;
 using FluentValidation.Results;
 using MediatR;
@@ -11,63 +11,55 @@ using System.Threading.Tasks;
 
 namespace Automobile.Domain.Handlers.Veiculos
 {
-    public class AtualizarProprietarioCommandHandler : CommandHandler, IRequestHandler<AtualizarProprietarioCommand, ValidationResult>
+    public class AtualizarVeiculoCommandHandler : CommandHandler, IRequestHandler<AtualizarVeiculoCommand, ValidationResult>
     {
-        private readonly IProprietarioRepository _proprietarioRepository;
+        private readonly IVeiculoRepository _veiculoRepository;
 
-        public AtualizarProprietarioCommandHandler(IProprietarioRepository proprietarioRepository)
+        public AtualizarVeiculoCommandHandler(IVeiculoRepository veiculoRepository)
         {
-            _proprietarioRepository = proprietarioRepository;
+            _veiculoRepository = veiculoRepository;
         }
 
-        public async Task<ValidationResult> Handle(AtualizarProprietarioCommand message, CancellationToken cancellationToken)
+        public async Task<ValidationResult> Handle(AtualizarVeiculoCommand message, CancellationToken cancellationToken)
         {
             if (!message.EhValido()) return message.ValidationResult;
 
-            var proprietario = await _proprietarioRepository.ObterProprietarioPeloId(message.Id);
-
-            if (proprietario == null)
+            if (RenavamEstaVinculadoAOutroVeiculo(message.Renavam))
             {
-                AdicionarErro("Proprietário não encontrado.");
+                AdicionarErro($"Este renavam {message.Renavam} já está em uso.");
                 return ValidationResult;
             }
 
-            if (DocumentoEstaVinculadoAOutroProprietario(proprietario.Documento, message.Documento))
-            {
-                AdicionarErro($"Este {message.Documento.TipoDocumentoDescricao()} já está em uso.");
-                return ValidationResult;
-            }
+            var veiculo = MontaObjetoVeiculo(message);
 
-            AtualizarProprietario(proprietario, message);
+            _veiculoRepository.Adicionar(veiculo);
 
-            return await PersistirDados(_proprietarioRepository.UnitOfWork);
+            return await PersistirDados(_veiculoRepository.UnitOfWork);
+        }
+
+        public bool RenavamEstaVinculadoAOutroVeiculo(string renavam)
+        {
+            var renavamEstaVinculadoAOutroVeiculo = _veiculoRepository.ObterVeiculoPeloNumeroRenavam(renavam);
+
+            return renavamEstaVinculadoAOutroVeiculo.Result != null;
+        }
+
+        public static Veiculo MontaObjetoVeiculo(AtualizarVeiculoCommand message)
+        {
+            return new Veiculo(message.Id, message.ProprietarioId, message.MarcaId, message.Modelo, message.Renavam, message.Quilometragem, message.Valor, FluxoRevenda.Disponivel);
         }
 
 
-        public bool DocumentoEstaVinculadoAOutroProprietario(Documento documentoProprietario, Documento documentoCommand)
+        public void CadastrarVeiculo(Veiculo veiculo)
         {
-            if (documentoProprietario.NumeroDocumento != documentoCommand.NumeroDocumento)
-            {
-                var documentoVinculadoAOutroProprietario = _proprietarioRepository.ObterProprietarioPeloNumeroDocumento(documentoCommand);
+            _veiculoRepository.Adicionar(veiculo);
 
-                return documentoVinculadoAOutroProprietario.Result != null;
-            }
-
-            return false;
+            AdicionarEventoDeCadastroDoVeiculo(veiculo);
         }
 
-        public void AtualizarProprietario(Proprietario proprietario, AtualizarProprietarioCommand message)
+        public static void AdicionarEventoDeCadastroDoVeiculo(Veiculo veiculo)
         {
-            proprietario.Atualizar(message.Nome, message.Documento, message.Email);
-
-            _proprietarioRepository.Atualizar(proprietario);
-
-            AdicionarEventoDeAtualizacaoDoProprietario(proprietario, message);
-        }
-
-        public static void AdicionarEventoDeAtualizacaoDoProprietario(Proprietario proprietario, AtualizarProprietarioCommand message)
-        {
-            proprietario.AdicionarEvento(new ProprietarioAtualizadoEvent(message.Id, message.Nome, message.Documento, message.Email));
+            veiculo.AdicionarEvento(new VeiculoCadastradoEvent(veiculo.Renavam, veiculo.Modelo, veiculo.Quilometragem, veiculo.Valor));
         }
     }
 }

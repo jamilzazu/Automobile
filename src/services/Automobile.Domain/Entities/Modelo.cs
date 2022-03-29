@@ -1,17 +1,19 @@
 ﻿using Automobile.Core.DomainObjects;
 using System;
+using System.Text.Json.Serialization;
 
 namespace Automobile.Domain.Entities
 {
     public class Modelo : Entity
     {
-        public string Descricao { get; private set; }
-        public int AnoFabricacao { get; private set; }
-        public int AnoModelo { get; private set; }
+        public string Descricao { get; set; }
+        public int AnoFabricacao { get; set; }
+        public int AnoModelo { get; set; }
 
-        public Guid VeiculoId { get; private set; }
+        public Guid VeiculoId { get; set; }
 
         // EF Relation
+        [JsonIgnore]
         public Veiculo Veiculo { get; protected set; }
 
         public Modelo(string descricao, int anoFabricacao, int anoModelo, Guid veiculoId)

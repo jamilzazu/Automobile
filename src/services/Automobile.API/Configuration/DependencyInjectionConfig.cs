@@ -18,6 +18,8 @@ using Automobile.Enderecos.Domain.Handlers.Enderecos;
 using Automobile.Domain.Handlers.Marcas;
 using Automobile.Domain.Handlers.Marcass;
 using Automobile.Domain.Commands.Marca;
+using Automobile.Domain.Commands.Veiculo;
+using Automobile.Domain.Handlers.Veiculos;
 
 namespace Automobile.Proprietarios.API.Configuration
 {
@@ -57,6 +59,17 @@ namespace Automobile.Proprietarios.API.Configuration
             services.AddScoped<IRequestHandler<CadastrarMarcaCommand, ValidationResult>, CadastrarMarcaCommandHandler>();
             services.AddScoped<IRequestHandler<AtivarMarcaCommand, ValidationResult>, AtivarMarcaCommandHandler>();
             services.AddScoped<IRequestHandler<CancelarMarcaCommand, ValidationResult>, CancelarMarcaCommandHandler>();
+
+            // Veículo
+
+            services.AddScoped<IVeiculoRepository, VeiculoRepository>();
+            services.AddScoped<IVeiculoQueries, VeiculoQueries>();
+            services.AddScoped<IVeiculoService, VeiculoService>();
+
+            services.AddScoped<IRequestHandler<CadastrarVeiculoCommand, ValidationResult>, CadastrarVeiculoCommandHandler>();
+            services.AddScoped<IRequestHandler<AtualizarVeiculoCommand, ValidationResult>, AtualizarVeiculoCommandHandler>();
+            services.AddScoped<IRequestHandler<IndisponibilizarVeiculoCommand, ValidationResult>, IndisponibilizarVeiculoCommandHandler>();
+            services.AddScoped<IRequestHandler<VenderVeiculoCommand, ValidationResult>, VenderVeiculoCommandHandler>();
         }
     }
 }

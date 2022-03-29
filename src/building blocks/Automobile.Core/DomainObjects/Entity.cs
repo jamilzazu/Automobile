@@ -7,7 +7,7 @@ namespace Automobile.Core.DomainObjects
 {
     public abstract class Entity
     {
-        [JsonPropertyOrder(-10)]
+        [JsonPropertyOrder(-20)]
 
         public Guid Id { get; set; }
 
