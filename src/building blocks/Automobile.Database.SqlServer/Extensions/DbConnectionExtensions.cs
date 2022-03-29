@@ -38,7 +38,7 @@ namespace Automobile.Database.SqlServer.Extensions
 
             var paginateSql = new StringBuilder(sql);
             paginateSql.AppendLine(filter.GetOrderBy());
-            paginateSql.AppendLine(filter.GetOffSet(skip, take));
+            paginateSql.AppendLine(PaginateFilter.GetOffSet(skip, take));
 
             return paginateSql;
         }

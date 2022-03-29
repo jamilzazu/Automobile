@@ -16,7 +16,7 @@ namespace Automobile.Database.SqlServer.Order
             return $" ORDER BY {orderBy}";
         }
 
-        public string GetOffSet(int skip, int take)
+        public static string GetOffSet(int skip, int take)
         {
             return $" OFFSET {skip} ROWS FETCH NEXT {take} ROWS ONLY";
         }

@@ -1,6 +1,6 @@
 ﻿using Automobile.Application.Events.Veiculo;
 using Automobile.Core.Messages;
-using Automobile.Domain.Commands.Proprietario;
+using Automobile.Domain.Commands.Veiculo;
 using Automobile.Domain.Entities;
 using Automobile.Domain.Entities.Enums;
 using Automobile.Domain.Repositories;

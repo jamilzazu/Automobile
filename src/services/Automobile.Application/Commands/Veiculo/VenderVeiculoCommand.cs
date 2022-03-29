@@ -2,7 +2,7 @@
 using Automobile.Core.Messages;
 using System;
 
-namespace Automobile.Domain.Commands.Proprietario
+namespace Automobile.Domain.Commands.Veiculo
 {
     public class VenderVeiculoCommand : Command
     {
