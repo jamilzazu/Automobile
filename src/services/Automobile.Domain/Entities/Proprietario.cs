@@ -1,7 +1,6 @@
 ﻿using System;
 using Automobile.Core.DomainObjects;
 using Automobile.Core.Enums;
-using Automobile.Domain.Entities.Enums;
 using Automobile.Domain.Entities.Objects;
 
 namespace Automobile.Domain.Entities
@@ -17,6 +16,7 @@ namespace Automobile.Domain.Entities
         public Endereco Endereco { get; private set; }
 
         // EF Relation
+        public Veiculo Veiculo { get; protected set; }
         protected Proprietario() { }
 
         public Proprietario(Guid id,
@@ -40,14 +40,8 @@ namespace Automobile.Domain.Entities
             Email = new Email(email);
         }
 
-        public void Cancelar()
-        {
-            Cancelado = Cancelado.Sim;
-        }
+        public void Cancelar() => Cancelado = Cancelado.Sim;
+        public void Ativar() => Cancelado = Cancelado.Nao;
 
-        public void Ativar()
-        {
-            Cancelado = Cancelado.Nao;
-        }
     }
 }

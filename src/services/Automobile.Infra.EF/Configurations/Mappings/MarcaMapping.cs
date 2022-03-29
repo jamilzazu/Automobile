@@ -14,6 +14,9 @@ namespace Automobile.Infra.EF.Configurations.Mappings
                 .IsRequired()
                 .HasColumnType("varchar(200)");
 
+            builder.Property(c => c.Cancelado)
+                .IsRequired();
+
             builder.ToTable("Marcas");
         }
     }

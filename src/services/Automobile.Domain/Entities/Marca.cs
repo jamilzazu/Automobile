@@ -1,5 +1,6 @@
 ﻿using Automobile.Core.DomainObjects;
 using Automobile.Core.Enums;
+using Automobile.Domain.Entities;
 using System;
 
 namespace Automobile.Domain.Entitites
@@ -12,6 +13,7 @@ namespace Automobile.Domain.Entitites
         public DateTime? DataAlteracao { get; private set; }
 
         // EF Relation
+        public Veiculo Veiculo { get; protected set; }
         protected Marca() { }
 
         public Marca(Guid id, string nome, Cancelado cancelado)
@@ -21,14 +23,8 @@ namespace Automobile.Domain.Entitites
             Cancelado = cancelado;
         }
 
-        public void Cancelar()
-        {
-            Cancelado = Cancelado.Sim;
-        }
+        public void Cancelar() => Cancelado = Cancelado.Sim;
 
-        public void Ativar()
-        {
-            Cancelado = Cancelado.Nao;
-        }
+        public void Ativar() => Cancelado = Cancelado.Nao;
     }
 }
