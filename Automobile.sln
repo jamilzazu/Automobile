@@ -45,6 +45,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MessageBus", "MessageBus", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automobile.MessageBus", "src\building blocks\Automobile.MessageBus\Automobile.MessageBus.csproj", "{651AB127-D5C1-445F-8CC2-F665D9B4A834}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automobile.MVC", "src\web\Automobile.MVC\Automobile.MVC.csproj", "{5F202A93-73F1-4108-B0DA-D1B4C90A6A91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,10 @@ Global
 		{651AB127-D5C1-445F-8CC2-F665D9B4A834}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{651AB127-D5C1-445F-8CC2-F665D9B4A834}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{651AB127-D5C1-445F-8CC2-F665D9B4A834}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F202A93-73F1-4108-B0DA-D1B4C90A6A91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F202A93-73F1-4108-B0DA-D1B4C90A6A91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F202A93-73F1-4108-B0DA-D1B4C90A6A91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F202A93-73F1-4108-B0DA-D1B4C90A6A91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,6 +125,7 @@ Global
 		{FC244A6E-CFB2-4D73-8685-29D03568AFAB} = {1A904D26-3AD1-4A56-8496-052C81DC77CE}
 		{5F88947B-58A1-4E3E-ABF8-7060215AA9A2} = {10E3B62F-950A-437C-9628-E6FA74C9B47F}
 		{651AB127-D5C1-445F-8CC2-F665D9B4A834} = {5F88947B-58A1-4E3E-ABF8-7060215AA9A2}
+		{5F202A93-73F1-4108-B0DA-D1B4C90A6A91} = {D839B5CE-B98A-4927-A5E9-E5A30CED7AD7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {07A51463-0D91-43FD-9C8D-7B39DE253B73}
