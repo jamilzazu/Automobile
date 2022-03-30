@@ -1,10 +1,11 @@
+using Automobile.API.Configuration;
+using Automobile.Proprietarios.API.Configuration;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Automobile.Proprietarios.API.Configuration;
-using MediatR;
 
 namespace Automobile.Proprietarios.API
 {
@@ -37,6 +38,9 @@ namespace Automobile.Proprietarios.API
             services.AddMediatR(typeof(Startup));
 
             services.RegisterServices();
+
+            services.AddMessageBusConfiguration(Configuration);
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

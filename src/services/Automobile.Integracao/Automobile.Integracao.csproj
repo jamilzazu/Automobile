@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\building blocks\Automobile.Core\Automobile.Core.csproj" />
+    <ProjectReference Include="..\..\building blocks\Automobile.MessageBus\Automobile.MessageBus.csproj" />
+    <ProjectReference Include="..\Automobile.Application\Automobile.Application.csproj" />
+  </ItemGroup>
+
+</Project>

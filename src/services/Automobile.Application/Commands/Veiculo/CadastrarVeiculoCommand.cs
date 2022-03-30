@@ -1,7 +1,7 @@
-﻿using Automobile.Core.Messages;
-using System;
+﻿using Automobile.Application.Validators.Veiculo;
+using Automobile.Core.Messages;
 using Automobile.Domain.Entities;
-using Automobile.Application.Validators.Veiculo;
+using System;
 
 namespace Automobile.Domain.Commands.Veiculo
 {

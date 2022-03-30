@@ -24,8 +24,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\building blocks\Automobile.Core\Automobile.Core.csproj" />
+    <ProjectReference Include="..\..\building blocks\Automobile.MessageBus\Automobile.MessageBus.csproj" />
     <ProjectReference Include="..\..\building blocks\Automobile.WebAPI.Core\Automobile.WebAPI.Core.csproj" />
     <ProjectReference Include="..\Automobile.Application\Automobile.Application.csproj" />
     <ProjectReference Include="..\Automobile.Domain\Automobile.Domain.csproj" />
+    <ProjectReference Include="..\Automobile.Integracao\Automobile.Integracao.csproj" />
   </ItemGroup>
 </Project>
