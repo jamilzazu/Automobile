@@ -68,7 +68,7 @@ namespace Automobile.Integracao.Services
         {
             var proprietario = await _proprietarioRepository.ObterProprietarioPeloId(id);
 
-            var apiKey = "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";
+            var apiKey = "SEND_GRID_KEY";
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
