@@ -1,7 +1,6 @@
 ﻿using Automobile.Core.Mediator;
 using Automobile.Core.Messages.Integration;
 using Automobile.Domain.Commands.Veiculo;
-using Automobile.Domain.Repositories;
 using Automobile.MessageBus;
 using FluentValidation.Results;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,13 +18,11 @@ namespace Automobile.Integracao.Services
     {
         private readonly IMessageBus _bus;
         private readonly IServiceProvider _serviceProvider;
-        private readonly IProprietarioRepository _proprietarioRepository;
 
-        public CadastroVeiculoIntegrationHanlder(IMessageBus bus, IServiceProvider serviceProvider, IProprietarioRepository proprietarioRepository)
+        public CadastroVeiculoIntegrationHanlder(IMessageBus bus, IServiceProvider serviceProvider)
         {
             _bus = bus;
             _serviceProvider = serviceProvider;
-            _proprietarioRepository = proprietarioRepository;
         }
 
         private void SetResponder()
@@ -59,15 +56,13 @@ namespace Automobile.Integracao.Services
             }
 
             if (sucesso.IsValid)
-                await EnviarEmail(message.Id, message.Renavam, message.Quilometragem, message.Valor);
+                await EnviarEmail(message.Renavam, message.Quilometragem, message.Valor);
 
             return new ResponseMessage(sucesso);
         }
 
-        public async Task EnviarEmail(Guid id, string renavam, decimal quilometragem, decimal valor)
+        public async Task EnviarEmail(string renavam, decimal quilometragem, decimal valor)
         {
-            var proprietario = await _proprietarioRepository.ObterProprietarioPeloId(id);
-
             var apiKey = "SEND_GRID_KEY";
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
@@ -77,7 +72,7 @@ namespace Automobile.Integracao.Services
                 PlainTextContent = $@"Veiculo: 
                 {renavam}, {quilometragem}, {valor}"
             };
-            msg.AddTo(new EmailAddress(proprietario.Email.Endereco));
+            msg.AddTo(new EmailAddress("E-mail Destinatario"));
             var response = await client.SendEmailAsync(msg);
         }
     }
