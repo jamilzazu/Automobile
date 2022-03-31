@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-namespace Automobile.Proprietarios.API.Configuration
+namespace Automobile.API.Configuration
 {
     public static class SwaggerConfig
     {

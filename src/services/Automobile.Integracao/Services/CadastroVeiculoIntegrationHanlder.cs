@@ -5,6 +5,8 @@ using Automobile.MessageBus;
 using FluentValidation.Results;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -55,7 +57,25 @@ namespace Automobile.Integracao.Services
                 sucesso = await mediator.EnviarComando(veiculoCommand);
             }
 
+            if (sucesso.IsValid)
+                await EnviarEmail(message.Renavam, message.Quilometragem, message.Valor);
+
             return new ResponseMessage(sucesso);
+        }
+
+        public static async Task EnviarEmail(string renavam, decimal quilometragem, decimal valor)
+        {
+            var apiKey = "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";
+            var client = new SendGridClient(apiKey);
+            var msg = new SendGridMessage()
+            {
+                From = new EmailAddress("jamilzazu@hotmail.com", "Jamil Zazu]"),
+                Subject = "Novo veiculo cadastrado",
+                PlainTextContent = $@"Veiculo: 
+                {renavam}, {quilometragem}, {valor}"
+            };
+            msg.AddTo(new EmailAddress("jamilzazu@hotmail.com"));
+            var response = await client.SendEmailAsync(msg);
         }
     }
 }

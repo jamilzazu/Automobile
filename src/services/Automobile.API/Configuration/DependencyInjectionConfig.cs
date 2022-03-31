@@ -21,7 +21,7 @@ using FluentValidation.Results;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Automobile.Proprietarios.API.Configuration
+namespace Automobile.API.Configuration
 {
     public static class DependencyInjectionConfig
     {

@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Data;
 
-namespace Automobile.Proprietarios.API.Configuration
+namespace Automobile.API.Configuration
 {
     public static class ApiConfig
     {

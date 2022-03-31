@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
-namespace Automobile.Proprietarios.API.Controllers
+namespace Automobile.API.Controllers
 {
     [Route("api/proprietario")]
     public class ProprietarioController : MainController

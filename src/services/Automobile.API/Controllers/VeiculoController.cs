@@ -77,8 +77,6 @@ namespace Automobile.Veiculos.API.Controllers
 
         private async Task<ResponseMessage> CadastrarVeiculos(CadastrarVeiculoCommand veiculo)
         {
-            //var _veiculo = await _veiculoService.ObterVeiculoPeloId(veiculo.Id);
-
             var veiculoCadastrado = new VeiculoCadastradoIntegrationEvent(veiculo.ProprietarioId, veiculo.MarcaId, veiculo.Renavam, veiculo.Quilometragem, veiculo.Valor);
 
             try
@@ -87,7 +85,6 @@ namespace Automobile.Veiculos.API.Controllers
             }
             catch
             {
-                //await _authenticationService.UserManager.DeleteAsync(usuario);
                 throw;
             }
 

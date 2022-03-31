@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Automobile.Proprietarios.API
+namespace Automobile.API
 {
     public class Program
     {
