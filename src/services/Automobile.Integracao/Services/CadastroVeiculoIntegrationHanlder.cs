@@ -1,6 +1,7 @@
 ﻿using Automobile.Core.Mediator;
 using Automobile.Core.Messages.Integration;
 using Automobile.Domain.Commands.Veiculo;
+using Automobile.Domain.Repositories;
 using Automobile.MessageBus;
 using FluentValidation.Results;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,13 +19,13 @@ namespace Automobile.Integracao.Services
     {
         private readonly IMessageBus _bus;
         private readonly IServiceProvider _serviceProvider;
+        private readonly IProprietarioRepository _proprietarioRepository;
 
-        public CadastroVeiculoIntegrationHanlder(
-                            IServiceProvider serviceProvider,
-                            IMessageBus bus)
+        public CadastroVeiculoIntegrationHanlder(IMessageBus bus, IServiceProvider serviceProvider, IProprietarioRepository proprietarioRepository)
         {
-            _serviceProvider = serviceProvider;
             _bus = bus;
+            _serviceProvider = serviceProvider;
+            _proprietarioRepository = proprietarioRepository;
         }
 
         private void SetResponder()
@@ -58,13 +59,15 @@ namespace Automobile.Integracao.Services
             }
 
             if (sucesso.IsValid)
-                await EnviarEmail(message.Renavam, message.Quilometragem, message.Valor);
+                await EnviarEmail(message.Id, message.Renavam, message.Quilometragem, message.Valor);
 
             return new ResponseMessage(sucesso);
         }
 
-        public static async Task EnviarEmail(string renavam, decimal quilometragem, decimal valor)
+        public async Task EnviarEmail(Guid id, string renavam, decimal quilometragem, decimal valor)
         {
+            var proprietario = await _proprietarioRepository.ObterProprietarioPeloId(id);
+
             var apiKey = "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";
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
@@ -74,7 +77,7 @@ namespace Automobile.Integracao.Services
                 PlainTextContent = $@"Veiculo: 
                 {renavam}, {quilometragem}, {valor}"
             };
-            msg.AddTo(new EmailAddress("jamilzazu@hotmail.com"));
+            msg.AddTo(new EmailAddress(proprietario.Email.Endereco));
             var response = await client.SendEmailAsync(msg);
         }
     }

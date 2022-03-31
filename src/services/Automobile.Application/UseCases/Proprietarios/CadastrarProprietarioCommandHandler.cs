@@ -2,7 +2,6 @@
 using Automobile.Core.Messages;
 using Automobile.Domain.Commands.Proprietario;
 using Automobile.Domain.Entities;
-using Automobile.Domain.Entities.Enums;
 using Automobile.Domain.Entities.Objects;
 using Automobile.Domain.Events.Proprietario;
 using Automobile.Domain.Repositories;
@@ -41,7 +40,7 @@ namespace Automobile.Domain.Handlers.Proprietarios
 
         public static Proprietario MontaObjetoProprietario(CadastrarProprietarioCommand message)
         {
-            return new Proprietario(message.Id, message.Nome, message.Documento, message.Email,Cancelado.Nao);
+            return new Proprietario(message.Id, message.Nome, message.Documento, message.Email, Cancelado.Nao);
         }
 
         public bool DocumentoEstaVinculadoAOutroProprietario(Documento numeroDocumento)
