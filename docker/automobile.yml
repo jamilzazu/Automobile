@@ -37,24 +37,6 @@ services:
         depends_on:
             - api-automobile
 
-    # api-identidade:
-    #     image: automobile-api-identidade:latest
-    #     container_name: automobile-api-identidade    
-    #     build: 
-    #         context: ../src
-    #         dockerfile: ./services/Automobile.Identidade.API/Dockerfile  
-    #     restart: always    
-    #     environment: 
-    #         - ASPNETCORE_ENVIRONMENT=Production
-    #         - ASPNETCORE_URLS=https://+:5101;http://+5102
-    #         - ASPNETCORE_Kestrel__Certificates__Default__Password=automobile
-    #         - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/automobile-certificate.pfx
-    #     volumes:
-    #         - ./certs:/https:ro
-    #     depends_on:
-    #         - rabbitmq
-    #         - sql-server
-            
     api-automobile:
         image: automobile-api:latest
         container_name: automobile-api
@@ -71,7 +53,6 @@ services:
             - ./certs:/https:ro
         depends_on:
             - rabbitmq
-            # - api-identidade
             - sql-server         
 
     automobile-server:
